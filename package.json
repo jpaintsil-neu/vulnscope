@@ -1,0 +1,33 @@
+{
+  "name": "vulnscope",
+  "version": "1.0.0",
+  "description": "A full-stack cybersecurity vulnerability awareness and product security workspace.",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpaintsil-neu/vulnscope.git"
+  },
+  "keywords": [],
+  "author": "Sania Anwar and John Paintsil",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/jpaintsil-neu/vulnscope/issues"
+  },
+  "homepage": "https://github.com/jpaintsil-neu/vulnscope#readme",
+  "dependencies": {
+    "dotenv": "^18.0.6",
+    "express": "^5.2.1",
+    "mongodb": "^7.7.0"
+  },
+  "devDependencies": {
+    "eslint": "^10.12.0",
+    "prettier": "^3.9.9"
+  }
+}

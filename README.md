@@ -114,6 +114,31 @@ an optional enhancement rather than a dependency.
 - HTML5
 - CSS3
 
+## Current Architecture
+
+```text
+vulnscope/
+├── public/
+│   ├── css/
+│   ├── js/
+│   └── index.html
+├── scripts/
+├── src/
+│   ├── db/
+│   │   └── connection.js
+│   ├── routes/
+│   └── server.js
+├── .env.example
+├── eslint.config.js
+├── prettier.config.js
+├── package.json
+└── package-lock.json
+```
+
+## Local Development
+
+Install dependencies:
+
 ## Public Data Sources
 
 - [NIST NVD CVE API](https://nvd.nist.gov/developers/vulnerabilities)
@@ -131,20 +156,27 @@ VulnScope is currently in the project setup and design phase.
 Completed:
 
 - Project concept and scope
-- User personas
-- User stories
-- Primary use cases
+- User personas, User stories, and Primary use cases
 - Team responsibility split
 - Shared GitHub repository
+- Node.js project initialization
+- ES module configuration
+- Express server and health-check endpoint
+- Initial browser-facing homepage
+- Shared MongoDB connection module
+- Environment-variable template
+- ESLint configuration
+- Prettier configuration
 - Project tracking and submission-planning workspace
 
 Next:
 
-- Initialize Node.js project
-- Establish shared project architecture
-- Configure Express and ES modules
-- Define MongoDB schemas and import strategy
-- Create design mockups
+- IFinalize the design document and mockups
+- Configure the MongoDB development environment
+- Define the `vulnerabilities` and `products` data models
+- Plan the NVD CVE and CPE import process
+- Implement the independent CRUD APIs
+- Build the vulnerability and product browser interfaces
 
 ## License
 
