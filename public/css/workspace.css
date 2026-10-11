@@ -1,0 +1,202 @@
+/* Workspace title and action. */
+.workspace-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.workspace-heading h1 {
+  margin-bottom: 1rem;
+}
+
+.workspace-heading > .button {
+  flex-shrink: 0;
+}
+
+/* Availability and source notes. */
+.page-container .workspace-note {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Sidebar and results columns. */
+.workspace-grid {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  align-items: start;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* Shared workspace surfaces. */
+.workspace-panel {
+  min-width: 0;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+}
+
+/* Align both panels. */
+.workspace-grid > section {
+  margin-top: 0;
+}
+
+/* Remove default fieldset spacing. */
+.workspace-panel fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Accessible hidden labels. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Group labels and controls. */
+.form-field {
+  margin-bottom: 1.25rem;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--navy);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Consistent control appearance. */
+.form-field input,
+.form-field select {
+  width: 100%;
+  min-width: 0;
+  padding: 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+/* Visible keyboard focus. */
+.form-field input:focus-visible,
+.form-field select:focus-visible,
+.table-scroll:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+}
+
+/* Unavailable form controls. */
+.form-field input:disabled,
+.form-field select:disabled {
+  background: var(--background);
+  cursor: not-allowed;
+}
+
+/* Unavailable workspace actions. */
+.workspace-heading .button:disabled,
+.workspace-panel .button:disabled {
+  background: var(--muted);
+  cursor: not-allowed;
+}
+
+/* Full-width filter action. */
+.workspace-panel fieldset > .button {
+  width: 100%;
+}
+
+/* Results heading and count. */
+.results-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.results-heading h2 {
+  margin: 0;
+}
+
+.results-count {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Contain horizontal table overflow. */
+.table-scroll {
+  overflow-x: auto;
+}
+
+/* Structured record results. */
+.records-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.records-table th,
+.records-table td {
+  padding: 0.85rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.records-table th {
+  background: var(--background);
+  color: var(--navy);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Helpful initial results state. */
+.records-table .empty-state {
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.empty-state strong {
+  display: block;
+  color: var(--navy);
+  font-size: 1.1rem;
+}
+
+.empty-state p {
+  margin: 0.75rem auto 1rem;
+}
+
+/* Stack sidebar above results. */
+@media (max-width: 900px) {
+  .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Compact workspace spacing. */
+@media (max-width: 600px) {
+  .workspace-heading {
+    flex-direction: column;
+  }
+
+  .workspace-heading > .button {
+    width: 100%;
+  }
+
+  .workspace-panel {
+    padding: 1rem;
+  }
+}
