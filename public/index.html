@@ -1,33 +1,77 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Page metadata and responsive sizing. -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VulnScope</title>
+    <meta
+      name="description"
+      content="Explore cybersecurity vulnerabilities and technology products with VulnScope."
+    />
+    <title>VulnScope — Home</title>
+
+    <!-- Browser tab branding. -->
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+
+    <!-- Load the shared font. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Shared styles and layout module. -->
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script type="module" src="/js/layout.js"></script>
   </head>
 
   <body>
-    <header>
-      <h1>VulnScope</h1>
-      <p>Understand, Track, and Act on Cybersecurity Vulnerabilities</p>
-    </header>
+    <!-- Keyboard shortcut to content. -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
 
-    <main>
-      <section>
-        <h2>Vulnerability Awareness & Triage</h2>
+    <!-- Header populated by layout.js. -->
+    <header id="site-header" class="site-header"></header>
+
+    <!-- Starter homepage content. -->
+    <main id="main-content" class="page-container" tabindex="-1">
+      <!-- Balanced homepage headline. -->
+      <h1>
+        <span class="hero-line">Understand your technology.</span>
+        <span class="hero-line">Understand its risks.</span>
+      </h1>
+
+      <p class="page-intro">
+        Explore cybersecurity vulnerabilities, learn what they mean, and make
+        informed decisions about the technology you use.
+      </p>
+
+      <!-- Vulnerability workspace introduction. -->
+      <section aria-labelledby="vulnerabilities-heading">
+        <h2 id="vulnerabilities-heading">
+          Vulnerability Awareness &amp; Triage
+        </h2>
         <p>
-          Explore cybersecurity vulnerabilities and understand the risks
-          associated with the technology you use.
+          Explore publicly disclosed vulnerabilities and organize your security
+          reviews.
         </p>
       </section>
 
-      <section>
-        <h2>Product & Technology Workspace</h2>
+      <!-- Product workspace introduction. -->
+      <section aria-labelledby="products-heading">
+        <h2 id="products-heading">Product &amp; Technology Workspace</h2>
         <p>
-          Explore technology products and maintain locally managed
-          product-security information.
+          Explore technology products and maintain your product-security
+          reviews.
         </p>
       </section>
     </main>
+
+    <!-- Footer populated by layout.js. -->
+    <footer id="site-footer" class="site-footer"></footer>
   </body>
 </html>
