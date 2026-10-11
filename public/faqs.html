@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Page metadata and responsive sizing. -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Find answers about VulnScope, public vulnerability data, and workspace reviews."
+    />
+    <title>FAQs — VulnScope</title>
+
+    <!-- Browser tab branding. -->
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+
+    <!-- Load the shared font. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Shared styles and layout module. -->
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script type="module" src="/js/layout.js"></script>
+  </head>
+
+  <body>
+    <!-- Keyboard shortcut to content. -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!-- Shared header. -->
+    <header id="site-header" class="site-header"></header>
+
+    <main id="main-content" class="page-container" tabindex="-1">
+      <!-- Show the parent section. -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/resources.html">Resources</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">FAQs</span>
+      </nav>
+
+      <!-- Page introduction. -->
+      <h1>Frequently Asked Questions</h1>
+      <p class="page-intro">
+        Answers about VulnScope, its public data, and your workspace reviews.
+      </p>
+
+      <!-- Platform introduction questions. -->
+      <section aria-labelledby="getting-started-heading">
+        <h2 id="getting-started-heading">Getting Started</h2>
+
+        <details class="faq-item" open>
+          <summary>What is VulnScope?</summary>
+          <div class="faq-answer">
+            <p>
+              VulnScope is designed to make cybersecurity vulnerability
+              information easier to understand and organize. It brings together
+              vulnerability records, product information, educational resources,
+              and personal review workflows.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Who is VulnScope for?</summary>
+          <div class="faq-answer">
+            <p>
+              VulnScope supports everyday technology users, cybersecurity
+              students, and security professionals. Start with Resources for
+              foundational concepts or explore the workspaces for record
+              details.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Do I need an account to read these pages?</summary>
+          <div class="faq-answer">
+            <p>
+              No. You can read the Home, About, Resources, and FAQs pages
+              without signing in. Account registration is not currently
+              available.
+            </p>
+          </div>
+        </details>
+      </section>
+
+      <!-- Public data questions. -->
+      <section aria-labelledby="data-heading">
+        <h2 id="data-heading">Understanding the Data</h2>
+
+        <details class="faq-item">
+          <summary>Where does the public data come from?</summary>
+          <div class="faq-answer">
+            <p>
+              VulnScope is designed around public records from the National
+              Vulnerability Database (NVD), maintained by NIST. Vulnerability
+              information comes from CVE records, while product identifiers come
+              from the CPE Dictionary.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What is a CVE identifier?</summary>
+          <div class="faq-answer">
+            <p>
+              A Common Vulnerabilities and Exposures (CVE) identifier provides a
+              shared name for a publicly disclosed vulnerability. Its associated
+              record provides a description and references for further review.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            Does a severity score mean my technology is affected?
+          </summary>
+          <div class="faq-answer">
+            <p>
+              No. CVSS describes vulnerability severity. A score alone does not
+              establish whether your particular product or version is affected.
+              Review the affected versions and relevant vendor references.
+            </p>
+            <a class="text-link" href="https://www.first.org/cvss/">
+              Learn about CVSS
+            </a>
+          </div>
+        </details>
+      </section>
+
+      <!-- Workspace and record questions. -->
+      <section aria-labelledby="workspace-heading">
+        <h2 id="workspace-heading">Workspace Reviews</h2>
+
+        <details class="faq-item">
+          <summary>Do review notes change the original NVD record?</summary>
+          <div class="faq-answer">
+            <p>
+              No. Review notes and locally managed records are separate from
+              public source information. Changes within VulnScope do not modify
+              records published by NVD.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How do vulnerability and product reviews differ?</summary>
+          <div class="faq-answer">
+            <p>
+              Vulnerability reviews focus on security issues, triage statuses,
+              and analyst notes. Product reviews focus on technology
+              identifiers, product details, review statuses, and notes. Each
+              workspace has its own review workflow.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What should I check when a search has no results?</summary>
+          <div class="faq-answer">
+            <p>
+              Check the spelling of the identifier, vendor, or product name. Try
+              broader keywords and remove restrictive filters. An empty result
+              does not establish that a product has no vulnerabilities.
+            </p>
+          </div>
+        </details>
+      </section>
+
+      <!-- Return to learning resources. -->
+      <div class="action-links">
+        <a class="button button-secondary" href="/resources.html">
+          Back to Resources
+        </a>
+      </div>
+    </main>
+
+    <!-- Shared footer. -->
+    <footer id="site-footer" class="site-footer"></footer>
+  </body>
+</html>
