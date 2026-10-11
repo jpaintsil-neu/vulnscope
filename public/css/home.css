@@ -1,0 +1,145 @@
+/* Static banner wallpaper. */
+.page-container .home-hero {
+  margin-top: 0;
+  padding: clamp(2rem, 6vw, 4.5rem);
+  border-radius: 1rem;
+  background:
+    radial-gradient(
+      ellipse at top right,
+      rgb(29 78 216 / 45%),
+      transparent 65%
+    ),
+    linear-gradient(135deg, var(--navy), #183958);
+  color: var(--surface);
+}
+
+/* Banner topic label. */
+.home-hero .hero-eyebrow {
+  margin-bottom: 1rem;
+  color: #b9e5e0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* Light banner headline. */
+.home-hero h1 {
+  max-width: none;
+  color: var(--surface);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+}
+
+/* Comfortable banner copy. */
+.home-hero .page-intro {
+  max-width: 60ch;
+  color: #e2e8f0;
+}
+
+/* Light search surface. */
+.home-search {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+}
+
+/* Remove default group borders. */
+.home-search fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Accessible hidden legend. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Persistent search label. */
+.home-search label {
+  display: block;
+  margin-bottom: 0.6rem;
+  color: var(--navy);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Search input and action. */
+.search-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+}
+
+/* Shared input typography. */
+.search-controls input {
+  min-width: 0;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+/* Future input keyboard focus. */
+.search-controls input:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+}
+
+/* Readable placeholder text. */
+.search-controls input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+/* Unavailable search controls. */
+.search-controls input:disabled {
+  background: var(--background);
+  cursor: not-allowed;
+}
+
+.search-controls button:disabled {
+  background: var(--muted);
+  cursor: not-allowed;
+}
+
+/* Search availability message. */
+.home-search .search-note {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Equal workspace introductions. */
+.home-workspaces {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+/* Stack compact homepage content. */
+@media (max-width: 700px) {
+  .search-controls,
+  .home-workspaces {
+    grid-template-columns: 1fr;
+  }
+
+  .home-hero .hero-line {
+    display: inline;
+  }
+
+  .search-controls .button {
+    width: 100%;
+  }
+}
