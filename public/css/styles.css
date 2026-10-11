@@ -1,0 +1,722 @@
+/* Shared navy theme. */
+:root {
+  color-scheme: light;
+  --navy: #12213f;
+  --blue: #1d4ed8;
+  --teal: #0f766e;
+  --background: #f6f8fc;
+  --surface: #ffffff;
+  --text: #334155;
+  --muted: #526175;
+  --border: #e2e8f0;
+}
+
+/* Include borders in sizing. */
+* {
+  box-sizing: border-box;
+}
+
+/* Account for the sticky header. */
+html {
+  scroll-padding-top: 6rem;
+}
+
+/* Shared font and page layout. */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--background);
+  color: var(--text);
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* Inherit shared typography. */
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+/* Visible keyboard focus. */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 4px;
+}
+
+/* Reveal skip link on focus. */
+.skip-link {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+  padding: 0.6rem 1rem;
+  border-radius: 0.4rem;
+  background: var(--surface);
+  color: var(--navy);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Keep the header visible. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 12px rgb(18 33 63 / 4%);
+}
+
+/* Consistent content width. */
+.header-inner,
+.footer-inner,
+.page-container {
+  width: min(1200px, calc(100% - 3rem));
+  margin-inline: auto;
+}
+
+/* Center desktop navigation. */
+.header-inner {
+  min-height: 84px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Align logo and wordmark. */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: fit-content;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Preserve logo proportions. */
+.brand-logo {
+  display: block;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+/* Keep wordmark parts together. */
+.brand-name {
+  display: inline-flex;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+/* Contrasting brand colors. */
+.brand-vuln {
+  color: var(--navy);
+}
+
+.brand-scope {
+  color: var(--blue);
+}
+
+/* Desktop navigation spacing. */
+.primary-navigation {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.primary-navigation a {
+  padding-block: 0.6rem;
+  color: var(--navy);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Highlight the active page. */
+.primary-navigation a:hover,
+.primary-navigation a[aria-current] {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.45rem;
+}
+
+/* Right-aligned account placeholder. */
+.account-control {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Hide the desktop menu toggle. */
+.menu-toggle {
+  display: none;
+}
+
+/* Spacious main content. */
+.page-container {
+  flex: 1;
+  padding-block: clamp(2rem, 5vw, 4rem);
+}
+
+/* Balanced heading proportions. */
+.page-container h1 {
+  max-width: 26ch;
+  margin: 0 0 1.5rem;
+  color: var(--navy);
+  font-size: clamp(2rem, 4vw, 3.125rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+/* Separate homepage headline lines. */
+.hero-line {
+  display: block;
+}
+
+/* Comfortable reading width. */
+.page-container p {
+  max-width: 68ch;
+  margin: 0;
+}
+
+/* Homepage introduction emphasis. */
+.page-intro {
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+/* Consistent section spacing. */
+.page-container section {
+  margin-top: 2.75rem;
+}
+
+.page-container h2 {
+  margin: 0 0 0.85rem;
+  color: var(--navy);
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.35;
+}
+
+/* Shared footer surface. */
+.site-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+/* Wrap footer groups when needed. */
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding-block: 2rem;
+}
+
+/* Smaller footer branding. */
+.footer-brand .brand-logo {
+  width: 36px;
+  height: 36px;
+}
+
+.footer-brand .brand-name {
+  font-size: 1.3rem;
+}
+
+.footer-brand-group p {
+  margin: 0.6rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Footer links and icons. */
+.footer-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-navigation a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--navy);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.footer-navigation a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+
+/* Preserve icon dimensions. */
+svg {
+  flex-shrink: 0;
+}
+
+/* Switch to compact navigation. */
+@media (max-width: 1100px) {
+  .header-inner {
+    grid-template-columns: 1fr auto auto;
+    gap: 0.75rem;
+    padding-block: 0.85rem;
+  }
+
+  .menu-toggle {
+    display: inline-block;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background: var(--surface);
+    color: var(--navy);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* Expand links below controls. */
+  .primary-navigation {
+    display: none;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+    max-height: calc(100svh - 6rem);
+    padding-top: 0.5rem;
+    overflow-y: auto;
+    border-top: 1px solid var(--border);
+  }
+
+  .primary-navigation.is-open {
+    display: flex;
+  }
+
+  .primary-navigation a {
+    padding: 0.75rem;
+    border-radius: 0.4rem;
+  }
+
+  .primary-navigation a:hover,
+  .primary-navigation a[aria-current] {
+    background: var(--background);
+  }
+
+  /* Keep the compact account icon. */
+  .account-control {
+    padding: 0.65rem;
+  }
+
+  .account-control span {
+    display: none;
+  }
+}
+
+/* Narrow-screen spacing. */
+@media (max-width: 600px) {
+  .header-inner,
+  .footer-inner,
+  .page-container {
+    width: calc(100% - 2rem);
+  }
+
+  .header-inner {
+    gap: 0.5rem;
+    min-height: 76px;
+  }
+
+  .brand {
+    gap: 0.45rem;
+  }
+
+  .brand-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .brand-name {
+    font-size: 1.2rem;
+  }
+
+  .menu-toggle {
+    padding: 0.6rem;
+  }
+
+  .page-intro {
+    font-size: 1rem;
+  }
+
+  .footer-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .footer-navigation {
+    gap: 1rem;
+  }
+}
+
+/* Reusable information card grid. */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+/* Light information surfaces. */
+.info-card {
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+}
+
+/* Card heading hierarchy. */
+.info-card h3 {
+  margin: 0 0 0.75rem;
+  color: var(--navy);
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.info-card p {
+  font-size: 0.95rem;
+}
+
+/* Ordered workflow spacing. */
+.workflow-steps {
+  margin: 1.25rem 0 0;
+  padding-left: 1.5rem;
+}
+
+.workflow-steps li {
+  margin-bottom: 1.25rem;
+  padding-left: 0.25rem;
+}
+
+/* Subtle workflow accents. */
+.workflow-steps li::marker {
+  color: var(--teal);
+  font-weight: 700;
+}
+
+.workflow-steps strong {
+  color: var(--navy);
+}
+
+/* Separate related paragraphs. */
+.content-copy > p + p {
+  margin-top: 1rem;
+}
+
+/* Emphasize source separation. */
+.data-note {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid var(--teal);
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: var(--surface);
+}
+
+/* Official reference links. */
+.reference-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1.25rem;
+}
+
+.reference-links a {
+  color: var(--blue);
+  font-weight: 600;
+  text-underline-offset: 0.2rem;
+}
+
+/* Stack cards on smaller screens. */
+@media (max-width: 900px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Align resource card content. */
+.resource-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Subtle learning topic labels. */
+.resource-card .card-eyebrow {
+  margin-bottom: 0.85rem;
+  color: var(--teal);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* Explain each topic's purpose. */
+.resource-card .resource-context {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Shared educational links. */
+.text-link {
+  color: var(--blue);
+  font-weight: 600;
+  text-underline-offset: 0.2rem;
+}
+
+/* Align links near card bottoms. */
+.resource-card .text-link {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  font-size: 0.9rem;
+}
+
+/* Highlight the FAQs entry. */
+.faq-callout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+}
+
+/* Keep the FAQ action together. */
+.faq-callout .button {
+  flex-shrink: 0;
+}
+
+/* Shared link button treatment. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.1rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Primary workspace action. */
+.button-primary {
+  background: var(--navy);
+  color: var(--surface);
+}
+
+.button-primary:hover {
+  background: var(--blue);
+}
+
+/* Secondary workspace action. */
+.button-secondary {
+  border-color: var(--navy);
+  background: var(--surface);
+  color: var(--navy);
+}
+
+.button-secondary:hover {
+  border-color: var(--blue);
+  background: var(--background);
+  color: var(--blue);
+}
+
+/* Allow action links to wrap. */
+.action-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+/* Stack the FAQ callout. */
+@media (max-width: 700px) {
+  .faq-callout {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.5rem;
+  }
+}
+
+/* Full-width actions on small screens. */
+@media (max-width: 600px) {
+  .action-links {
+    flex-direction: column;
+  }
+
+  .action-links .button {
+    width: 100%;
+  }
+}
+
+/* Show the Resources hierarchy. */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.breadcrumb a {
+  color: var(--blue);
+  text-underline-offset: 0.2rem;
+}
+
+/* Shared FAQ containers. */
+.faq-item {
+  margin-top: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  background: var(--surface);
+}
+
+/* Native expandable question control. */
+.faq-item summary {
+  padding: 1.1rem 1.25rem;
+  border-radius: inherit;
+  color: var(--navy);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Preserve the disclosure indicator. */
+.faq-item summary::marker {
+  color: var(--blue);
+}
+
+/* Question hover treatment. */
+.faq-item summary:hover {
+  background: var(--background);
+}
+
+/* Visible question keyboard focus. */
+.faq-item summary:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+}
+
+/* Separate expanded questions and answers. */
+.faq-item[open] summary {
+  border-bottom: 1px solid var(--border);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Comfortable answer spacing. */
+.faq-answer {
+  padding: 1.25rem;
+}
+
+.faq-answer .text-link {
+  display: inline-block;
+  margin-top: 1rem;
+} /* Show the Resources hierarchy. */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.breadcrumb a {
+  color: var(--blue);
+  text-underline-offset: 0.2rem;
+}
+
+/* Shared FAQ containers. */
+.faq-item {
+  margin-top: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  background: var(--surface);
+}
+
+/* Native expandable question control. */
+.faq-item summary {
+  padding: 1.1rem 1.25rem;
+  border-radius: inherit;
+  color: var(--navy);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Preserve the disclosure indicator. */
+.faq-item summary::marker {
+  color: var(--blue);
+}
+
+/* Question hover treatment. */
+.faq-item summary:hover {
+  background: var(--background);
+}
+
+/* Visible question keyboard focus. */
+.faq-item summary:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+}
+
+/* Separate expanded questions and answers. */
+.faq-item[open] summary {
+  border-bottom: 1px solid var(--border);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Comfortable answer spacing. */
+.faq-answer {
+  padding: 1.25rem;
+}
+
+.faq-answer .text-link {
+  display: inline-block;
+  margin-top: 1rem;
+}
