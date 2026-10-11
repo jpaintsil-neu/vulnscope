@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Page metadata and responsive sizing. -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Learn about VulnScope, its cybersecurity objectives, and its public data sources."
+    />
+    <title>About — VulnScope</title>
+
+    <!-- Browser tab branding. -->
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+
+    <!-- Load the shared font. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Shared styles and layout module. -->
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script type="module" src="/js/layout.js"></script>
+  </head>
+
+  <body>
+    <!-- Keyboard shortcut to content. -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!-- Shared header. -->
+    <header id="site-header" class="site-header"></header>
+
+    <main id="main-content" class="page-container" tabindex="-1">
+      <!-- Page introduction. -->
+      <h1>About VulnScope</h1>
+      <p class="page-intro">
+        Making cybersecurity vulnerability information easier to understand,
+        organize, and act on.
+      </p>
+
+      <!-- Platform purpose. -->
+      <section aria-labelledby="purpose-heading">
+        <h2 id="purpose-heading">Why VulnScope Exists</h2>
+        <p>
+          Security information can be difficult to interpret. VulnScope is
+          designed to bring public vulnerability records, technology
+          information, and personal review workflows into an approachable
+          workspace.
+        </p>
+      </section>
+
+      <!-- Intended audiences. -->
+      <section aria-labelledby="audience-heading">
+        <h2 id="audience-heading">Who It Is For</h2>
+
+        <div class="content-grid">
+          <article class="info-card">
+            <h3>Everyday Technology Users</h3>
+            <p>
+              Understand security terminology and explore issues that may be
+              relevant to the technology you use.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <h3>Cybersecurity Students</h3>
+            <p>
+              Explore real vulnerability records and connect cybersecurity
+              concepts to practical examples.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <h3>Security Professionals</h3>
+            <p>
+              Review technical information and organize locally managed records,
+              review statuses, and notes.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Core platform workflow. -->
+      <section aria-labelledby="workflow-heading">
+        <h2 id="workflow-heading">How VulnScope Works</h2>
+
+        <ol class="workflow-steps">
+          <li>
+            <strong>Explore.</strong>
+            <p>
+              Search and browse vulnerability or product records in their
+              respective workspaces.
+            </p>
+          </li>
+
+          <li>
+            <strong>Understand.</strong>
+            <p>
+              Review record details, source references, and educational
+              resources to build context.
+            </p>
+          </li>
+
+          <li>
+            <strong>Track and act.</strong>
+            <p>
+              Maintain your own records, update review statuses, and document
+              notes for follow-up.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Public sources and local records. -->
+      <section class="content-copy" aria-labelledby="data-heading">
+        <h2 id="data-heading">About the Data</h2>
+
+        <p>
+          VulnScope is designed around public data from the National
+          Vulnerability Database (NVD), maintained by the National Institute of
+          Standards and Technology (NIST).
+        </p>
+
+        <p>
+          Vulnerability information comes from CVE records. Product information
+          comes from the Common Platform Enumeration (CPE) Dictionary, which
+          provides standardized technology identifiers.
+        </p>
+
+        <div class="data-note">
+          <p>
+            Public source information is kept separate from locally managed
+            records and review notes. Changes within VulnScope do not change
+            records published by NVD.
+          </p>
+        </div>
+
+        <!-- Official source references. -->
+        <div class="reference-links">
+          <a href="https://nvd.nist.gov/developers/vulnerabilities">
+            NVD Vulnerability Documentation
+          </a>
+          <a href="https://nvd.nist.gov/developers/products">
+            NVD Product Documentation
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Shared footer. -->
+    <footer id="site-footer" class="site-footer"></footer>
+  </body>
+</html>
