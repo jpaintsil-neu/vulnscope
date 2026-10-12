@@ -5,8 +5,11 @@ const resultsHeading = document.querySelector("#results-heading");
 const resultsCount = document.querySelector("#results-count");
 const resultsStatus = document.querySelector("#results-status");
 const retryButton = document.querySelector("#results-retry");
+const tableCaption = document.querySelector("#records-caption");
+const identifierHeading = document.querySelector("#record-identifier-heading");
+const dateHeading = document.querySelector("#record-date-heading");
 
-// Select both paging toolbars.
+// Top pagination controls.
 const pageSummaries = document.querySelectorAll("[data-page-summary]");
 const previousButtons = document.querySelectorAll("[data-previous-page]");
 const nextButtons = document.querySelectorAll("[data-next-page]");
@@ -15,8 +18,16 @@ const nextButtons = document.querySelectorAll("[data-next-page]");
 const filterForm = document.querySelector("#vulnerability-filters");
 const filterControls = document.querySelector("#filter-controls");
 const queryInput = document.querySelector("#vulnerability-query");
+const scopeSelect = document.querySelector("#record-scope");
 const severitySelect = document.querySelector("#severity-filter");
 const clearFiltersButton = document.querySelector("#clear-filters");
+
+// Restore the requested view.
+const initialScope =
+  new URL(window.location.href).searchParams.get("scope") === "mine"
+    ? "mine"
+    : "public";
+scopeSelect.value = initialScope;
 
 // Current browsing state.
 let currentPage = 1;
@@ -24,11 +35,9 @@ let totalPages = 0;
 let requestedPage = 1;
 let loading = false;
 let hasLoaded = false;
+let activeFilters = { scope: initialScope, q: "", severity: "" };
 
-// Filters used by the current results.
-let activeFilters = { q: "", severity: "" };
-
-// Consistent publication dates.
+// Consistent record dates.
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric",
@@ -37,12 +46,45 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 });
 
 /**
- * Formats a publication date.
+ * Returns the current record label.
  */
-function formatPublishedDate(value) {
-  if (!value) {
-    return "Not available";
+function recordLabel() {
+  return activeFilters.scope === "mine" ? "local records" : "public CVEs";
+}
+
+/**
+ * Updates headings for the selected view.
+ */
+function updateScopeView() {
+  const isLocal = activeFilters.scope === "mine";
+
+  resultsHeading.textContent = isLocal
+    ? "My Local Records"
+    : "Vulnerability Records";
+  tableCaption.textContent = isLocal
+    ? "Guest workspace vulnerability records"
+    : "Public vulnerability records";
+  identifierHeading.textContent = isLocal ? "Title" : "CVE ID";
+  dateHeading.textContent = isLocal ? "Updated (UTC)" : "Published (UTC)";
+  tableRegion.classList.toggle("is-local", isLocal);
+
+  // Preserve the view when refreshing.
+  const url = new URL(window.location.href);
+
+  if (isLocal) {
+    url.searchParams.set("scope", "mine");
+  } else {
+    url.searchParams.delete("scope");
   }
+
+  window.history.replaceState(null, "", url);
+}
+
+/**
+ * Formats an available record date.
+ */
+function formatRecordDate(value) {
+  if (!value) return "Not available";
 
   const date = new Date(value);
 
@@ -61,17 +103,22 @@ function showTableMessage(message) {
   cell.colSpan = 4;
   cell.className = "empty-state";
   cell.textContent = message;
-
   row.append(cell);
   tableBody.replaceChildren(row);
 }
 
 /**
- * Renders vulnerability records and detail links.
+ * Renders the selected record collection.
  */
 function renderRecords(records) {
+  const isLocal = activeFilters.scope === "mine";
+
   if (records.length === 0) {
-    showTableMessage("No matching CVEs. Try changing or clearing the filters.");
+    showTableMessage(
+      isLocal
+        ? "No local records found. Try changing or clearing the filters."
+        : "No matching CVEs. Try changing or clearing the filters.",
+    );
     return;
   }
 
@@ -83,21 +130,31 @@ function renderRecords(records) {
         : (record.severity ?? "Not available");
 
     const values = [
-      record.cveId ?? "Not available",
+      isLocal ? record.title || "Untitled record" : record.cveId,
       severity,
       record.description || "Description not available.",
-      formatPublishedDate(record.publishedAt),
+      formatRecordDate(isLocal ? record.updatedAt : record.publishedAt),
     ];
 
     for (const [index, value] of values.entries()) {
       const cell = document.createElement("td");
 
       if (index === 0) {
-        // Open the vulnerability detail page.
+        // Open details from the selected collection.
         const link = document.createElement("a");
+        const detailUrl = new URL(
+          "/vulnerability.html",
+          window.location.origin,
+        );
+
+        detailUrl.searchParams.set("id", record._id);
+
+        if (isLocal) {
+          detailUrl.searchParams.set("scope", "mine");
+        }
 
         link.className = "text-link";
-        link.href = `/vulnerability.html?id=${encodeURIComponent(record._id)}`;
+        link.href = detailUrl.href;
         link.textContent = value;
         cell.append(link);
       } else {
@@ -115,7 +172,7 @@ function renderRecords(records) {
 }
 
 /**
- * Synchronizes both page summaries.
+ * Updates the page summary.
  */
 function setPageSummary(message) {
   for (const summary of pageSummaries) {
@@ -124,23 +181,16 @@ function setPageSummary(message) {
 }
 
 /**
- * Updates both paging toolbars.
+ * Updates pagination and request controls.
  */
 function updatePagingControls() {
   const disablePrevious = loading || !hasLoaded || currentPage <= 1;
   const disableNext = loading || !hasLoaded || currentPage >= totalPages;
 
-  for (const button of previousButtons) {
-    button.disabled = disablePrevious;
-  }
-
-  for (const button of nextButtons) {
-    button.disabled = disableNext;
-  }
+  for (const button of previousButtons) button.disabled = disablePrevious;
+  for (const button of nextButtons) button.disabled = disableNext;
 
   retryButton.disabled = loading;
-
-  // Prevent changes during requests.
   filterControls.disabled = loading;
 }
 
@@ -148,27 +198,25 @@ function updatePagingControls() {
  * Loads and displays one results page.
  */
 async function loadPage(page, focusResults = false) {
-  if (loading) {
-    return;
-  }
+  if (loading) return;
 
   requestedPage = page;
   loading = true;
   retryButton.hidden = true;
-
   tableRegion.setAttribute("aria-busy", "true");
-  resultsStatus.textContent = "Loading vulnerabilities...";
+  resultsStatus.textContent = `Loading ${recordLabel()}...`;
   updatePagingControls();
 
   try {
-    // Preserve applied filters across pages.
-    const url = new URL("/api/vulnerabilities", window.location.origin);
+    // Choose the public or guest endpoint.
+    const isLocal = activeFilters.scope === "mine";
+    const endpoint = isLocal
+      ? "/api/vulnerabilities/local"
+      : "/api/vulnerabilities";
+    const url = new URL(endpoint, window.location.origin);
     url.searchParams.set("page", String(page));
 
-    if (activeFilters.q) {
-      url.searchParams.set("q", activeFilters.q);
-    }
-
+    if (activeFilters.q) url.searchParams.set("q", activeFilters.q);
     if (activeFilters.severity) {
       url.searchParams.set("severity", activeFilters.severity);
     }
@@ -177,36 +225,40 @@ async function loadPage(page, focusResults = false) {
       signal: globalThis.AbortSignal.timeout(15000),
     });
 
-    if (!response.ok) {
-      throw new Error("Vulnerability request failed.");
-    }
+    if (!response.ok) throw new Error("Vulnerability request failed.");
 
     const data = await response.json();
     const pagination = data.pagination;
+    const expectedSource = isLocal ? "local" : "nvd";
 
-    // Confirm the expected API fields.
+    // Confirm the expected collection and pagination.
     if (
       !Array.isArray(data.records) ||
       !Number.isSafeInteger(pagination?.page) ||
+      pagination.page < 1 ||
       !Number.isSafeInteger(pagination?.total) ||
+      pagination.total < 0 ||
       !Number.isSafeInteger(pagination?.totalPages) ||
+      pagination.totalPages < 0 ||
       !Number.isSafeInteger(pagination?.pageSize) ||
-      pagination.pageSize < 1
+      pagination.pageSize < 1 ||
+      data.records.some(
+        (record) =>
+          record?.source !== expectedSource ||
+          typeof record?._id !== "string" ||
+          !/^[a-f0-9]{24}$/.test(record._id),
+      )
     ) {
       throw new Error("Unexpected vulnerability response.");
     }
 
     renderRecords(data.records);
-
-    // Start each results page at the first row.
     tableRegion.scrollTop = 0;
-
     currentPage = pagination.page;
     totalPages = pagination.totalPages;
     hasLoaded = true;
 
-    resultsCount.textContent = `${pagination.total.toLocaleString()} public CVEs`;
-
+    resultsCount.textContent = `${pagination.total.toLocaleString()} ${recordLabel()}`;
     setPageSummary(
       totalPages > 0 ? `Page ${currentPage} of ${totalPages}` : "No pages",
     );
@@ -216,10 +268,9 @@ async function loadPage(page, focusResults = false) {
       data.records.length > 0 ? (currentPage - 1) * pagination.pageSize + 1 : 0;
     const last = data.records.length > 0 ? first + data.records.length - 1 : 0;
 
-    resultsStatus.textContent = `Showing ${first}–${last} of ${pagination.total.toLocaleString()} public CVEs.`;
+    resultsStatus.textContent = `Showing ${first}–${last} of ${pagination.total.toLocaleString()} ${recordLabel()}.`;
 
     if (focusResults) {
-      // Return focus to the new results.
       resultsHeading.focus();
       resultsHeading.scrollIntoView({ block: "start" });
     }
@@ -227,7 +278,7 @@ async function loadPage(page, focusResults = false) {
     console.error("Vulnerability loading failed:", error.name);
 
     if (!hasLoaded) {
-      showTableMessage("Vulnerabilities could not be loaded.");
+      showTableMessage(`${recordLabel()} could not be loaded.`);
       resultsCount.textContent = "Unavailable";
     }
 
@@ -241,14 +292,13 @@ async function loadPage(page, focusResults = false) {
 }
 
 /**
- * Applies the form selections from page one.
+ * Applies form selections from page one.
  */
 function applyFilters() {
-  if (loading) {
-    return;
-  }
+  if (loading) return;
 
   activeFilters = {
+    scope: scopeSelect.value === "mine" ? "mine" : "public",
     q: queryInput.value.trim(),
     severity: severitySelect.value,
   };
@@ -257,43 +307,42 @@ function applyFilters() {
   currentPage = 1;
   totalPages = 0;
   hasLoaded = false;
-
+  updateScopeView();
   resultsCount.textContent = "Loading records";
   setPageSummary("No page loaded");
-  showTableMessage("Loading matching CVEs...");
-
+  showTableMessage(`Loading ${recordLabel()}...`);
   loadPage(1, true);
 }
 
-// Apply filters without reloading the document.
+// Apply filters without a document reload.
 filterForm.addEventListener("submit", (event) => {
   event.preventDefault();
   applyFilters();
 });
 
-// Restore unfiltered browsing.
+// Switch collections when selected.
+scopeSelect.addEventListener("change", applyFilters);
+
+// Clear filters within the selected collection.
 clearFiltersButton.addEventListener("click", () => {
-  if (loading) {
-    return;
-  }
+  if (loading) return;
 
   queryInput.value = "";
   severitySelect.value = "";
   applyFilters();
 });
 
-// Connect Previous buttons.
+// Connect top pagination.
 for (const button of previousButtons) {
   button.addEventListener("click", () => loadPage(currentPage - 1, true));
 }
-
-// Connect Next buttons.
 for (const button of nextButtons) {
   button.addEventListener("click", () => loadPage(currentPage + 1, true));
 }
 
-// Retry the unsuccessful request.
+// Retry an unsuccessful request.
 retryButton.addEventListener("click", () => loadPage(requestedPage, true));
 
-// Load the initial results.
+// Load the initial collection.
+updateScopeView();
 loadPage(1);

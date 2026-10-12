@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <!-- Vulnerability page metadata. -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
       content="Explore CVEs and organize vulnerability reviews with VulnScope."
@@ -33,9 +35,6 @@
     <!-- Workspace styles. -->
     <link rel="stylesheet" href="/css/workspace.css" />
   </head>
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <body>
     <!-- Keyboard shortcut to content. -->
@@ -69,8 +68,9 @@
 
       <!-- Explain control availability. -->
       <p id="workspace-availability" class="workspace-note">
-        Search imported CVEs by ID or keywords, or filter by severity. Local
-        records and record management are coming soon.
+        Search public CVEs or your local records by keywords and severity.
+        Public CVEs are read-only. Creating and editing local records will be
+        enabled next.
       </p>
 
       <div class="workspace-grid">
@@ -103,7 +103,7 @@
 
               <div class="form-field">
                 <label for="record-scope">Records</label>
-                <select id="record-scope" name="scope" disabled>
+                <select id="record-scope" name="scope">
                   <option value="public">Public CVEs</option>
                   <option value="mine">My local records</option>
                 </select>
@@ -184,16 +184,17 @@
             tabindex="0"
           >
             <table class="records-table">
-              <caption class="visually-hidden">
+              <caption id="records-caption" class="visually-hidden">
                 Public vulnerability records
               </caption>
 
+              <!-- Headings change with the selected collection. -->
               <thead>
                 <tr>
-                  <th scope="col">CVE ID</th>
+                  <th id="record-identifier-heading" scope="col">CVE ID</th>
                   <th scope="col">Severity</th>
                   <th scope="col">Description</th>
-                  <th scope="col">Published (UTC)</th>
+                  <th id="record-date-heading" scope="col">Published (UTC)</th>
                 </tr>
               </thead>
 

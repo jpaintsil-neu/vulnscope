@@ -1,5 +1,6 @@
 import { ObjectId } from "mongodb";
 import { getDatabase } from "./connection.js";
+import { createVulnerabilityRecord } from "../models/vulnerability.js";
 
 /**
  * Returns the vulnerabilities collection.
@@ -137,6 +138,132 @@ export async function findPublicVulnerabilityById(id) {
         references: 1,
         explanation: 1,
         protectiveGuidance: 1,
+        createdAt: 1,
+        updatedAt: 1,
+      },
+    },
+  );
+}
+
+/**
+ * Creates a validated record in a guest workspace.
+ */
+export async function createLocalVulnerability(values, ownerId) {
+  // Require server-assigned ownership.
+  if (typeof ownerId !== "string" || !/^[a-f0-9]{64}$/.test(ownerId)) {
+    throw new Error("A local workspace is required.");
+  }
+
+  const collection = await getVulnerabilitiesCollection();
+  const record = {
+    ...createVulnerabilityRecord("local"),
+    ...values,
+    // Enforce local origin and ownership.
+    source: "local",
+    ownerId,
+  };
+
+  const result = await collection.insertOne(record);
+
+  // Exclude internal ownership from responses.
+  const savedRecord = { ...record, _id: result.insertedId };
+  delete savedRecord.ownerId;
+
+  return savedRecord;
+}
+
+/**
+ * Returns one page of the owner's local records.
+ */
+export async function listLocalVulnerabilities({
+  ownerId,
+  page = 1,
+  q = "",
+  severity = "",
+}) {
+  // Require server-assigned ownership.
+  if (typeof ownerId !== "string" || !/^[a-f0-9]{64}$/.test(ownerId)) {
+    throw new Error("A local workspace is required.");
+  }
+
+  const collection = await getVulnerabilitiesCollection();
+  const pageSize = 20;
+
+  // Restrict results to this guest workspace.
+  const filter = { source: "local", ownerId };
+
+  if (severity) {
+    filter.severity = severity;
+  }
+
+  if (q) {
+    // Treat search text as a literal phrase.
+    const escapedQuery = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const match = { $regex: escapedQuery, $options: "i" };
+
+    filter.$or = [{ cveId: match }, { title: match }, { description: match }];
+  }
+
+  // Return fields needed by the local table.
+  const projection = {
+    source: 1,
+    cveId: 1,
+    title: 1,
+    description: 1,
+    severity: 1,
+    triageStatus: 1,
+    createdAt: 1,
+    updatedAt: 1,
+  };
+
+  // Show recently updated records first.
+  const [records, total] = await Promise.all([
+    collection
+      .find(filter, { projection })
+      .sort({ updatedAt: -1, _id: -1 })
+      .skip((page - 1) * pageSize)
+      .limit(pageSize)
+      .toArray(),
+    collection.countDocuments(filter),
+  ]);
+
+  return {
+    records,
+    pagination: {
+      page,
+      pageSize,
+      total,
+      totalPages: Math.ceil(total / pageSize),
+    },
+  };
+}
+
+/**
+ * Returns a local record owned by the guest workspace.
+ */
+export async function findLocalVulnerabilityById(id, ownerId) {
+  // Require server-assigned ownership.
+  if (typeof ownerId !== "string" || !/^[a-f0-9]{64}$/.test(ownerId)) {
+    throw new Error("A local workspace is required.");
+  }
+
+  const collection = await getVulnerabilitiesCollection();
+
+  // Match the record, local source, and owner.
+  return collection.findOne(
+    { _id: new ObjectId(id), source: "local", ownerId },
+    {
+      // Return editable details without ownership.
+      projection: {
+        source: 1,
+        cveId: 1,
+        title: 1,
+        description: 1,
+        severity: 1,
+        explanation: 1,
+        protectiveGuidance: 1,
+        triageStatus: 1,
+        analystNotes: 1,
         createdAt: 1,
         updatedAt: 1,
       },

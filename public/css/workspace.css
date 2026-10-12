@@ -282,3 +282,10 @@
 .results-pagination-top {
   margin: 0 0 1rem;
 }
+
+/* Let local record titles wrap. */
+#vulnerability-results.is-local .records-table td:first-child {
+  min-width: 12rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
