@@ -24,6 +24,13 @@ function navigationState(href) {
   if (currentPath === "/faqs.html" && href === "/resources.html") {
     return 'aria-current="true"';
   }
+  // Keep details within Vulnerabilities.
+  if (
+    currentPath === "/vulnerability.html" &&
+    href === "/vulnerabilities.html"
+  ) {
+    return 'aria-current="true"';
+  }
 
   return "";
 }

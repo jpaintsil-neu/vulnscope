@@ -200,3 +200,85 @@
     padding: 1rem;
   }
 }
+/* Keep identifiers and dates together. */
+.records-table td:first-child,
+.records-table td:nth-child(2),
+.records-table td:last-child {
+  white-space: nowrap;
+}
+
+/* Give descriptions readable space. */
+.records-table td:nth-child(3) {
+  min-width: 18rem;
+  overflow-wrap: anywhere;
+}
+
+/* Emphasize record identifiers. */
+.records-table td:first-child {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+/* Arrange pagination controls. */
+.results-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.results-pagination span {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Clear disabled paging states. */
+.results-pagination .button:disabled {
+  border-color: var(--border);
+  background: var(--background);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+/* Separate the retry action. */
+.results-retry {
+  margin-top: 0.75rem;
+}
+
+/* Preserve native hidden behavior. */
+.results-retry[hidden] {
+  display: none;
+}
+
+/* Separate the filter reset action. */
+.filter-reset {
+  margin-top: 0.75rem;
+}
+/* Keep record scrolling within the panel. */
+#vulnerability-results {
+  max-height: min(65vh, 48rem);
+  overflow: auto;
+  scroll-padding-top: 4rem;
+}
+
+/* Preserve borders while headings stick. */
+#vulnerability-results .records-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Keep column headings visible. */
+#vulnerability-results .records-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--background);
+  box-shadow: inset 0 -1px 0 var(--border);
+}
+
+/* Separate top paging from the table. */
+.results-pagination-top {
+  margin: 0 0 1rem;
+}

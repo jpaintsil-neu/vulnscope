@@ -27,12 +27,15 @@
     <link rel="stylesheet" href="/css/styles.css" />
     <script type="module" src="/js/layout.js"></script>
 
+    <!-- Load vulnerability records. -->
+    <script type="module" src="/js/vulnerabilities.js"></script>
+
     <!-- Workspace styles. -->
     <link rel="stylesheet" href="/css/workspace.css" />
-
-    <!-- Homepage styles. -->
-    <link rel="stylesheet" href="/css/home.css" />
   </head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <body>
     <!-- Keyboard shortcut to content. -->
@@ -66,7 +69,8 @@
 
       <!-- Explain control availability. -->
       <p id="workspace-availability" class="workspace-note">
-        Search and record management are coming soon.
+        Search imported CVEs by ID or keywords, or filter by severity. Local
+        records and record management are coming soon.
       </p>
 
       <div class="workspace-grid">
@@ -74,9 +78,16 @@
         <aside class="workspace-panel" aria-labelledby="filters-heading">
           <h2 id="filters-heading">Search &amp; Filter</h2>
 
-          <form role="search" aria-labelledby="filters-heading">
-            <!-- Enable after data integration. -->
-            <fieldset disabled aria-describedby="workspace-availability">
+          <form
+            id="vulnerability-filters"
+            role="search"
+            aria-labelledby="filters-heading"
+          >
+            <!-- Search imported records. -->
+            <fieldset
+              id="filter-controls"
+              aria-describedby="workspace-availability"
+            >
               <legend class="visually-hidden">Vulnerability filters</legend>
 
               <div class="form-field">
@@ -92,7 +103,7 @@
 
               <div class="form-field">
                 <label for="record-scope">Records</label>
-                <select id="record-scope" name="scope">
+                <select id="record-scope" name="scope" disabled>
                   <option value="public">Public CVEs</option>
                   <option value="mine">My local records</option>
                 </select>
@@ -114,6 +125,14 @@
               <button class="button button-primary" type="submit">
                 Apply Filters
               </button>
+              <!-- Restore the full results list. -->
+              <button
+                id="clear-filters"
+                class="button button-secondary filter-reset"
+                type="button"
+              >
+                Clear Filters
+              </button>
             </fieldset>
           </form>
         </aside>
@@ -121,20 +140,52 @@
         <!-- Vulnerability results panel. -->
         <section class="workspace-panel" aria-labelledby="results-heading">
           <div class="results-heading">
-            <h2 id="results-heading">Vulnerability Records</h2>
-            <span class="results-count">No data loaded</span>
+            <h2 id="results-heading" tabindex="-1">Vulnerability Records</h2>
+            <span id="results-count" class="results-count"
+              >Loading records</span
+            >
           </div>
+
+          <!-- Paging above the records. -->
+          <nav
+            class="results-pagination results-pagination-top"
+            aria-label="Vulnerability pages, top"
+          >
+            <button
+              class="button button-secondary"
+              type="button"
+              data-previous-page
+              aria-controls="vulnerability-results"
+              disabled
+            >
+              Previous
+            </button>
+
+            <span data-page-summary>No page loaded</span>
+
+            <button
+              class="button button-secondary"
+              type="button"
+              data-next-page
+              aria-controls="vulnerability-results"
+              disabled
+            >
+              Next
+            </button>
+          </nav>
 
           <!-- Keyboard-accessible table scrolling. -->
           <div
+            id="vulnerability-results"
             class="table-scroll"
             role="region"
             aria-labelledby="results-heading"
+            aria-busy="true"
             tabindex="0"
           >
             <table class="records-table">
               <caption class="visually-hidden">
-                Vulnerability search results
+                Public vulnerability records
               </caption>
 
               <thead>
@@ -142,27 +193,34 @@
                   <th scope="col">CVE ID</th>
                   <th scope="col">Severity</th>
                   <th scope="col">Description</th>
-                  <th scope="col">Published</th>
+                  <th scope="col">Published (UTC)</th>
                 </tr>
               </thead>
 
-              <tbody>
+              <tbody id="vulnerability-records">
                 <!-- Replace when records load. -->
                 <tr>
                   <td colspan="4" class="empty-state">
-                    <strong>Your exploration starts here.</strong>
-                    <p>
-                      Vulnerability records will appear here when browsing
-                      becomes available.
-                    </p>
-                    <a class="text-link" href="/resources.html">
-                      Learn about vulnerabilities
-                    </a>
+                    Loading public CVEs...
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
+
+          <!-- Announce request progress. -->
+          <p id="results-status" class="workspace-note" role="status">
+            Loading public CVEs...
+          </p>
+
+          <button
+            id="results-retry"
+            class="button button-secondary results-retry"
+            type="button"
+            hidden
+          >
+            Try again
+          </button>
 
           <!-- Distinguish source and local records. -->
           <p class="workspace-note">
