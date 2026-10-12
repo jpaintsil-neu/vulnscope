@@ -1,183 +1,537 @@
 # VulnScope
 
-**VulnScope: Understand, Track, and Act on Cybersecurity Vulnerabilities**
+**Understand, Track, and Act on Cybersecurity Vulnerabilities**
 
-VulnScope is a full-stack web application designed to help everyday technology
-users, cybersecurity students, and security professionals understand, assess,
-and respond to publicly disclosed vulnerabilities.
+A full-stack cybersecurity awareness and review application created for
+**CS 5610: Web Development** at Northeastern University.
 
-The application uses public vulnerability and product data from the
-[National Vulnerability Database (NVD)](https://nvd.nist.gov/) maintained by
-the National Institute of Standards and Technology (NIST). VulnScope will
-store more than 1,000 public records in MongoDB and provide two independently
-functional full-stack workspaces.
+VulnScope helps everyday technology users, cybersecurity students, and
+security professionals explore publicly disclosed vulnerabilities and
+organize locally managed security reviews.
 
-## Project Purpose
+- **Live Site:** Pending — public deployment has not been completed.
+- **Repository:** [jpaintsil-neu/vulnscope](https://github.com/jpaintsil-neu/vulnscope)
+- **Progress Updated:** October 12, 2026
 
-Cybersecurity vulnerability information is often highly technical and
-difficult for everyday users to interpret. VulnScope aims to make that
-information more approachable while preserving the technical detail needed
-by students and security professionals.
+## Authors
 
-Users will be able to:
+### John Paintsil
 
-- Explore publicly disclosed vulnerabilities and technology products.
-- Search and filter vulnerability and product records.
-- Understand vulnerability severity and relevant cybersecurity terminology.
-- Review practical protective guidance.
-- Maintain locally managed vulnerability or product-review records.
-- Create, read, update, and delete locally managed records without modifying
-  authoritative NVD source data.
+- GitHub: [jpaintsil-neu](https://github.com/jpaintsil-neu)
+- Responsibility: Vulnerability Awareness & Triage workspace.
 
-## User Personas
+### Sania Anwar
 
-### Joe — Everyday Technology User
+- Responsibility: Product & Technology workspace.
 
-Joe wants to understand how security vulnerabilities may affect the software
-or devices he uses and learn practical steps he can take to reduce risk.
+**Course Page:** [CS 5610 — Web Development](https://johnguerra.co/classes/webDevelopment_online_fall_2026/)
 
-### Ahmed — Cybersecurity Student
+## Project Objective
 
-Ahmed is learning about cybersecurity and wants to explore real CVEs,
-understand severity ratings, compare vulnerabilities, and learn how
-vulnerabilities affect commonly used technologies.
+The goal is to build a useful, approachable application using semantic HTML,
+modular CSS, vanilla JavaScript, Node.js, Express, and MongoDB.
 
-### Fatima — Security Analyst
+The application has two planned independent feature areas:
 
-Fatima needs access to detailed vulnerability information, filtering,
-triage statuses, product-review information, and analyst notes to support
-vulnerability-management activities.
+- **Vulnerability Awareness & Triage:** Explore CVEs and manage local
+  vulnerability records, review statuses, and analyst notes.
+- **Product & Technology:** Explore technology products and manage local
+  product-security records and review notes.
 
-## User Stories
+Each workspace must support its own CRUD workflow without depending on the
+other workspace's collection. Imported NVD source data remains separate
+from locally managed records.
 
-### Sania Anwar — Product & Technology Workspace
+The primary implementation focus is the **Homepage, Vulnerabilities, and
+Products** pages. Supporting About, Resources, and FAQs pages provide
+context and cybersecurity learning material.
 
-Sania will own the `products` MongoDB collection and its independent
-full-stack CRUD workflow.
+The project also demonstrates:
 
-- As Joe, I want to search and browse product records so I can learn about
-  software and devices that may have known security concerns.
-- As Ahmed, I want to view product details such as vendor, product name,
-  version, and review status so I can better understand how security
-  vulnerabilities relate to commonly used technologies.
-- As Fatima, I want to create, update, and delete locally managed product
-  records and review notes so I can maintain an accurate product-security
-  workspace.
+- Client-side record rendering with vanilla JavaScript.
+- ES modules in frontend and backend code.
+- Node.js and Express API development.
+- MongoDB operations using the native driver.
+- Search, filtering, pagination, and record detail views.
+- Semantic controls, responsive layouts, and accessible navigation.
+- ESLint, Prettier, and Git/GitHub workflow.
 
-### John Paintsil — Vulnerability Awareness & Triage
+**Current milestone:** A successful local development import loaded
+**1,500 CVE records**. Public and guest-workspace browsing and detail views
+are implemented. Local creation is available through the API; its form,
+update/delete workflows, and Products integration remain unfinished.
 
-John will own the `vulnerabilities` MongoDB collection and its independent
-full-stack CRUD workflow.
+## Pages
 
-- As Joe, I want to search and browse vulnerability records with understandable
-  explanations so I can determine whether a security issue may be relevant to
-  technology I use.
-- As Ahmed, I want to view CVE details, severity ratings, and protective
-  guidance so I can understand how real-world vulnerabilities are assessed
-  and what actions users can take to reduce risk.
-- As Fatima, I want to create, update, and delete locally managed vulnerability
-  records, triage statuses, and analyst notes so I can maintain an organized
-  vulnerability-review workspace.
+### Home — [`public/index.html`](./public/index.html)
 
-## Primary Use Cases
+The homepage introduces the platform and its two workspaces.
 
-### Vulnerability Awareness & Triage
+Implemented:
 
-1. Browse and search imported CVE records.
-2. Filter vulnerabilities by severity and triage status.
-3. View technical CVE information and approachable explanations.
-4. Review practical protective guidance.
-5. Create a locally managed vulnerability record.
-6. Update triage status and analyst notes.
-7. Delete locally managed vulnerability records.
+- Minimal banner wallpaper.
+- Shared logo, navigation, sticky header, and footer.
+- Homepage search interface.
+- Overview of the vulnerability and product workspaces.
 
-### Product & Technology Workspace
+**Pending:** Connect the homepage search to the working APIs. The search
+controls are currently disabled.
 
-1. Browse and search imported product records.
-2. Filter records by vendor, product, version, or review status.
-3. View product-security information.
-4. Create a locally managed product record.
-5. Update product details, review status, and notes.
-6. Delete locally managed product records.
+### Vulnerabilities — [`public/vulnerabilities.html`](./public/vulnerabilities.html)
 
-The two feature areas will remain independently functional. Any future
-relationship between product records and vulnerabilities will be treated as
-an optional enhancement rather than a dependency.
+The workspace supports:
 
-## Technology Stack
+- Public CVE and My local records views.
+- CVE ID, title, and description keyword search.
+- Severity filtering.
+- Results in pages of up to 20 records.
+- Sticky column headings and top Previous/Next controls.
+- Links to public and local record details.
+- Loading, empty-result, error, and retry states.
 
-- Node.js
-- Express
-- Vanilla ES6 JavaScript
-- MongoDB
-- MongoDB native Node.js driver
-- HTML5
-- CSS3
+**Pending:** Add Vulnerability form, local edit/delete controls, and the
+planned triage-status filter.
 
-## Current Architecture
+### Vulnerability Details — [`public/vulnerability.html`](./public/vulnerability.html)
+
+Public details show descriptions, available CVSS assessments, source dates,
+and reference links.
+
+Local details show titles, descriptions, severity, review status, analyst
+notes, and creation/update dates. Authored explanations and protective
+guidance appear when present.
+
+The breadcrumb returns users to the selected record collection.
+
+### Products — Pending Integration
+
+Sania owns this workspace. Its implementation has not yet been integrated
+into `main`.
+
+**Pending:** Product data import, MongoDB collection, APIs, search/filtering,
+detail views, and local-record CRUD interface.
+
+### Supporting Pages
+
+- [About](./public/about.html) — Platform purpose, workflow, and data context.
+- [Resources](./public/resources.html) — Cybersecurity learning resources.
+- [FAQs](./public/faqs.html) — Frequently asked questions.
+
+**Pending:** Privacy Policy and Contact destinations.
+
+## Original JavaScript Functionality
+
+The project uses ES modules for browser behavior, API routes, database
+operations, and supporting services.
+
+### Record Search and Collection Switching
+
+Visitors can switch between imported public CVEs and their guest workspace's
+local records. Search text and severity selections are sent to the matching
+API, and the results table is rendered in the browser.
+
+### Pagination and Detail Rendering
+
+The interface updates page summaries, navigation controls, record counts,
+column headings, and detail links. Detail pages select the public or local
+API and render the matching record fields.
+
+### Guest Workspace Records
+
+The server assigns local-record ownership using a browser workspace cookie.
+The browser token is hashed before it is used as the database owner ID.
+
+Local creation validates editable fields. Local list and detail queries
+restrict results to records owned by the requesting workspace.
+
+**Pending:** Owner-restricted update/delete operations and their browser controls.
+
+### NVD Import and Conversion
+
+Backend modules retrieve NVD CVE data, normalize descriptions and CVSS
+information, preserve UTC source dates, and import accepted records into
+MongoDB using upserts.
+
+The import runs manually. The dataset reflects the last successful import.
+
+### Responsive Navigation
+
+The shared layout module controls the mobile navigation using
+`aria-expanded` and `aria-controls`. Escape closes the menu and restores
+focus to the menu button.
+
+## Technologies
+
+- HTML5 and CSS3.
+- Vanilla JavaScript ES6+ and ES modules.
+- CSS Grid and Flexbox.
+- Fetch API.
+- Node.js and npm.
+- Express.
+- MongoDB and the native MongoDB Node.js driver.
+- Git and GitHub.
+- ESLint and Prettier.
+
+The implementation uses ES modules and the native database driver.
+Mongoose and server-side template engines are excluded from the project.
+
+## Project Structure
+
+The following mapping reflects files currently present on `main`.
 
 ```text
 vulnscope/
 ├── public/
 │   ├── css/
+│   │   ├── home.css
+│   │   ├── styles.css
+│   │   ├── vulnerability.css
+│   │   └── workspace.css
+│   ├── images/
+│   │   └── logo.png
 │   ├── js/
-│   └── index.html
+│   │   ├── layout.js
+│   │   ├── vulnerabilities.js
+│   │   └── vulnerability.js
+│   ├── about.html
+│   ├── faqs.html
+│   ├── index.html
+│   ├── resources.html
+│   ├── vulnerabilities.html
+│   └── vulnerability.html
 ├── scripts/
+│   ├── check-nvd.js
+│   ├── import-vulnerabilities.js
+│   └── setup-database.js
 ├── src/
 │   ├── db/
-│   │   └── connection.js
+│   │   ├── connection.js
+│   │   └── vulnerabilities.js
+│   ├── models/
+│   │   └── vulnerability.js
 │   ├── routes/
+│   │   └── vulnerabilities.js
+│   ├── services/
+│   │   ├── local-workspace.js
+│   │   ├── nvd.js
+│   │   └── vulnerability-validation.js
 │   └── server.js
 ├── .env.example
+├── .gitignore
+├── .prettierignore
 ├── eslint.config.js
-├── prettier.config.js
+├── LICENSE
 ├── package.json
-└── package-lock.json
+├── package-lock.json
+├── prettier.config.js
+└── README.md
 ```
 
-## Local Development
+**Pending:** Creation/editing form files, Products modules, application
+screenshots, and final submission documentation.
 
-Install dependencies:
+## Design Documentation
+
+- [0. VulnScope Design Mockups — Index](https://docs.google.com/spreadsheets/d/1OPhlHSFipS1TBg5fY3gODJUL3W921hsAR03a6K-po7k/edit?usp=drivesdk)
+
+The design document draft covers the project description, personas, user
+stories, use cases, technical architecture, and responsibility split.
+The mockup index organizes the exported references and includes the editable
+Figma link.
+
+### User Personas
+
+- **Joe — Everyday Technology User:** Wants to understand risks affecting
+  software and devices and learn practical protective steps.
+- **Ahmed — Cybersecurity Student:** Wants to explore CVEs, severity ratings,
+  and relationships between vulnerabilities and technologies.
+- **Fatima — Security Analyst:** Needs detailed records, triage information,
+  filtering, and review notes.
+
+### User Stories
+
+These describe the intended complete workflows.
+
+- As Joe, I want to search vulnerability records so I can identify issues
+  that may be relevant to technology I use.
+- As Ahmed, I want to examine CVE details and protective guidance so I can
+  understand vulnerability assessment and response.
+- As Fatima, I want to create, update, and delete local vulnerability records
+  and notes so I can maintain an organized review workspace.
+- As Joe, I want to browse product records so I can learn about software and
+  devices that may have security concerns.
+- As Ahmed, I want to view vendor, product, version, and review information so
+  I can understand how vulnerabilities relate to technologies.
+- As Fatima, I want to manage local product records and review notes so I can
+  maintain an accurate product-security workspace.
+
+**Pending:** Update the design document with completed mockup references and
+current implementation progress, then review the final document and sharing
+access before submission.
+
+## Installation and Local Development
+
+### 1. Prerequisites
+
+- Node.js **24 LTS** with npm is recommended.
+- A running MongoDB server or a MongoDB Atlas connection.
+- Internet access for NVD requests.
+
+### 2. Clone the Repository
+
+```bash
+git clone https://github.com/jpaintsil-neu/vulnscope.git
+cd vulnscope
+```
+
+### 3. Install Dependencies
+
+```bash
+npm ci
+```
+
+### 4. Configure the Environment
+
+For a fresh clone:
+
+```bash
+cp .env.example .env
+```
+
+For local MongoDB:
+
+```dotenv
+# Local database connection.
+MONGODB_URI=mongodb://127.0.0.1:27017
+MONGODB_DB_NAME=vulnscope
+
+# HTTP server port.
+PORT=3000
+```
+
+For Atlas, supply your own connection URI. Keep credentials in the local
+`.env` file and exclude them from version control.
+
+### 5. Prepare the Database
+
+With MongoDB running:
+
+```bash
+# Create collection indexes.
+node scripts/setup-database.js
+
+# Check a known NVD sample.
+node scripts/check-nvd.js
+
+# Import the development dataset.
+node scripts/import-vulnerabilities.js
+```
+
+The importer requests up to 1,500 non-rejected CVEs from a 90-day publication
+window. It requires more than 1,000 usable records before importing and
+upserts records by CVE ID.
+
+MongoDB data is populated by these scripts and is not bundled with the
+repository.
+
+### 6. Start the Application
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+For a regular server start:
+
+```bash
+npm start
+```
+
+Express serves the frontend and API. There is no separate frontend bundling step.
+
+## Using the Application
+
+1. Open **Vulnerabilities** from the navigation.
+2. Choose **Public CVEs** or **My local records**.
+3. Enter a CVE ID or keyword and select an optional severity.
+4. Click **Apply Filters**. Use **Clear Filters** to reset the current collection.
+5. Use **Previous** and **Next** above the table to browse results.
+6. Click a CVE ID or local-record title to open its details.
+
+Guest records are associated with the browser that created them. Another
+browser has a separate workspace. Clearing the workspace cookie removes
+access to that workspace.
+
+**Pending:** The Add Vulnerability form and editing/deletion controls.
+Homepage search and account access are currently placeholders.
+
+## API Endpoints
+
+| Method | Endpoint                         | Function                              |
+| ------ | -------------------------------- | ------------------------------------- |
+| GET    | `/api/health`                    | HTTP server health check              |
+| GET    | `/api/vulnerabilities`           | Public CVE search and pagination      |
+| GET    | `/api/vulnerabilities/:id`       | Public CVE details                    |
+| POST   | `/api/vulnerabilities/local`     | Validated local-record creation       |
+| GET    | `/api/vulnerabilities/local`     | Guest workspace search and pagination |
+| GET    | `/api/vulnerabilities/local/:id` | Guest-owned local record details      |
+
+List endpoints accept `page`, `q`, and `severity` and return up to 20 records
+per page. Detail endpoints use the MongoDB `_id` returned by the list API.
+Local creation accepts JSON and assigns ownership on the server.
+
+**Pending:** Local update/delete endpoints and Products endpoints.
 
 ## Public Data Sources
 
-- [NIST NVD CVE API](https://nvd.nist.gov/developers/vulnerabilities)
-- [NIST NVD CPE/Product API](https://nvd.nist.gov/developers/products)
+- [NIST NVD CVE API](https://nvd.nist.gov/developers/vulnerabilities) — implemented.
+- [NIST NVD CPE/Product API](https://nvd.nist.gov/developers/products) — planned for Products.
 
-## Team
+## Code Quality
 
-- **John Paintsil** — Vulnerability Awareness & Triage
-- **Sania Anwar** — Product & Technology Workspace
+### Run ESLint
+
+```bash
+npm run lint
+```
+
+### Format Files with Prettier
+
+```bash
+npm run format
+```
+
+### Verify Prettier Formatting
+
+```bash
+npm run format:check
+```
+
+Source modules include brief purpose comments and short documentation for
+reusable functions.
+
+**Pending:** Final whole-project lint/format verification and unused-code cleanup.
+
+## Validation
+
+Development checks have covered:
+
+- NVD sample conversion and the development import.
+- Public CVE search, severity filters, pagination, and details.
+- Local-record validation and creation.
+- Guest ownership checks and separate-browser access.
+- Public/local view switching and detail navigation.
+
+**Pending:**
+
+- W3C Nu HTML Checker validation and evidence.
+- Final responsive and keyboard-access testing.
+- Complete CRUD checks for both collections.
+- Deployment and final end-to-end testing.
+- Final validation screenshots and logs.
+
+## Accessibility
+
+Implemented considerations include:
+
+- Semantic HTML and standard interactive controls.
+- Skip-to-content navigation.
+- Visible keyboard focus.
+- Decorative logo images with empty alternative text.
+- Accessible mobile-menu state and Escape behavior.
+- Keyboard-accessible table scrolling.
+- Labeled search/filter controls.
+- `aria-expanded`, `aria-controls`, and `aria-busy`.
+- Status announcements for loading and errors.
+- Responsive layout rules.
+
+**Pending:** Final accessibility review across all completed pages and forms.
+
+## Peer Code Review
+
+**Pending — the Project 2 code-review requirement has not been completed.**
+
+The final update will include:
+
+- Reviewed repository.
+- Review or pull-request link.
+- Summary of findings and contributions.
+- Validation performed.
+
+## Screenshot
+
+### Homepage
+
+**Pending — add a current screenshot of the running Homepage.**
+
+### Vulnerabilities Workspace
+
+**Pending — add screenshots of public CVEs, local records, and record details.**
+
+### Products Workspace
+
+**Pending — add a screenshot after Products integration.**
+
+## Presentation and Demo Video
+
+- **Google Slides Presentation:** Pending.
+- **Short Public Narrated Demo Video:** Pending.
+- **Published Demo Link:** Pending.
+- **Submission Thumbnail:** Pending.
+- **Google Form Submission:** Pending.
 
 ## Development Status
 
-VulnScope is currently in the project setup and design phase.
+### Completed
 
-Completed:
+- Scope, personas, user stories, use cases, and responsibility split.
+- Design mockups and their shared index.
+- Shared layout, navy theme, logo, and sticky navigation.
+- Homepage banner and search interface.
+- About, Resources, and FAQs pages.
+- Node/Express setup, ES modules, and MongoDB connection.
+- Vulnerability model, indexes, NVD conversion, and 1,500-record development import.
+- Public search, severity filtering, pagination, and detail APIs.
+- Guest identity, local validation, and local create/list/detail APIs.
+- Public/local browsing and detail views with sticky headings and top pagination.
+- ESLint/Prettier configuration, dependency files, and MIT license.
 
-- Project concept and scope
-- User personas, User stories, and Primary use cases
-- Team responsibility split
-- Shared GitHub repository
-- Node.js project initialization
-- ES module configuration
-- Express server and health-check endpoint
-- Initial browser-facing homepage
-- Shared MongoDB connection module
-- Environment-variable template
-- ESLint configuration
-- Prettier configuration
-- Project tracking and submission-planning workspace
+### In Progress / Next
 
-Next:
+- Add Vulnerability form.
+- Owner-restricted local update/delete APIs and browser controls.
+- Planned triage-status filtering.
+- Products collection, data import, APIs, and full CRUD interface.
+- Homepage search integration.
+- Privacy Policy and Contact destinations.
+- Final design-document, usability, accessibility, and code-quality review.
+- Public deployment with both workflows and more than 1,000 records.
+- Screenshots, presentation, narrated video, and code review.
+- Google Form submission and working thumbnail/links.
+- Code freeze 24 hours before class; deployment, video, and slides before class.
 
-- IFinalize the design document and mockups
-- Configure the MongoDB development environment
-- Define the `vulnerabilities` and `products` data models
-- Plan the NVD CVE and CPE import process
-- Implement the independent CRUD APIs
-- Build the vulnerability and product browser interfaces
+## Generative AI Disclosure
+
+Generative AI has assisted portions of the Project 2.
+
+### Tool and Model
+
+- **Tool:** ChatGPT / Codex.
+- **Provider:** OpenAI.
+- **Model/version details:** Pending final documentation of the models used.
+
+### How Generative AI Was Used
+
+-
+
+### Prompt Log and Supporting Evidence
+
+**Pending — compile the Project 2 prompt history, model details, and any
+required supporting screenshots.**
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the **MIT License**.
+
+See [`LICENSE`](./LICENSE) for details.
