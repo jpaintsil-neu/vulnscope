@@ -11,20 +11,20 @@ About, Resources, and FAQs add context and portfolio value.
 
 ## Responsibilities
 
-| Contributor | Main responsibility |
-| --- | --- |
+| Contributor   | Main responsibility                        |
+| ------------- | ------------------------------------------ |
 | John Paintsil | Vulnerability Awareness & Triage workspace |
-| Sania Anwar | Product & Technology workspace |
+| Sania Anwar   | Product & Technology workspace             |
 
 Products implementation remains pending integration into `main`.
 
 ## User Personas
 
-| Persona | Need |
-| --- | --- |
+| Persona                        | Need                                                                       |
+| ------------------------------ | -------------------------------------------------------------------------- |
 | Joe — Everyday Technology User | Understand risks affecting software/devices and practical protective steps |
-| Ahmed — Cybersecurity Student | Explore CVEs, severity assessments, and technology relationships |
-| Fatima — Security Analyst | Search records, manage review status, and maintain analyst notes |
+| Ahmed — Cybersecurity Student  | Explore CVEs, severity assessments, and technology relationships           |
+| Fatima — Security Analyst      | Search records, manage review status, and maintain analyst notes           |
 
 ## User Stories
 

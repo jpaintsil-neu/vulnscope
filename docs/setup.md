@@ -77,16 +77,16 @@ Express serves the browser files and API together.
 
 ## Troubleshooting
 
-| Symptom | Check |
-| --- | --- |
-| `MONGODB_URI is not defined` | Create `.env` in the repository root and set the URI |
-| MongoDB connection fails | Confirm the server is running and the URI/access settings are correct |
-| Public results are empty | Check whether the import completed in the configured database |
-| Import returns too few usable records | Review the error and requested publication window before retrying |
-| NVD request fails | Check connectivity and the returned error; allow time before retrying |
-| Port is occupied | Stop the conflicting server or change `PORT` in `.env` |
-| Local record is unavailable | Use the browser workspace that created it; check whether its cookie was cleared |
-| A save/delete cannot be confirmed | Recheck the record before repeating the operation |
+| Symptom                               | Check                                                                           |
+| ------------------------------------- | ------------------------------------------------------------------------------- |
+| `MONGODB_URI is not defined`          | Create `.env` in the repository root and set the URI                            |
+| MongoDB connection fails              | Confirm the server is running and the URI/access settings are correct           |
+| Public results are empty              | Check whether the import completed in the configured database                   |
+| Import returns too few usable records | Review the error and requested publication window before retrying               |
+| NVD request fails                     | Check connectivity and the returned error; allow time before retrying           |
+| Port is occupied                      | Stop the conflicting server or change `PORT` in `.env`                          |
+| Local record is unavailable           | Use the browser workspace that created it; check whether its cookie was cleared |
+| A save/delete cannot be confirmed     | Recheck the record before repeating the operation                               |
 
 **Pending:** Public hosting instructions, production database configuration,
 and deployment verification.
