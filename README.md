@@ -220,58 +220,14 @@ Database records are imported separately and are not bundled with the repository
 
 ## Using the Application
 
-### Search from the Homepage
+Search from Home, or open Vulnerabilities and choose Public CVEs or My local
+records. Apply search/severity filters; local records also support review status.
+Open a record for details, or use Add Vulnerability to create a local record.
 
-1. Enter a CVE ID or vulnerability keyword.
-2. Click **Search** or press Enter.
-3. Review the matching public CVEs on the Vulnerabilities page.
+Guest records belong to the browser workspace that created them.
+Clearing its cookie removes access. Public CVEs remain read-only.
 
-Leave the query blank to browse all imported public CVEs.
-
-### Browse and Filter Records
-
-1. Open **Vulnerabilities** from the navigation.
-2. Choose **Public CVEs** or **My local records**.
-3. Enter a CVE ID or keyword and select an optional severity.
-4. For local records, optionally choose a **Review status**.
-5. Click **Apply Filters**. Use **Clear Filters** to reset the current collection.
-6. Use **Previous** and **Next** above the table to browse results.
-7. Click a CVE ID or local-record title to open its details.
-
-Active filters remain selected when the results page is refreshed.
-Review status is available only for local records.
-
-### Create a Local Record
-
-1. Click **Add Vulnerability**.
-2. Enter the required title and description.
-3. Add an optional CVE ID, severity, review status, and supporting notes.
-4. Click **Save record** to open the saved record's details.
-
-### Edit a Local Record
-
-1. Open a record from **My local records**.
-2. Click **Edit record** and wait for its existing values to load.
-3. Update the fields and click **Save changes**.
-
-### Delete a Local Record
-
-1. Open a record from **My local records**.
-2. Click **Delete record**.
-3. Cancel to keep the record, or confirm permanent deletion.
-4. After successful deletion, the application returns to **My local records**.
-
-If a save cannot be confirmed, check My local records before submitting again.
-If deletion cannot be confirmed, use **Try again** to reload the record.
-
-Guest records are associated with the browser that created them. Another
-browser has a separate workspace. Clearing the workspace cookie removes
-access to that workspace. Guest workspaces do not provide account login
-or cross-device access.
-
-Imported public CVEs are read-only.
-
-**Pending:** Account access.
+See the [user guide](docs/user-guide.md).
 
 ## API Endpoints
 
