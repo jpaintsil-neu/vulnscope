@@ -399,10 +399,6 @@ The final update will include:
 
 ### Completed
 
-## Development Status
-
-### Completed
-
 - Scope, personas, user stories, use cases, and responsibility split.
 - Design mockups and their shared index.
 - Shared layout, navy theme, logo, and sticky navigation.
