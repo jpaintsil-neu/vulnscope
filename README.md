@@ -11,7 +11,7 @@ organize locally managed security reviews.
 
 - **Live Site:** Pending — public deployment has not been completed.
 - **Repository:** [jpaintsil-neu/vulnscope](https://github.com/jpaintsil-neu/vulnscope)
-- **Progress Updated:** October 12, 2026
+- **Progress Updated:** October 13, 2026
 
 ## Authors
 
@@ -57,9 +57,10 @@ The project also demonstrates:
 - ESLint, Prettier, and Git/GitHub workflow.
 
 **Current milestone:** A successful local development import loaded
-**1,500 CVE records**. Public and guest-workspace browsing and detail views
-are implemented. Local creation is available through the API; its form,
-update/delete workflows, and Products integration remain unfinished.
+**1,500 CVE records**. Public CVE browsing and guest-workspace creation,
+search, details, editing, and confirmed deletion are implemented.
+Imported CVEs remain read-only. Homepage search integration, Products,
+public deployment, and final submission deliverables remain pending.
 
 ## Pages
 
@@ -88,9 +89,9 @@ The workspace supports:
 - Sticky column headings and top Previous/Next controls.
 - Links to public and local record details.
 - Loading, empty-result, error, and retry states.
+- Add Vulnerability link to the local-record form.
 
-**Pending:** Add Vulnerability form, local edit/delete controls, and the
-planned triage-status filter.
+**Pending:** The planned triage-status filter.
 
 ### Vulnerability Details — [`public/vulnerability.html`](./public/vulnerability.html)
 
@@ -101,7 +102,23 @@ Local details show titles, descriptions, severity, review status, analyst
 notes, and creation/update dates. Authored explanations and protective
 guidance appear when present.
 
-The breadcrumb returns users to the selected record collection.
+Local records include **Edit record** and **Delete record** controls.
+Deletion requires confirmation. Imported CVEs display read-only details
+without editing or deletion controls.The breadcrumb returns users to the selected record collection.
+
+### Add / Edit Vulnerability — [`public/vulnerability-form.html`](./public/vulnerability-form.html)
+
+One form supports creating and editing guest-workspace records:
+
+- Required title and description.
+- Optional CVE ID, analyst notes, explanation, and protective guidance.
+- Severity and review-status selections.
+- Browser validation and server-returned field errors.
+- Existing-value loading before editing is enabled.
+- Save progress, retry feedback, and duplicate-submission guards.
+
+A successful save opens the local record's detail page.
+Unavailable or unowned records cannot be edited.
 
 ### Products — Pending Integration
 
@@ -141,8 +158,14 @@ API and render the matching record fields.
 The server assigns local-record ownership using a browser workspace cookie.
 The browser token is hashed before it is used as the database owner ID.
 
-Local creation validates editable fields. Local list and detail queries
-restrict results to records owned by the requesting workspace.
+Local records support creation, browsing, detail viewing, editing, and
+confirmed deletion. The server validates creation and update submissions
+and accepts only editable fields.
+
+Local list, detail, update, and delete operations restrict access to the
+requesting workspace's records. Updates preserve the creation date and
+refresh the update date. Imported NVD records remain read-only through
+the application.
 
 **Pending:** Owner-restricted update/delete operations and their browser controls.
 
@@ -186,13 +209,15 @@ vulnscope/
 │   │   ├── home.css
 │   │   ├── styles.css
 │   │   ├── vulnerability.css
+│   │   ├── vulnerability-form.css
 │   │   └── workspace.css
 │   ├── images/
 │   │   └── logo.png
 │   ├── js/
 │   │   ├── layout.js
 │   │   ├── vulnerabilities.js
-│   │   └── vulnerability.js
+│   │   ├── vulnerability.js
+│   │   └── vulnerability-form.js
 │   ├── about.html
 │   ├── faqs.html
 │   ├── index.html
@@ -227,8 +252,8 @@ vulnscope/
 └── README.md
 ```
 
-**Pending:** Creation/editing form files, Products modules, application
-screenshots, and final submission documentation.
+**Pending:** Products modules, application screenshots, and final
+submission documentation.
 
 ## Design Documentation
 
@@ -359,29 +384,68 @@ Express serves the frontend and API. There is no separate frontend bundling step
 5. Use **Previous** and **Next** above the table to browse results.
 6. Click a CVE ID or local-record title to open its details.
 
+### Create a Local Record
+
+1. Click **Add Vulnerability**.
+2. Enter the required title and description.
+3. Add an optional CVE ID, severity, review status, and supporting notes.
+4. Click **Save record** to open the saved record's details.
+
+### Edit a Local Record
+
+1. Open a record from **My local records**.
+2. Click **Edit record** and wait for its existing values to load.
+3. Update the fields and click **Save changes**.
+
+### Delete a Local Record
+
+1. Open a record from **My local records**.
+2. Click **Delete record**.
+3. Cancel to keep the record, or confirm permanent deletion.
+4. After successful deletion, the application returns to **My local records**.
+
+If a save cannot be confirmed, check My local records before submitting again.
+If deletion cannot be confirmed, use **Try again** to reload the record.
+
 Guest records are associated with the browser that created them. Another
 browser has a separate workspace. Clearing the workspace cookie removes
-access to that workspace.
+access to that workspace. Guest workspaces do not provide account login
+or cross-device access.
 
-**Pending:** The Add Vulnerability form and editing/deletion controls.
-Homepage search and account access are currently placeholders.
+Imported public CVEs are read-only.
+
+**Pending:** Homepage search integration and account access.
 
 ## API Endpoints
 
-| Method | Endpoint                         | Function                              |
-| ------ | -------------------------------- | ------------------------------------- |
-| GET    | `/api/health`                    | HTTP server health check              |
-| GET    | `/api/vulnerabilities`           | Public CVE search and pagination      |
-| GET    | `/api/vulnerabilities/:id`       | Public CVE details                    |
-| POST   | `/api/vulnerabilities/local`     | Validated local-record creation       |
-| GET    | `/api/vulnerabilities/local`     | Guest workspace search and pagination |
-| GET    | `/api/vulnerabilities/local/:id` | Guest-owned local record details      |
+| Method | Endpoint                         | Function                                  |
+| ------ | -------------------------------- | ----------------------------------------- |
+| GET    | `/api/health`                    | HTTP server health check                  |
+| GET    | `/api/vulnerabilities`           | Public CVE search and pagination          |
+| GET    | `/api/vulnerabilities/:id`       | Public CVE details                        |
+| POST   | `/api/vulnerabilities/local`     | Validated local-record creation           |
+| GET    | `/api/vulnerabilities/local`     | Guest workspace search and pagination     |
+| GET    | `/api/vulnerabilities/local/:id` | Guest-owned local record details          |
+| PUT    | `/api/vulnerabilities/local/:id` | Validated guest-owned local record update |
+| DELETE | `/api/vulnerabilities/local/:id` | Guest-owned local record deletion         |
 
 List endpoints accept `page`, `q`, and `severity` and return up to 20 records
 per page. Detail endpoints use the MongoDB `_id` returned by the list API.
-Local creation accepts JSON and assigns ownership on the server.
 
-**Pending:** Local update/delete endpoints and Products endpoints.
+POST and PUT accept JSON containing editable local-record fields:
+`title`, `description`, `cveId`, `severity`, `triageStatus`,
+`analystNotes`, `explanation`, and `protectiveGuidance`.
+Title and description are required. PUT submits the complete editable
+record; omitted optional fields reset to their defaults.
+
+The server derives ownership from the guest workspace cookie.
+Client-supplied ownership and other server-managed fields are rejected.
+
+Successful creation returns `201`, updating returns `200`, and deletion
+returns `204` with no response body. Invalid submissions return `400`.
+Unavailable or unowned local records return `404`.
+
+**Pending:** Products endpoints.
 
 ## Public Data Sources
 
@@ -389,6 +453,14 @@ Local creation accepts JSON and assigns ownership on the server.
 - [NIST NVD CPE/Product API](https://nvd.nist.gov/developers/products) — planned for Products.
 
 ## Code Quality
+
+**Current checkpoint:** ESLint passed without errors after the public CVE
+detail-rendering correction on October 13, 2026. Changed files were
+formatted with Prettier.
+
+**Pending:** Final repository-wide formatting verification and unused-code
+cleanup. Repeat lint and formatting checks after further implementation
+and before submission.
 
 ### Run ESLint
 
@@ -419,15 +491,16 @@ Development checks have covered:
 
 - NVD sample conversion and the development import.
 - Public CVE search, severity filters, pagination, and details.
-- Local-record validation and creation.
+- Local-record form validation, creation, editing, and confirmed deletion.
 - Guest ownership checks and separate-browser access.
 - Public/local view switching and detail navigation.
+- Review and correction of public CVE details to remove local editing controls.
 
 **Pending:**
 
 - W3C Nu HTML Checker validation and evidence.
 - Final responsive and keyboard-access testing.
-- Complete CRUD checks for both collections.
+- Products CRUD checks and final regression checks across both collections.
 - Deployment and final end-to-end testing.
 - Final validation screenshots and logs.
 
@@ -493,14 +566,15 @@ The final update will include:
 - Node/Express setup, ES modules, and MongoDB connection.
 - Vulnerability model, indexes, NVD conversion, and 1,500-record development import.
 - Public search, severity filtering, pagination, and detail APIs.
-- Guest identity, local validation, and local create/list/detail APIs.
-- Public/local browsing and detail views with sticky headings and top pagination.
+- Guest identity, local validation, and local create/list/detail/update/delete APIs.
+- Shared creation/editing form with required-field validation and save feedback.
+- Local detail actions with confirmed deletion and failure recovery.
+- Read-only public CVE details with local management controls excluded.
+- Successful local ESLint check after the public-detail rendering correction.- Public/local browsing and detail views with sticky headings and top pagination.
 - ESLint/Prettier configuration, dependency files, and MIT license.
 
 ### In Progress / Next
 
-- Add Vulnerability form.
-- Owner-restricted local update/delete APIs and browser controls.
 - Planned triage-status filtering.
 - Products collection, data import, APIs, and full CRUD interface.
 - Homepage search integration.
