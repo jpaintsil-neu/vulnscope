@@ -59,8 +59,9 @@ The project also demonstrates:
 **Current milestone:** A successful local development import loaded
 **1,500 CVE records**. Public CVE browsing and guest-workspace creation,
 search, details, editing, and confirmed deletion are implemented.
-Imported CVEs remain read-only. Homepage search integration, Products,
-public deployment, and final submission deliverables remain pending.
+Local records support review-status filtering, and active filters are preserved when refreshing the results page.
+Imported CVEs remain read-only. Products integration, public deployment,
+and final submission deliverables remain pending.
 
 ## Pages
 
@@ -72,11 +73,11 @@ Implemented:
 
 - Minimal banner wallpaper.
 - Shared logo, navigation, sticky header, and footer.
-- Homepage search interface.
+- Working public vulnerability search by CVE ID or keyword.
+- Search navigation to the Vulnerabilities page with the query applied.
 - Overview of the vulnerability and product workspaces.
 
-**Pending:** Connect the homepage search to the working APIs. The search
-controls are currently disabled.
+**Pending:** Product-specific search after Products integration.
 
 ### Vulnerabilities — [`public/vulnerabilities.html`](./public/vulnerabilities.html)
 
@@ -90,8 +91,8 @@ The workspace supports:
 - Links to public and local record details.
 - Loading, empty-result, error, and retry states.
 - Add Vulnerability link to the local-record form.
-
-**Pending:** The planned triage-status filter.
+- Local review-status filtering: New, In review, and Resolved.
+- Active search, severity, and local review-status filters preserved in the URL.
 
 ### Vulnerability Details — [`public/vulnerability.html`](./public/vulnerability.html)
 
@@ -104,7 +105,9 @@ guidance appear when present.
 
 Local records include **Edit record** and **Delete record** controls.
 Deletion requires confirmation. Imported CVEs display read-only details
-without editing or deletion controls.The breadcrumb returns users to the selected record collection.
+without editing or deletion controls.
+
+The breadcrumb returns users to the selected record collection.
 
 ### Add / Edit Vulnerability — [`public/vulnerability-form.html`](./public/vulnerability-form.html)
 
@@ -136,52 +139,15 @@ detail views, and local-record CRUD interface.
 
 **Pending:** Privacy Policy and Contact destinations.
 
+See the [user guide](docs/user-guide.md) for page workflows.
+
 ## Original JavaScript Functionality
 
-The project uses ES modules for browser behavior, API routes, database
-operations, and supporting services.
+Vanilla JavaScript renders API results, switches collections, manages
+filters and pagination, and handles local-record forms and actions.
+Active filters are preserved in the URL.
 
-### Record Search and Collection Switching
-
-Visitors can switch between imported public CVEs and their guest workspace's
-local records. Search text and severity selections are sent to the matching
-API, and the results table is rendered in the browser.
-
-### Pagination and Detail Rendering
-
-The interface updates page summaries, navigation controls, record counts,
-column headings, and detail links. Detail pages select the public or local
-API and render the matching record fields.
-
-### Guest Workspace Records
-
-The server assigns local-record ownership using a browser workspace cookie.
-The browser token is hashed before it is used as the database owner ID.
-
-Local records support creation, browsing, detail viewing, editing, and
-confirmed deletion. The server validates creation and update submissions
-and accepts only editable fields.
-
-Local list, detail, update, and delete operations restrict access to the
-requesting workspace's records. Updates preserve the creation date and
-refresh the update date. Imported NVD records remain read-only through
-the application.
-
-**Pending:** Owner-restricted update/delete operations and their browser controls.
-
-### NVD Import and Conversion
-
-Backend modules retrieve NVD CVE data, normalize descriptions and CVSS
-information, preserve UTC source dates, and import accepted records into
-MongoDB using upserts.
-
-The import runs manually. The dataset reflects the last successful import.
-
-### Responsive Navigation
-
-The shared layout module controls the mobile navigation using
-`aria-expanded` and `aria-controls`. Escape closes the menu and restores
-focus to the menu button.
+See [architecture and module responsibilities](docs/architecture.md).
 
 ## Technologies
 
@@ -200,189 +166,80 @@ Mongoose and server-side template engines are excluded from the project.
 
 ## Project Structure
 
-The following mapping reflects files currently present on `main`.
+| Location   | Purpose                                                 |
+| ---------- | ------------------------------------------------------- |
+| `public/`  | HTML pages, CSS modules, browser JavaScript, and images |
+| `src/`     | Express routes, database modules, models, and services  |
+| `scripts/` | Database setup, NVD sample check, and data import       |
+| `docs/`    | Detailed project documentation                          |
 
-```text
-vulnscope/
-├── public/
-│   ├── css/
-│   │   ├── home.css
-│   │   ├── styles.css
-│   │   ├── vulnerability.css
-│   │   ├── vulnerability-form.css
-│   │   └── workspace.css
-│   ├── images/
-│   │   └── logo.png
-│   ├── js/
-│   │   ├── layout.js
-│   │   ├── vulnerabilities.js
-│   │   ├── vulnerability.js
-│   │   └── vulnerability-form.js
-│   ├── about.html
-│   ├── faqs.html
-│   ├── index.html
-│   ├── resources.html
-│   ├── vulnerabilities.html
-│   └── vulnerability.html
-├── scripts/
-│   ├── check-nvd.js
-│   ├── import-vulnerabilities.js
-│   └── setup-database.js
-├── src/
-│   ├── db/
-│   │   ├── connection.js
-│   │   └── vulnerabilities.js
-│   ├── models/
-│   │   └── vulnerability.js
-│   ├── routes/
-│   │   └── vulnerabilities.js
-│   ├── services/
-│   │   ├── local-workspace.js
-│   │   ├── nvd.js
-│   │   └── vulnerability-validation.js
-│   └── server.js
-├── .env.example
-├── .gitignore
-├── .prettierignore
-├── eslint.config.js
-├── LICENSE
-├── package.json
-├── package-lock.json
-├── prettier.config.js
-└── README.md
-```
-
-**Pending:** Products modules, application screenshots, and final
-submission documentation.
+See the [complete folder/file mapping](docs/architecture.md#folder-and-file-mapping).
 
 ## Design Documentation
 
-- [0. VulnScope Design Mockups — Index](https://docs.google.com/spreadsheets/d/1OPhlHSFipS1TBg5fY3gODJUL3W921hsAR03a6K-po7k/edit?usp=drivesdk)
+Personas, user stories, mockups, and responsibility split are documented in
+the [design overview](docs/design.md).
 
-The design document draft covers the project description, personas, user
-stories, use cases, technical architecture, and responsibility split.
-The mockup index organizes the exported references and includes the editable
-Figma link.
-
-### User Personas
-
-- **Joe — Everyday Technology User:** Wants to understand risks affecting
-  software and devices and learn practical protective steps.
-- **Ahmed — Cybersecurity Student:** Wants to explore CVEs, severity ratings,
-  and relationships between vulnerabilities and technologies.
-- **Fatima — Security Analyst:** Needs detailed records, triage information,
-  filtering, and review notes.
-
-### User Stories
-
-These describe the intended complete workflows.
-
-- As Joe, I want to search vulnerability records so I can identify issues
-  that may be relevant to technology I use.
-- As Ahmed, I want to examine CVE details and protective guidance so I can
-  understand vulnerability assessment and response.
-- As Fatima, I want to create, update, and delete local vulnerability records
-  and notes so I can maintain an organized review workspace.
-- As Joe, I want to browse product records so I can learn about software and
-  devices that may have security concerns.
-- As Ahmed, I want to view vendor, product, version, and review information so
-  I can understand how vulnerabilities relate to technologies.
-- As Fatima, I want to manage local product records and review notes so I can
-  maintain an accurate product-security workspace.
-
-**Pending:** Update the design document with completed mockup references and
-current implementation progress, then review the final document and sharing
-access before submission.
+The [shared mockup index](https://docs.google.com/spreadsheets/d/1OPhlHSFipS1TBg5fY3gODJUL3W921hsAR03a6K-po7k/edit)
+includes the editable Figma reference. Final design-document review is pending.
 
 ## Installation and Local Development
 
-### 1. Prerequisites
-
-- Node.js **24 LTS** with npm is recommended.
-- A running MongoDB server or a MongoDB Atlas connection.
-- Internet access for NVD requests.
-
-### 2. Clone the Repository
+Prerequisites: Node.js **24 LTS**, npm, a running MongoDB server or Atlas
+connection, and internet access for the NVD import.
 
 ```bash
+# Clone and install.
 git clone https://github.com/jpaintsil-neu/vulnscope.git
 cd vulnscope
-```
-
-### 3. Install Dependencies
-
-```bash
 npm ci
-```
-
-### 4. Configure the Environment
-
-For a fresh clone:
-
-```bash
 cp .env.example .env
-```
 
-For local MongoDB:
-
-```dotenv
-# Local database connection.
-MONGODB_URI=mongodb://127.0.0.1:27017
-MONGODB_DB_NAME=vulnscope
-
-# HTTP server port.
-PORT=3000
-```
-
-For Atlas, supply your own connection URI. Keep credentials in the local
-`.env` file and exclude them from version control.
-
-### 5. Prepare the Database
-
-With MongoDB running:
-
-```bash
-# Create collection indexes.
+# Prepare MongoDB and import CVEs.
 node scripts/setup-database.js
-
-# Check a known NVD sample.
-node scripts/check-nvd.js
-
-# Import the development dataset.
 node scripts/import-vulnerabilities.js
-```
 
-The importer requests up to 1,500 non-rejected CVEs from a 90-day publication
-window. It requires more than 1,000 usable records before importing and
-upserts records by CVE ID.
-
-MongoDB data is populated by these scripts and is not bundled with the
-repository.
-
-### 6. Start the Application
-
-```bash
+# Start the application.
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+For local MongoDB, the example configuration uses:
 
-For a regular server start:
-
-```bash
-npm start
+```dotenv
+MONGODB_URI=mongodb://127.0.0.1:27017
+MONGODB_DB_NAME=vulnscope
+PORT=3000
 ```
 
-Express serves the frontend and API. There is no separate frontend bundling step.
+For Atlas, edit `.env` with your own connection settings before running the scripts.
+Open [http://localhost:3000](http://localhost:3000).
+Use `npm start` for a regular server start.
+
+See [detailed setup and troubleshooting](docs/setup.md).
+Database records are imported separately and are not bundled with the repository.
 
 ## Using the Application
+
+### Search from the Homepage
+
+1. Enter a CVE ID or vulnerability keyword.
+2. Click **Search** or press Enter.
+3. Review the matching public CVEs on the Vulnerabilities page.
+
+Leave the query blank to browse all imported public CVEs.
+
+### Browse and Filter Records
 
 1. Open **Vulnerabilities** from the navigation.
 2. Choose **Public CVEs** or **My local records**.
 3. Enter a CVE ID or keyword and select an optional severity.
-4. Click **Apply Filters**. Use **Clear Filters** to reset the current collection.
-5. Use **Previous** and **Next** above the table to browse results.
-6. Click a CVE ID or local-record title to open its details.
+4. For local records, optionally choose a **Review status**.
+5. Click **Apply Filters**. Use **Clear Filters** to reset the current collection.
+6. Use **Previous** and **Next** above the table to browse results.
+7. Click a CVE ID or local-record title to open its details.
+
+Active filters remain selected when the results page is refreshed.
+Review status is available only for local records.
 
 ### Create a Local Record
 
@@ -414,43 +271,24 @@ or cross-device access.
 
 Imported public CVEs are read-only.
 
-**Pending:** Homepage search integration and account access.
+**Pending:** Account access.
 
 ## API Endpoints
 
-| Method | Endpoint                         | Function                                  |
-| ------ | -------------------------------- | ----------------------------------------- |
-| GET    | `/api/health`                    | HTTP server health check                  |
-| GET    | `/api/vulnerabilities`           | Public CVE search and pagination          |
-| GET    | `/api/vulnerabilities/:id`       | Public CVE details                        |
-| POST   | `/api/vulnerabilities/local`     | Validated local-record creation           |
-| GET    | `/api/vulnerabilities/local`     | Guest workspace search and pagination     |
-| GET    | `/api/vulnerabilities/local/:id` | Guest-owned local record details          |
-| PUT    | `/api/vulnerabilities/local/:id` | Validated guest-owned local record update |
-| DELETE | `/api/vulnerabilities/local/:id` | Guest-owned local record deletion         |
+The Express API provides public CVE browsing and guest-owned local CRUD.
+Local searches support `triageStatus` alongside search and severity.
 
-List endpoints accept `page`, `q`, and `severity` and return up to 20 records
-per page. Detail endpoints use the MongoDB `_id` returned by the list API.
-
-POST and PUT accept JSON containing editable local-record fields:
-`title`, `description`, `cveId`, `severity`, `triageStatus`,
-`analystNotes`, `explanation`, and `protectiveGuidance`.
-Title and description are required. PUT submits the complete editable
-record; omitted optional fields reset to their defaults.
-
-The server derives ownership from the guest workspace cookie.
-Client-supplied ownership and other server-managed fields are rejected.
-
-Successful creation returns `201`, updating returns `200`, and deletion
-returns `204` with no response body. Invalid submissions return `400`.
-Unavailable or unowned local records return `404`.
+See the [API reference](docs/api.md) for endpoints, validation, and examples.
 
 **Pending:** Products endpoints.
 
 ## Public Data Sources
 
 - [NIST NVD CVE API](https://nvd.nist.gov/developers/vulnerabilities) — implemented.
-- [NIST NVD CPE/Product API](https://nvd.nist.gov/developers/products) — planned for Products.
+- [NIST NVD CPE/Product API](https://nvd.nist.gov/developers/products) — planned.
+
+The development import is manual; the dataset reflects its last successful run.
+See [import behavior](docs/setup.md#nvd-import).
 
 ## Code Quality
 
@@ -495,6 +333,9 @@ Development checks have covered:
 - Guest ownership checks and separate-browser access.
 - Public/local view switching and detail navigation.
 - Review and correction of public CVE details to remove local editing controls.
+- Homepage search navigation and query transfer.
+- Combined local search, severity, and review-status filtering.
+- URL filter restoration, Clear Filters, and collection switching.
 
 **Pending:**
 
@@ -558,10 +399,14 @@ The final update will include:
 
 ### Completed
 
+## Development Status
+
+### Completed
+
 - Scope, personas, user stories, use cases, and responsibility split.
 - Design mockups and their shared index.
 - Shared layout, navy theme, logo, and sticky navigation.
-- Homepage banner and search interface.
+- Homepage banner and connected public vulnerability search.
 - About, Resources, and FAQs pages.
 - Node/Express setup, ES modules, and MongoDB connection.
 - Vulnerability model, indexes, NVD conversion, and 1,500-record development import.
@@ -569,15 +414,17 @@ The final update will include:
 - Guest identity, local validation, and local create/list/detail/update/delete APIs.
 - Shared creation/editing form with required-field validation and save feedback.
 - Local detail actions with confirmed deletion and failure recovery.
+- Local review-status filtering combined with search and severity.
+- Active-filter URL persistence, refresh restoration, and Clear Filters behavior.
 - Read-only public CVE details with local management controls excluded.
-- Successful local ESLint check after the public-detail rendering correction.- Public/local browsing and detail views with sticky headings and top pagination.
+- Successful local ESLint check after the public-detail rendering correction.
+- Public/local browsing and detail views with sticky headings and top pagination.
 - ESLint/Prettier configuration, dependency files, and MIT license.
 
 ### In Progress / Next
 
-- Planned triage-status filtering.
 - Products collection, data import, APIs, and full CRUD interface.
-- Homepage search integration.
+- Product-specific homepage search integration.
 - Privacy Policy and Contact destinations.
 - Final design-document, usability, accessibility, and code-quality review.
 - Public deployment with both workflows and more than 1,000 records.
