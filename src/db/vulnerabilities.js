@@ -270,3 +270,74 @@ export async function findLocalVulnerabilityById(id, ownerId) {
     },
   );
 }
+
+/**
+ * Updates a validated record owned by the guest workspace.
+ */
+export async function updateLocalVulnerability(id, values, ownerId) {
+  // Require server-assigned ownership.
+  if (typeof ownerId !== "string" || !/^[a-f0-9]{64}$/.test(ownerId)) {
+    throw new Error("A local workspace is required.");
+  }
+
+  const collection = await getVulnerabilitiesCollection();
+
+  // Update editable fields only.
+  const changes = {
+    title: values.title,
+    description: values.description,
+    cveId: values.cveId,
+    severity: values.severity,
+    triageStatus: values.triageStatus,
+    analystNotes: values.analystNotes,
+    explanation: values.explanation,
+    protectiveGuidance: values.protectiveGuidance,
+    updatedAt: new Date(),
+  };
+
+  // Match local origin and ownership.
+  return collection.findOneAndUpdate(
+    { _id: new ObjectId(id), source: "local", ownerId },
+    { $set: changes },
+    {
+      returnDocument: "after",
+      includeResultMetadata: false,
+      upsert: false,
+      // Exclude internal ownership.
+      projection: {
+        source: 1,
+        cveId: 1,
+        title: 1,
+        description: 1,
+        severity: 1,
+        explanation: 1,
+        protectiveGuidance: 1,
+        triageStatus: 1,
+        analystNotes: 1,
+        createdAt: 1,
+        updatedAt: 1,
+      },
+    },
+  );
+}
+
+/**
+ * Deletes a local record owned by the guest workspace.
+ */
+export async function deleteLocalVulnerability(id, ownerId) {
+  // Require server-assigned ownership.
+  if (typeof ownerId !== "string" || !/^[a-f0-9]{64}$/.test(ownerId)) {
+    throw new Error("A local workspace is required.");
+  }
+
+  const collection = await getVulnerabilitiesCollection();
+
+  // Match local origin and ownership.
+  const result = await collection.deleteOne({
+    _id: new ObjectId(id),
+    source: "local",
+    ownerId,
+  });
+
+  return result.deletedCount === 1;
+}

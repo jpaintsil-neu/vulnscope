@@ -24,9 +24,9 @@ function navigationState(href) {
   if (currentPath === "/faqs.html" && href === "/resources.html") {
     return 'aria-current="true"';
   }
-  // Keep details within Vulnerabilities.
+  // Keep detail and form pages within Vulnerabilities.
   if (
-    currentPath === "/vulnerability.html" &&
+    ["/vulnerability.html", "/vulnerability-form.html"].includes(currentPath) &&
     href === "/vulnerabilities.html"
   ) {
     return 'aria-current="true"';

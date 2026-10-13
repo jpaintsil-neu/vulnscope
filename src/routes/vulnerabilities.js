@@ -1,10 +1,12 @@
 import { Router } from "express";
 import {
   createLocalVulnerability,
+  deleteLocalVulnerability,
   findLocalVulnerabilityById,
   findPublicVulnerabilityById,
   listLocalVulnerabilities,
   listPublicVulnerabilities,
+  updateLocalVulnerability,
 } from "../db/vulnerabilities.js";
 import { SEVERITY_LEVELS } from "../models/vulnerability.js";
 import { getLocalWorkspaceOwner } from "../services/local-workspace.js";
@@ -209,6 +211,111 @@ router.get("/", async (req, res) => {
 
     return res.status(500).json({
       error: "Unable to load vulnerabilities. Please try again.",
+    });
+  }
+});
+
+// Update one guest workspace record.
+router.put("/local/:id", async (req, res) => {
+  // Prevent caching of workspace details.
+  res.set("Cache-Control", "no-store");
+
+  const { id } = req.params;
+
+  // Validate the database identifier.
+  if (!/^[a-fA-F0-9]{24}$/.test(id)) {
+    return res.status(400).json({
+      error: "Invalid vulnerability ID.",
+    });
+  }
+
+  // Accept JSON submissions only.
+  if (!req.is("application/json")) {
+    return res.status(415).json({
+      error: "Submit the record as JSON.",
+    });
+  }
+
+  try {
+    const ownerId = getLocalWorkspaceOwner(req, res);
+
+    // Require an existing workspace.
+    if (!ownerId) {
+      return res.status(404).json({
+        error: "Local vulnerability not found.",
+      });
+    }
+
+    const { values, errors } = validateLocalVulnerability(req.body);
+
+    // Return field-specific errors.
+    if (!values) {
+      return res.status(400).json({
+        error: "Please correct the highlighted fields.",
+        errors,
+      });
+    }
+
+    const record = await updateLocalVulnerability(id, values, ownerId);
+
+    // Handle unavailable records consistently.
+    if (!record) {
+      return res.status(404).json({
+        error: "Local vulnerability not found.",
+      });
+    }
+
+    return res.json({ record });
+  } catch (error) {
+    // Keep internal errors private.
+    console.error("Local vulnerability update failed:", error.name);
+
+    return res.status(500).json({
+      error: "Unable to update this local record. Please try again.",
+    });
+  }
+});
+
+// Delete one guest workspace record.
+router.delete("/local/:id", async (req, res) => {
+  // Prevent caching of workspace responses.
+  res.set("Cache-Control", "no-store");
+
+  const { id } = req.params;
+
+  // Validate the database identifier.
+  if (!/^[a-fA-F0-9]{24}$/.test(id)) {
+    return res.status(400).json({
+      error: "Invalid vulnerability ID.",
+    });
+  }
+
+  try {
+    const ownerId = getLocalWorkspaceOwner(req, res);
+
+    // Require an existing workspace.
+    if (!ownerId) {
+      return res.status(404).json({
+        error: "Local vulnerability not found.",
+      });
+    }
+
+    const deleted = await deleteLocalVulnerability(id, ownerId);
+
+    if (!deleted) {
+      return res.status(404).json({
+        error: "Local vulnerability not found.",
+      });
+    }
+
+    // Successful deletion has no response body.
+    return res.status(204).end();
+  } catch (error) {
+    // Keep internal errors private.
+    console.error("Local vulnerability deletion failed:", error.name);
+
+    return res.status(500).json({
+      error: "Unable to delete this local record. Please try again.",
     });
   }
 });
