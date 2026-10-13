@@ -180,6 +180,7 @@ export async function listLocalVulnerabilities({
   page = 1,
   q = "",
   severity = "",
+  triageStatus = "",
 }) {
   // Require server-assigned ownership.
   if (typeof ownerId !== "string" || !/^[a-f0-9]{64}$/.test(ownerId)) {
@@ -191,6 +192,10 @@ export async function listLocalVulnerabilities({
 
   // Restrict results to this guest workspace.
   const filter = { source: "local", ownerId };
+  // Filter the local review status.
+  if (triageStatus) {
+    filter.triageStatus = triageStatus;
+  }
 
   if (severity) {
     filter.severity = severity;

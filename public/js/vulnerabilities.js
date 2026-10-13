@@ -20,6 +20,8 @@ const filterControls = document.querySelector("#filter-controls");
 const queryInput = document.querySelector("#vulnerability-query");
 const scopeSelect = document.querySelector("#record-scope");
 const severitySelect = document.querySelector("#severity-filter");
+const triageStatusField = document.querySelector("#triage-status-field");
+const triageStatusSelect = document.querySelector("#triage-status-filter");
 const clearFiltersButton = document.querySelector("#clear-filters");
 
 // Restore search and filters from the URL.
@@ -29,6 +31,7 @@ const initialQuery = (parameters.get("q") ?? "").trim();
 const requestedSeverity = (parameters.get("severity") ?? "")
   .trim()
   .toUpperCase();
+const requestedTriageStatus = (parameters.get("triageStatus") ?? "").trim();
 
 const initialSeverity = Array.from(severitySelect.options).some(
   (option) => option.value === requestedSeverity,
@@ -36,11 +39,19 @@ const initialSeverity = Array.from(severitySelect.options).some(
   ? requestedSeverity
   : "";
 
+const initialTriageStatus =
+  initialScope === "mine" &&
+  Array.from(triageStatusSelect.options).some(
+    (option) => option.value === requestedTriageStatus,
+  )
+    ? requestedTriageStatus
+    : "";
+
 // Match the controls to the requested filters.
 scopeSelect.value = initialScope;
 queryInput.value = initialQuery;
 severitySelect.value = initialSeverity;
-scopeSelect.value = initialScope;
+triageStatusSelect.value = initialTriageStatus;
 
 // Current browsing state.
 let currentPage = 1;
@@ -52,6 +63,7 @@ let activeFilters = {
   scope: initialScope,
   q: initialQuery,
   severity: initialSeverity,
+  triageStatus: initialTriageStatus,
 };
 
 // Consistent record dates.
@@ -70,9 +82,6 @@ function recordLabel() {
 }
 
 /**
- * Updates headings for the selected view.
- */
-/**
  * Updates headings and preserves active URL filters.
  */
 function updateScopeView() {
@@ -88,6 +97,15 @@ function updateScopeView() {
   dateHeading.textContent = isLocal ? "Updated (UTC)" : "Published (UTC)";
   tableRegion.classList.toggle("is-local", isLocal);
 
+  // Limit review status to local records.
+  triageStatusField.hidden = !isLocal;
+  triageStatusSelect.disabled = !isLocal;
+
+  if (!isLocal) {
+    triageStatusSelect.value = "";
+    activeFilters.triageStatus = "";
+  }
+
   // Preserve the selected collection.
   const url = new URL(window.location.href);
 
@@ -97,10 +115,11 @@ function updateScopeView() {
     url.searchParams.delete("scope");
   }
 
-  // Preserve active search and severity.
+  // Preserve active filters when refreshing.
   for (const [name, value] of [
     ["q", activeFilters.q],
     ["severity", activeFilters.severity],
+    ["triageStatus", activeFilters.triageStatus],
   ]) {
     if (value) {
       url.searchParams.set(name, value);
@@ -253,6 +272,11 @@ async function loadPage(page, focusResults = false) {
       url.searchParams.set("severity", activeFilters.severity);
     }
 
+    // Apply review status to local searches.
+    if (isLocal && activeFilters.triageStatus) {
+      url.searchParams.set("triageStatus", activeFilters.triageStatus);
+    }
+
     const response = await fetch(url, {
       signal: globalThis.AbortSignal.timeout(15000),
     });
@@ -329,10 +353,13 @@ async function loadPage(page, focusResults = false) {
 function applyFilters() {
   if (loading) return;
 
+  const scope = scopeSelect.value === "mine" ? "mine" : "public";
+
   activeFilters = {
-    scope: scopeSelect.value === "mine" ? "mine" : "public",
+    scope,
     q: queryInput.value.trim(),
     severity: severitySelect.value,
+    triageStatus: scope === "mine" ? triageStatusSelect.value : "",
   };
 
   // Reset the previous results.
@@ -345,7 +372,6 @@ function applyFilters() {
   showTableMessage(`Loading ${recordLabel()}...`);
   loadPage(1, true);
 }
-
 // Apply filters without a document reload.
 filterForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -361,6 +387,7 @@ clearFiltersButton.addEventListener("click", () => {
 
   queryInput.value = "";
   severitySelect.value = "";
+  triageStatusSelect.value = "";
   applyFilters();
 });
 

@@ -117,6 +117,17 @@
                 </select>
               </div>
 
+              <!-- Local review-status filter. -->
+              <div id="triage-status-field" class="form-field" hidden>
+                <label for="triage-status-filter">Review status</label>
+                <select id="triage-status-filter" name="triageStatus" disabled>
+                  <option value="">All review statuses</option>
+                  <option value="new">New</option>
+                  <option value="in-review">In review</option>
+                  <option value="resolved">Resolved</option>
+                </select>
+              </div>
+
               <button class="button button-primary" type="submit">
                 Apply Filters
               </button>

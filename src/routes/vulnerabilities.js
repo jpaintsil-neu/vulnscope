@@ -8,7 +8,7 @@ import {
   listPublicVulnerabilities,
   updateLocalVulnerability,
 } from "../db/vulnerabilities.js";
-import { SEVERITY_LEVELS } from "../models/vulnerability.js";
+import { SEVERITY_LEVELS, TRIAGE_STATUSES } from "../models/vulnerability.js";
 import { getLocalWorkspaceOwner } from "../services/local-workspace.js";
 import { validateLocalVulnerability } from "../services/vulnerability-validation.js";
 
@@ -57,6 +57,7 @@ router.get("/local", async (req, res) => {
   const rawPage = req.query.page ?? "1";
   const rawQuery = req.query.q ?? "";
   const rawSeverity = req.query.severity ?? "";
+  const rawTriageStatus = req.query.triageStatus ?? "";
 
   // Accept bounded whole-number pages.
   const page =
@@ -92,6 +93,17 @@ router.get("/local", async (req, res) => {
     return res.status(400).json({ error: "Invalid severity filter." });
   }
 
+  // Accept supported local review statuses.
+  if (typeof rawTriageStatus !== "string") {
+    return res.status(400).json({ error: "Invalid review-status filter." });
+  }
+
+  const triageStatus = rawTriageStatus.trim();
+
+  if (triageStatus && !TRIAGE_STATUSES.includes(triageStatus)) {
+    return res.status(400).json({ error: "Invalid review-status filter." });
+  }
+
   try {
     const ownerId = getLocalWorkspaceOwner(req, res);
 
@@ -108,6 +120,7 @@ router.get("/local", async (req, res) => {
       page,
       q,
       severity,
+      triageStatus,
     });
 
     return res.json(result);

@@ -289,3 +289,8 @@
   white-space: normal;
   overflow-wrap: anywhere;
 }
+
+/* Hide the local-only status field. */
+#triage-status-field[hidden] {
+  display: none;
+}
