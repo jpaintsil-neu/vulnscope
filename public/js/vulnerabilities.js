@@ -22,11 +22,24 @@ const scopeSelect = document.querySelector("#record-scope");
 const severitySelect = document.querySelector("#severity-filter");
 const clearFiltersButton = document.querySelector("#clear-filters");
 
-// Restore the requested view.
-const initialScope =
-  new URL(window.location.href).searchParams.get("scope") === "mine"
-    ? "mine"
-    : "public";
+// Restore search and filters from the URL.
+const parameters = new URL(window.location.href).searchParams;
+const initialScope = parameters.get("scope") === "mine" ? "mine" : "public";
+const initialQuery = (parameters.get("q") ?? "").trim();
+const requestedSeverity = (parameters.get("severity") ?? "")
+  .trim()
+  .toUpperCase();
+
+const initialSeverity = Array.from(severitySelect.options).some(
+  (option) => option.value === requestedSeverity,
+)
+  ? requestedSeverity
+  : "";
+
+// Match the controls to the requested filters.
+scopeSelect.value = initialScope;
+queryInput.value = initialQuery;
+severitySelect.value = initialSeverity;
 scopeSelect.value = initialScope;
 
 // Current browsing state.
@@ -35,7 +48,11 @@ let totalPages = 0;
 let requestedPage = 1;
 let loading = false;
 let hasLoaded = false;
-let activeFilters = { scope: initialScope, q: "", severity: "" };
+let activeFilters = {
+  scope: initialScope,
+  q: initialQuery,
+  severity: initialSeverity,
+};
 
 // Consistent record dates.
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -55,6 +72,9 @@ function recordLabel() {
 /**
  * Updates headings for the selected view.
  */
+/**
+ * Updates headings and preserves active URL filters.
+ */
 function updateScopeView() {
   const isLocal = activeFilters.scope === "mine";
 
@@ -68,13 +88,25 @@ function updateScopeView() {
   dateHeading.textContent = isLocal ? "Updated (UTC)" : "Published (UTC)";
   tableRegion.classList.toggle("is-local", isLocal);
 
-  // Preserve the view when refreshing.
+  // Preserve the selected collection.
   const url = new URL(window.location.href);
 
   if (isLocal) {
     url.searchParams.set("scope", "mine");
   } else {
     url.searchParams.delete("scope");
+  }
+
+  // Preserve active search and severity.
+  for (const [name, value] of [
+    ["q", activeFilters.q],
+    ["severity", activeFilters.severity],
+  ]) {
+    if (value) {
+      url.searchParams.set(name, value);
+    } else {
+      url.searchParams.delete(name);
+    }
   }
 
   window.history.replaceState(null, "", url);

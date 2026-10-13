@@ -90,7 +90,7 @@
   font: inherit;
 }
 
-/* Future input keyboard focus. */
+/* Search input keyboard focus. */
 .search-controls input:focus-visible {
   outline: 3px solid var(--teal);
   outline-offset: 3px;
@@ -100,17 +100,6 @@
 .search-controls input::placeholder {
   color: var(--muted);
   opacity: 1;
-}
-
-/* Unavailable search controls. */
-.search-controls input:disabled {
-  background: var(--background);
-  cursor: not-allowed;
-}
-
-.search-controls button:disabled {
-  background: var(--muted);
-  cursor: not-allowed;
 }
 
 /* Search availability message. */
