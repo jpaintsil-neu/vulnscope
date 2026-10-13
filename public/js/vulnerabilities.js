@@ -1,3 +1,9 @@
+import {
+  renderOverview,
+  showOverviewError,
+  showOverviewLoading,
+} from "./vulnerability-overview.js";
+
 // Results elements.
 const tableBody = document.querySelector("#vulnerability-records");
 const tableRegion = document.querySelector("#vulnerability-results");
@@ -256,6 +262,7 @@ async function loadPage(page, focusResults = false) {
   retryButton.hidden = true;
   tableRegion.setAttribute("aria-busy", "true");
   resultsStatus.textContent = `Loading ${recordLabel()}...`;
+  showOverviewLoading(activeFilters.scope === "mine");
   updatePagingControls();
 
   try {
@@ -308,6 +315,12 @@ async function loadPage(page, focusResults = false) {
       throw new Error("Unexpected vulnerability response.");
     }
 
+    // Keep overview and pagination totals aligned.
+    if (data.summary?.total !== pagination.total) {
+      throw new Error("Unexpected overview total.");
+    }
+
+    renderOverview(data.summary, isLocal);
     renderRecords(data.records);
     tableRegion.scrollTop = 0;
     currentPage = pagination.page;
@@ -332,6 +345,7 @@ async function loadPage(page, focusResults = false) {
     }
   } catch (error) {
     console.error("Vulnerability loading failed:", error.name);
+    showOverviewError();
 
     if (!hasLoaded) {
       showTableMessage(`${recordLabel()} could not be loaded.`);

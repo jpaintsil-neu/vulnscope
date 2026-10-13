@@ -25,8 +25,9 @@
       rel="stylesheet"
     />
 
-    <!-- Shared styles and layout module. -->
+    <!-- Shared layout and page styles. -->
     <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/about.css" />
     <script type="module" src="/js/layout.js"></script>
   </head>
 
@@ -91,28 +92,79 @@
       <section aria-labelledby="workflow-heading">
         <h2 id="workflow-heading">How VulnScope Works</h2>
 
-        <ol class="workflow-steps">
+        <ol class="workflow-visual" role="list" aria-label="VulnScope workflow">
           <li>
-            <strong>Explore.</strong>
+            <!-- Decorative workflow icon. -->
+            <div class="workflow-icon">
+              <svg
+                viewBox="0 0 64 64"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <circle cx="27" cy="27" r="14" />
+                <path d="m38 38 14 14" />
+              </svg>
+            </div>
+
+            <h3>1. Explore</h3>
             <p>
-              Search and browse vulnerability or product records in their
-              respective workspaces.
+              Search imported CVEs, apply filters, and open the source
+              references.
             </p>
           </li>
 
           <li>
-            <strong>Understand.</strong>
+            <!-- Decorative workflow icon. -->
+            <div class="workflow-icon">
+              <svg
+                viewBox="0 0 64 64"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <rect x="14" y="10" width="36" height="44" rx="5" />
+                <path d="m22 31 6 6 14-15M23 45h18" />
+              </svg>
+            </div>
+
+            <h3>2. Review</h3>
             <p>
-              Review record details, source references, and educational
-              resources to build context.
+              Read record details and use Resources to understand the
+              terminology and severity context.
             </p>
           </li>
 
           <li>
-            <strong>Track and act.</strong>
+            <!-- Decorative workflow icon. -->
+            <div class="workflow-icon">
+              <svg
+                viewBox="0 0 64 64"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <rect x="12" y="12" width="40" height="40" rx="5" />
+                <path d="M22 23h20M22 32h20M22 41h12" />
+              </svg>
+            </div>
+
+            <h3>3. Track</h3>
             <p>
-              Maintain your own records, update review statuses, and document
-              notes for follow-up.
+              Create local review records, maintain notes, and update their
+              review status.
             </p>
           </li>
         </ol>
@@ -129,11 +181,43 @@
         </p>
 
         <p>
-          Vulnerability information comes from CVE records. Product information
-          comes from the Common Platform Enumeration (CPE) Dictionary, which
-          provides standardized technology identifiers.
+          The current vulnerability workspace uses an imported sample of NVD CVE
+          records. Product integration is planned around the Common Platform
+          Enumeration (CPE) Dictionary and its standardized technology
+          identifiers.
         </p>
 
+        <!-- Distinguish record origins visually. -->
+        <div class="data-comparison">
+          <article class="data-origin">
+            <p class="origin-label">Public source</p>
+            <h3>Imported NVD records</h3>
+            <p>A development sample of publicly disclosed vulnerabilities.</p>
+
+            <ul>
+              <li>Browse descriptions, severity, and source references.</li>
+              <li>Read-only within VulnScope.</li>
+              <li>Reflects the last successful import.</li>
+            </ul>
+          </article>
+
+          <article class="data-origin data-origin-local">
+            <p class="origin-label">Your workspace</p>
+            <h3>Local review records</h3>
+            <p>Your own vulnerability records, notes, and review statuses.</p>
+
+            <ul>
+              <li>Create, read, edit, and delete your records.</li>
+              <li>
+                Access is associated with the creating browser's workspace
+                cookie.
+              </li>
+              <li>Local changes leave the public NVD records unchanged.</li>
+            </ul>
+          </article>
+        </div>
+
+        <!-- Explain source independence. -->
         <div class="data-note">
           <p>
             Public source information is kept separate from locally managed

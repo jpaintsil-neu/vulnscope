@@ -1,0 +1,89 @@
+/* Illustrated learning cards. */
+.resource-visual {
+  display: grid;
+  place-items: center;
+  min-height: 8rem;
+  margin-bottom: 1.25rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #edf3ff, #eef8f6);
+  color: var(--blue);
+}
+
+.resource-visual svg {
+  width: 5rem;
+  height: 5rem;
+}
+
+/* Concrete learning examples. */
+.resource-card .resource-example {
+  margin-top: 1rem;
+  padding: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--background);
+}
+
+.resource-example strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--navy);
+  font-size: 0.85rem;
+}
+
+.resource-example code {
+  color: var(--teal);
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+/* Reinforce severity with words. */
+.severity-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.severity-key li {
+  padding: 0.2rem 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: 0.3rem;
+  background: var(--surface);
+  font-size: 0.75rem;
+}
+
+/* Connect learning to practice. */
+.learning-path {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 0;
+  margin: 1.25rem 0;
+  list-style: none;
+}
+
+.learning-path li {
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+}
+
+.learning-path strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--navy);
+}
+
+.learning-path p {
+  font-size: 0.9rem;
+}
+
+/* Stack learning steps on smaller screens. */
+@media (max-width: 900px) {
+  .learning-path {
+    grid-template-columns: 1fr;
+  }
+}

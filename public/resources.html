@@ -25,8 +25,9 @@
       rel="stylesheet"
     />
 
-    <!-- Shared styles and layout module. -->
+    <!-- Shared layout and page styles. -->
     <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/resources.css" />
     <script type="module" src="/js/layout.js"></script>
   </head>
 
@@ -50,12 +51,40 @@
 
         <div class="content-grid">
           <article class="info-card resource-card">
+            <!-- Decorative topic illustration. -->
+            <div class="resource-visual">
+              <svg
+                viewBox="0 0 64 64"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <rect x="14" y="10" width="36" height="44" rx="5" />
+                <path d="M23 24h18M23 32h18M23 40h10" />
+              </svg>
+            </div>
+
             <p class="card-eyebrow">01 / Understand CVEs</p>
             <h3>Vulnerability Basics</h3>
             <p>
               Learn how CVE identifiers name publicly disclosed vulnerabilities
               and how descriptions and references provide context.
             </p>
+
+            <!-- CVE identifier structure. -->
+            <div class="resource-example">
+              <strong>Identifier structure</strong>
+              <code>CVE-YEAR-NUMBER</code>
+              <p>
+                The year and sequence number identify the record; they do not
+                describe severity.
+              </p>
+            </div>
+
             <p class="resource-context">
               Use this when exploring the Vulnerability Workspace.
             </p>
@@ -65,6 +94,25 @@
           </article>
 
           <article class="info-card resource-card">
+            <!-- Decorative topic illustration. -->
+            <div class="resource-visual">
+              <svg
+                viewBox="0 0 64 64"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  d="M10 43a22 22 0 0 1 44 0M18 43h-8M54 43h-8M32 21v7M16 27l6 6M48 27l-6 6M32 43l12-13"
+                />
+                <circle cx="32" cy="43" r="3" />
+              </svg>
+            </div>
+
             <p class="card-eyebrow">02 / Interpret severity</p>
             <h3>Severity &amp; CVSS</h3>
             <p>
@@ -72,6 +120,23 @@
               consider how a vulnerability relates to your technology and
               environment.
             </p>
+
+            <!-- Labeled severity categories. -->
+            <div class="resource-example">
+              <strong>Severity categories</strong>
+              <ul class="severity-key" aria-label="CVSS severity categories">
+                <li>None</li>
+                <li>Low</li>
+                <li>Medium</li>
+                <li>High</li>
+                <li>Critical</li>
+              </ul>
+              <p>
+                Not available means a severity assessment is missing from the
+                imported record.
+              </p>
+            </div>
+
             <p class="resource-context">
               Use this when reviewing and prioritizing vulnerabilities.
             </p>
@@ -81,12 +146,40 @@
           </article>
 
           <article class="info-card resource-card">
+            <!-- Decorative topic illustration. -->
+            <div class="resource-visual">
+              <svg
+                viewBox="0 0 64 64"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <rect x="9" y="12" width="46" height="28" rx="4" />
+                <path d="M25 40v10M39 40v10M20 50h24M18 22h10M18 29h26" />
+              </svg>
+            </div>
+
             <p class="card-eyebrow">03 / Know your technology</p>
             <h3>Products &amp; Versions</h3>
             <p>
               Learn how vendors, product names, and versions help identify the
               technology you are reviewing.
             </p>
+
+            <!-- Product identifier structure. -->
+            <div class="resource-example">
+              <strong>Technology context</strong>
+              <p>Vendor → Product → Version</p>
+              <p>
+                Identify the specific technology before reviewing whether a
+                vulnerability applies.
+              </p>
+            </div>
+
             <p class="resource-context">
               Use this when exploring the Product Workspace.
             </p>
@@ -120,6 +213,26 @@
           Apply what you learn to explore public records, organize your reviews,
           and document what needs a closer look.
         </p>
+
+        <!-- Learning-to-review path. -->
+        <ol class="learning-path" role="list" aria-label="Learning workflow">
+          <li>
+            <strong>1. Understand</strong>
+            <p>Learn the terminology and read the original references.</p>
+          </li>
+          <li>
+            <strong>2. Review</strong>
+            <p>
+              Explore public CVEs and assess their relevance to your technology.
+            </p>
+          </li>
+          <li>
+            <strong>3. Track</strong>
+            <p>
+              Create local records, capture notes, and update review status.
+            </p>
+          </li>
+        </ol>
 
         <div class="action-links">
           <a class="button button-primary" href="/vulnerabilities.html">

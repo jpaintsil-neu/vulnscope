@@ -1,0 +1,94 @@
+/* Visual platform workflow. */
+.workflow-visual {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  padding: 0;
+  margin: 1.25rem 0 0;
+  list-style: none;
+}
+
+.workflow-visual li {
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+}
+
+/* Shared navy and teal accents. */
+.workflow-icon {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.75rem;
+  background: #edf3ff;
+  color: var(--blue);
+}
+
+.workflow-icon svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.workflow-visual h3 {
+  margin: 0 0 0.6rem;
+  color: var(--navy);
+  font-size: 1.1rem;
+}
+
+.workflow-visual p {
+  font-size: 0.95rem;
+}
+
+/* Compare record origins clearly. */
+.data-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.data-comparison .data-origin {
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--blue);
+  border-radius: 0.75rem;
+  background: var(--surface);
+}
+
+.data-comparison .data-origin-local {
+  border-top-color: var(--teal);
+}
+
+.data-origin h3 {
+  margin: 0 0 0.75rem;
+  color: var(--navy);
+  font-size: 1.1rem;
+}
+
+.data-origin .origin-label {
+  margin-bottom: 0.5rem;
+  color: var(--teal);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.data-origin ul {
+  padding-left: 1.25rem;
+  margin: 0.85rem 0 0;
+  font-size: 0.95rem;
+}
+
+.data-origin li + li {
+  margin-top: 0.45rem;
+}
+
+/* Stack the workflow and comparisons. */
+@media (max-width: 900px) {
+  .workflow-visual,
+  .data-comparison {
+    grid-template-columns: 1fr;
+  }
+}

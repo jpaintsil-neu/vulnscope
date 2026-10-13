@@ -11,6 +11,7 @@ import {
 import { SEVERITY_LEVELS, TRIAGE_STATUSES } from "../models/vulnerability.js";
 import { getLocalWorkspaceOwner } from "../services/local-workspace.js";
 import { validateLocalVulnerability } from "../services/vulnerability-validation.js";
+import { createEmptySummary } from "../services/vulnerability-summary.js";
 
 // Vulnerability API routes.
 const router = Router();
@@ -111,6 +112,7 @@ router.get("/local", async (req, res) => {
     if (!ownerId) {
       return res.json({
         records: [],
+        summary: createEmptySummary(true),
         pagination: { page, pageSize: 20, total: 0, totalPages: 0 },
       });
     }

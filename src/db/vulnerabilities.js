@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 import { getDatabase } from "./connection.js";
 import { createVulnerabilityRecord } from "../models/vulnerability.js";
+import { summarizeGroups } from "../services/vulnerability-summary.js";
 
 /**
  * Returns the vulnerabilities collection.
@@ -47,6 +48,24 @@ export async function initializeVulnerabilitiesCollection() {
 
   return collection;
 }
+
+/**
+ * Counts every matching record by category.
+ */
+async function summarizeVulnerabilities(collection, filter, isLocal = false) {
+  const groupBy = isLocal ? "$triageStatus" : "$severity";
+
+  // Reuse the table's exact filter.
+  const groups = await collection
+    .aggregate([
+      { $match: filter },
+      { $group: { _id: groupBy, count: { $sum: 1 } } },
+    ])
+    .toArray();
+
+  return summarizeGroups(groups, isLocal);
+}
+
 /**
  * Returns one page of matching imported vulnerabilities.
  */
@@ -90,23 +109,24 @@ export async function listPublicVulnerabilities({
   };
 
   // Use a stable order across pages.
-  const [records, total] = await Promise.all([
+  const [records, summary] = await Promise.all([
     collection
       .find(filter, { projection })
       .sort({ publishedAt: -1, _id: -1 })
       .skip((page - 1) * pageSize)
       .limit(pageSize)
       .toArray(),
-    collection.countDocuments(filter),
+    summarizeVulnerabilities(collection, filter),
   ]);
 
   return {
     records,
+    summary,
     pagination: {
       page,
       pageSize,
-      total,
-      totalPages: Math.ceil(total / pageSize),
+      total: summary.total,
+      totalPages: Math.ceil(summary.total / pageSize),
     },
   };
 }
@@ -222,23 +242,24 @@ export async function listLocalVulnerabilities({
   };
 
   // Show recently updated records first.
-  const [records, total] = await Promise.all([
+  const [records, summary] = await Promise.all([
     collection
       .find(filter, { projection })
       .sort({ updatedAt: -1, _id: -1 })
       .skip((page - 1) * pageSize)
       .limit(pageSize)
       .toArray(),
-    collection.countDocuments(filter),
+    summarizeVulnerabilities(collection, filter, true),
   ]);
 
   return {
     records,
+    summary,
     pagination: {
       page,
       pageSize,
-      total,
-      totalPages: Math.ceil(total / pageSize),
+      total: summary.total,
+      totalPages: Math.ceil(summary.total / pageSize),
     },
   };
 }

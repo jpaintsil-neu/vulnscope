@@ -90,7 +90,11 @@ const contactIcon = icon(`
 // Render the shared header.
 document.querySelector("#site-header").innerHTML = `
     <div class="header-inner">
-      ${brandMarkup()}
+            <!-- Header brand and tagline. -->
+      <div class="header-brand-group">
+        ${brandMarkup()}
+        <p class="brand-tagline">Understand. Track. Act.</p>
+      </div>
   
       <!-- Mobile menu control. -->
       <button class="menu-toggle" type="button"
@@ -127,7 +131,8 @@ document.querySelector("#site-footer").innerHTML = `
     <div class="footer-inner">
       <div class="footer-brand-group">
         ${brandMarkup("footer-brand")}
-        <p>Understand. Track. Act.</p>
+               <!-- Current-year copyright. -->
+        <p>&copy; ${new Date().getFullYear()} VulnScope.</p>
       </div>
   
       <!-- Standard reference links. -->

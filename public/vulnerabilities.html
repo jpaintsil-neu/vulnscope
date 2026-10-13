@@ -34,6 +34,8 @@
 
     <!-- Workspace styles. -->
     <link rel="stylesheet" href="/css/workspace.css" />
+
+    <link rel="stylesheet" href="/css/vulnerability-overview.css" />
   </head>
 
   <body>
@@ -67,6 +69,38 @@
         Add Vulnerability to create a guest workspace record. Public CVEs are
         read-only.
       </p>
+
+      <!-- Filter-aware workspace overview. -->
+      <section
+        id="vulnerability-overview"
+        class="vulnerability-overview"
+        aria-labelledby="overview-heading"
+        aria-busy="true"
+      >
+        <p id="overview-context" class="overview-context">
+          Imported NVD records
+        </p>
+        <h2 id="overview-heading">Workspace Overview</h2>
+
+        <div class="overview-layout">
+          <dl id="overview-metrics" class="overview-metrics"></dl>
+
+          <div>
+            <h3 id="overview-chart-heading" class="overview-chart-heading">
+              Severity distribution
+            </h3>
+            <ul
+              id="overview-chart"
+              class="overview-chart"
+              aria-labelledby="overview-chart-heading"
+            ></ul>
+          </div>
+        </div>
+
+        <p id="overview-status" class="overview-status" role="status">
+          Loading the matching-record overview…
+        </p>
+      </section>
 
       <div class="workspace-grid">
         <!-- Search and filter sidebar. -->
