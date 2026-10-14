@@ -42,7 +42,7 @@ There is no frontend bundling step or server-side template engine.
 | Root             | `eslint.config.js`, `prettier.config.js`, `.prettierignore`                                           | Quality-tool configuration                                |
 | Root             | `.env.example`, `.gitignore`                                                                          | Configuration example and ignored local files             |
 
-**Pending:** Products modules, Privacy/Contact pages, and application screenshots.
+**Pending:** Products modules and application screenshots.
 
 ## Collections and Record Origin
 

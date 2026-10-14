@@ -94,39 +94,7 @@ The workspace supports:
 - Local review-status filtering: New, In review, and Resolved.
 - Active search, severity, and local review-status filters preserved in the URL.
 
-### Vulnerability Details — [`public/vulnerability.html`](./public/vulnerability.html)
-
-Public details show descriptions, available CVSS assessments, source dates,
-and reference links.
-
-Local details show titles, descriptions, severity, review status, analyst
-notes, and creation/update dates. Authored explanations and protective
-guidance appear when present.
-
-Local records include **Edit record** and **Delete record** controls.
-Deletion requires confirmation. Imported CVEs display read-only details
-without editing or deletion controls.
-
-The breadcrumb returns users to the selected record collection.
-
-### Add / Edit Vulnerability — [`public/vulnerability-form.html`](./public/vulnerability-form.html)
-
-One form supports creating and editing guest-workspace records:
-
-- Required title and description.
-- Optional CVE ID, analyst notes, explanation, and protective guidance.
-- Severity and review-status selections.
-- Browser validation and server-returned field errors.
-- Existing-value loading before editing is enabled.
-- Save progress, retry feedback, and duplicate-submission guards.
-
-A successful save opens the local record's detail page.
-Unavailable or unowned records cannot be edited.
-
 ### Products — Pending Integration
-
-Sania owns this workspace. Its implementation has not yet been integrated
-into `main`.
 
 **Pending:** Product data import, MongoDB collection, APIs, search/filtering,
 detail views, and local-record CRUD interface.
@@ -136,8 +104,6 @@ detail views, and local-record CRUD interface.
 - [About](./public/about.html) — Platform purpose, workflow, and data context.
 - [Resources](./public/resources.html) — Cybersecurity learning resources.
 - [FAQs](./public/faqs.html) — Frequently asked questions.
-
-**Pending:** Privacy Policy and Contact destinations.
 
 See the [user guide](docs/user-guide.md) for page workflows.
 
@@ -279,28 +245,6 @@ reusable functions.
 
 **Pending:** Final whole-project lint/format verification and unused-code cleanup.
 
-## Validation
-
-Development checks have covered:
-
-- NVD sample conversion and the development import.
-- Public CVE search, severity filters, pagination, and details.
-- Local-record form validation, creation, editing, and confirmed deletion.
-- Guest ownership checks and separate-browser access.
-- Public/local view switching and detail navigation.
-- Review and correction of public CVE details to remove local editing controls.
-- Homepage search navigation and query transfer.
-- Combined local search, severity, and review-status filtering.
-- URL filter restoration, Clear Filters, and collection switching.
-
-**Pending:**
-
-- W3C Nu HTML Checker validation and evidence.
-- Final responsive and keyboard-access testing.
-- Products CRUD checks and final regression checks across both collections.
-- Deployment and final end-to-end testing.
-- Final validation screenshots and logs.
-
 ## Accessibility
 
 Implemented considerations include:
@@ -322,10 +266,8 @@ Implemented considerations include:
 
 **Pending — the Project 2 code-review requirement has not been completed.**
 
-The final update will include:
-
-- Reviewed repository.
-- Review or pull-request link.
+- Reviewed repository: [link]
+- Review or pull-request: [link]
 - Summary of findings and contributions.
 - Validation performed.
 
@@ -333,51 +275,22 @@ The final update will include:
 
 ### Homepage
 
-**Pending — add a current screenshot of the running Homepage.**
+![homepage thumbnail](public/images/screenshots/thumbnail.png)
+See the [dev](docs/dev.md).
 
-### Vulnerabilities Workspace
-
-**Pending — add screenshots of public CVEs, local records, and record details.**
-
-### Products Workspace
-
-**Pending — add a screenshot after Products integration.**
 
 ## Presentation and Demo Video
 
-- **Google Slides Presentation:** Pending.
+- **Google Slides Presentation:** [Project 2 — Presentation](https://docs.google.com/presentation/d/1VAJmpa_GvycCUX-Re0htSbg_81e-8JJs4MOuBCO9C20/edit?usp=drive_link) In-progress.
 - **Short Public Narrated Demo Video:** Pending.
 - **Published Demo Link:** Pending.
-- **Submission Thumbnail:** Pending.
-- **Google Form Submission:** Pending.
 
 ## Development Status
-
-### Completed
-
-- Scope, personas, user stories, use cases, and responsibility split.
-- Design mockups and their shared index.
-- Shared layout, navy theme, logo, and sticky navigation.
-- Homepage banner and connected public vulnerability search.
-- About, Resources, and FAQs pages.
-- Node/Express setup, ES modules, and MongoDB connection.
-- Vulnerability model, indexes, NVD conversion, and 1,500-record development import.
-- Public search, severity filtering, pagination, and detail APIs.
-- Guest identity, local validation, and local create/list/detail/update/delete APIs.
-- Shared creation/editing form with required-field validation and save feedback.
-- Local detail actions with confirmed deletion and failure recovery.
-- Local review-status filtering combined with search and severity.
-- Active-filter URL persistence, refresh restoration, and Clear Filters behavior.
-- Read-only public CVE details with local management controls excluded.
-- Successful local ESLint check after the public-detail rendering correction.
-- Public/local browsing and detail views with sticky headings and top pagination.
-- ESLint/Prettier configuration, dependency files, and MIT license.
 
 ### In Progress / Next
 
 - Products collection, data import, APIs, and full CRUD interface.
 - Product-specific homepage search integration.
-- Privacy Policy and Contact destinations.
 - Final design-document, usability, accessibility, and code-quality review.
 - Public deployment with both workflows and more than 1,000 records.
 - Screenshots, presentation, narrated video, and code review.
@@ -397,11 +310,6 @@ Generative AI has assisted portions of the Project 2.
 ### How Generative AI Was Used
 
 -
-
-### Prompt Log and Supporting Evidence
-
-**Pending — compile the Project 2 prompt history, model details, and any
-required supporting screenshots.**
 
 ## License
 
