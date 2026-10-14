@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- PRODUCT DETAILS -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Review product details, review status, and notes."
+    />
+    <title>Product Details — VulnScope</title>
+
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/product-details.css" />
+
+    <script type="module" src="/js/layout.js"></script>
+    <script type="module" src="/js/product-details.js"></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header id="site-header" class="site-header"></header>
+
+    <main
+      id="main-content"
+      class="page-container product-details"
+      tabindex="-1"
+    >
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/products.html">Products</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Details</span>
+      </nav>
+
+      <h1 id="product-title" tabindex="-1">Product Details</h1>
+
+      <p id="detail-status" class="detail-status" role="status">
+        Loading all products . . .
+      </p>
+
+      <button
+        id="detail-retry"
+        class="button button-secondary detail-retry"
+        type="button"
+        hidden
+      >
+        Try again
+      </button>
+
+      <!-- details panel -->
+      <article
+        id="detail-content"
+        aria-labelledby="product-title"
+        hidden
+      ></article>
+
+    </main>
+
+    <footer id="site-footer" class="site-footer"></footer>
+  </body>
+</html>
