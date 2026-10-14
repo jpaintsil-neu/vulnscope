@@ -99,10 +99,10 @@
           <summary>Where does the public data come from?</summary>
           <div class="faq-answer">
             <p>
-              VulnScope is designed around public records from the National
-              Vulnerability Database (NVD), maintained by NIST. Vulnerability
-              information comes from CVE records, while product identifiers come
-              from the CPE Dictionary.
+              The current vulnerability workspace uses an imported sample of CVE
+              records from the National Vulnerability Database (NVD), maintained
+              by NIST. Product integration is planned around the Common Platform
+              Enumeration (CPE) Dictionary.
             </p>
           </div>
         </details>
@@ -155,9 +155,9 @@
           <div class="faq-answer">
             <p>
               Vulnerability reviews focus on security issues, triage statuses,
-              and analyst notes. Product reviews focus on technology
-              identifiers, product details, review statuses, and notes. Each
-              workspace has its own review workflow.
+              and analyst notes. Product reviews are planned to focus on
+              technology identifiers, product details, review statuses, and
+              notes in their own workspace.
             </p>
           </div>
         </details>
@@ -170,6 +170,97 @@
               broader keywords and remove restrictive filters. An empty result
               does not establish that a product has no vulnerabilities.
             </p>
+          </div>
+        </details>
+      </section>
+
+      <!-- Guest workspace data and privacy. -->
+      <section aria-labelledby="workspace-privacy-heading">
+        <h2 id="workspace-privacy-heading" tabindex="-1">
+          Workspace Data and Privacy
+        </h2>
+
+        <details class="faq-item">
+          <summary>What local information is saved?</summary>
+          <div class="faq-answer">
+            <p>
+              Local vulnerability records store your title, description,
+              optional CVE identifier, severity, review status, and any notes,
+              explanations, or protective guidance you enter. The database also
+              stores creation/update dates and a workspace identifier used to
+              associate the records with your browser workspace.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How does the workspace cookie work?</summary>
+          <div class="faq-answer">
+            <p>
+              Creating a local record establishes a random workspace cookie in
+              your browser. The server uses it to identify your local workspace.
+              The cookie has a lifetime of up to one year, renewed when you
+              create another local record. Browsing public CVEs does not require
+              a workspace cookie.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Who can access my local workspace?</summary>
+          <div class="faq-answer">
+            <p>
+              Local-record pages and actions are scoped to the workspace cookie
+              presented by your browser. Another browser or private browsing
+              session normally has a separate workspace. This guest feature does
+              not provide account login or cross-device access. Database
+              administrators can access stored records.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Does clearing cookies delete my records?</summary>
+          <div class="faq-answer">
+            <p>
+              No. Clearing or losing the workspace cookie removes that browser's
+              access to its existing local records; the records remain in the
+              database. Cookie expiration also does not automatically delete
+              records. Delete records you no longer want while you still have
+              access to the workspace.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How can I delete a local record?</summary>
+          <div class="faq-answer">
+            <p>
+              Open Vulnerabilities, choose My local records, and open the
+              record. Select Delete record and confirm the deletion. This
+              removes the record from the application's database. Imported
+              public CVEs are read-only and cannot be deleted through
+              local-record controls.
+            </p>
+            <a class="text-link" href="/vulnerabilities.html?scope=mine">
+              Open My local records
+            </a>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Which external services does the site use?</summary>
+          <div class="faq-answer">
+            <p>
+              The current pages load the Manrope font from Google Fonts, making
+              requests to Google's font servers. Public vulnerability data is
+              imported from NVD. Links to CVE, FIRST, NVD, and GitHub take you
+              to services with their own privacy practices. Feedback submitted
+              through this project's GitHub Issues is public.
+            </p>
+            <a class="text-link" href="https://policies.google.com/privacy">
+              Google Privacy Policy
+            </a>
           </div>
         </details>
       </section>
