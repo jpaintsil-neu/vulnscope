@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Producs page -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore technology products and organize product-security reviews with VulnScope."
+    />
+    <title>Products — VulnScope</title>
+
+    <!-- logo -->
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script type="module" src="/js/layout.js"></script>
+
+    <!-- loading product records -->
+    <script type="module" src="/js/products.js"></script>
+
+    <link rel="stylesheet" href="/css/workspace.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header id="site-header" class="site-header"></header>
+
+    <main id="main-content" class="page-container" tabindex="-1">
+      <div class="workspace-heading">
+        <div>
+          <h1>Products</h1>
+          <p class="page-intro">
+            Explore vendors, products, and versions, and keep track of your
+            technology reviews.
+          </p>
+        </div>
+
+        <!-- Records form - products side -->
+        <a class="button button-primary" href="/product-form.html">
+          Add Product
+        </a>
+      </div>
+
+      <p id="workspace-availability" class="workspace-note">
+        Search public products by vendor, name, or version, or search your own
+        records. Use Add Product to create a record in your guest workspace.
+        Public products are read-only.
+      </p>
+
+      <div class="workspace-grid">
+        <!-- Search/Filtering records - product -->
+        <aside class="workspace-panel" aria-labelledby="filters-heading">
+          <h2 id="filters-heading">Search &amp; Filter</h2>
+
+          <form
+            id="product-filters"
+            role="search"
+            aria-labelledby="filters-heading"
+          >
+            <fieldset
+              id="filter-controls"
+              aria-describedby="workspace-availability"
+            >
+              <legend class="visually-hidden">Product filters</legend>
+
+              <div class="form-field">
+                <label for="product-query">Vendor, product, or version</label>
+                <input
+                  id="product-query"
+                  name="q"
+                  type="search"
+                  placeholder="Search products"
+                  maxlength="200"
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="record-scope">Records</label>
+                <select id="record-scope" name="scope">
+                  <option value="public">Public products</option>
+                  <option value="mine">My local records</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="type-filter">Product type</label>
+                <select id="type-filter" name="productType">
+                  <option value="">All types</option>
+                  <option value="application">Application</option>
+                  <option value="operating-system">Operating system</option>
+                  <option value="hardware">Hardware</option>
+                </select>
+              </div>
+
+              <div id="review-status-field" class="form-field" hidden>
+                <label for="review-status-filter">Review status</label>
+                <select id="review-status-filter" name="reviewStatus" disabled>
+                  <option value="">All review statuses</option>
+                  <option value="not-reviewed">Not reviewed</option>
+                  <option value="in-review">In review</option>
+                  <option value="reviewed">Reviewed</option>
+                </select>
+              </div>
+
+              <button class="button button-primary" type="submit">
+                Apply Filters
+              </button>
+
+              <button
+                id="clear-filters"
+                class="button button-secondary filter-reset"
+                type="button"
+              >
+                Clear Filters
+              </button>
+            </fieldset>
+          </form>
+        </aside>
+
+        <!-- RESULTS -->
+        <section class="workspace-panel" aria-labelledby="results-heading">
+          <div class="results-heading">
+            <h2 id="results-heading" tabindex="-1">Product Records</h2>
+            <span id="results-count" class="results-count"
+              >Loading records</span
+            >
+          </div>
+
+          <nav
+            class="results-pagination results-pagination-top"
+            aria-label="Product pages, top"
+          >
+            <button
+              class="button button-secondary"
+              type="button"
+              data-previous-page
+              aria-controls="product-results"
+              disabled
+            >
+              Previous
+            </button>
+
+            <span data-page-summary>No page loaded</span>
+
+            <button
+              class="button button-secondary"
+              type="button"
+              data-next-page
+              aria-controls="product-results"
+              disabled
+            >
+              Next
+            </button>
+          </nav>
+
+          <div
+            id="product-results"
+            class="table-scroll"
+            role="region"
+            aria-labelledby="results-heading"
+            aria-busy="true"
+            tabindex="0"
+          >
+            <table class="records-table">
+              <caption id="records-caption" class="visually-hidden">
+                Public product records
+              </caption>
+
+              <thead>
+                <tr>
+                  <th scope="col">Product</th>
+                  <th scope="col">Vendor</th>
+                  <th scope="col">Version</th>
+                  <th scope="col">Type</th>
+                  <th id="record-extra-heading" scope="col">Source</th>
+                </tr>
+              </thead>
+
+              <tbody id="product-records">
+                <tr>
+                  <td colspan="5" class="empty-state">
+                    Loading all public product records ...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p id="results-status" class="workspace-note" role="status">
+            Loading all public product records ...
+          </p>
+
+          <button
+            id="results-retry"
+            class="button button-secondary results-retry"
+            type="button"
+            hidden
+          >
+            Try again
+          </button>
+        </section>
+      </div>
+    </main>
+
+    <!-- footer -->
+    <footer id="site-footer" class="site-footer"></footer>
+  </body>
+</html>
