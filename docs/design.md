@@ -40,7 +40,7 @@ and product-specific search remain pending integration.
 
 ## Mockups and Shared References
 
-- [Desing Mockups](../docs/mockup.md)
+- [Design Mockups](mockup.md)
 - [Design Mockups — Index](https://docs.google.com/spreadsheets/d/1OPhlHSFipS1TBg5fY3gODJUL3W921hsAR03a6K-po7k/edit)
 
 The index organizes exported mockups and includes the editable Figma link.
@@ -56,6 +56,6 @@ Keep editable designs and exported references in their existing shared locations
 - Public source records are read-only; guest-owned local records support CRUD.
 - Table headings remain visible during scrolling, with pagination above the table.
 
-See the [dev.md](/docs/dev.md).
+See [development screenshots](dev.md) and [validation status](validation.md).
 
 [Back to project overview](../README.md)

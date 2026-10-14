@@ -11,7 +11,7 @@ organize locally managed security reviews.
 
 - **Live Site:** Pending — public deployment has not been completed.
 - **Repository:** [jpaintsil-neu/vulnscope](https://github.com/jpaintsil-neu/vulnscope)
-- **Progress Updated:** October 13, 2026
+- **Progress Updated:** October 14, 2026
 
 ## Authors
 
@@ -71,7 +71,7 @@ The homepage introduces the platform and its two workspaces.
 
 Implemented:
 
-- Minimal banner wallpaper.
+- Minimal navy gradient banner.
 - Shared logo, navigation, sticky header, and footer.
 - Working public vulnerability search by CVE ID or keyword.
 - Search navigation to the Vulnerabilities page with the query applied.
@@ -93,6 +93,7 @@ The workspace supports:
 - Add Vulnerability link to the local-record form.
 - Local review-status filtering: New, In review, and Resolved.
 - Active search, severity, and local review-status filters preserved in the URL.
+- Filter-aware overview cards and charts.
 
 ### Products — Pending Integration
 
@@ -276,8 +277,8 @@ Implemented considerations include:
 ### Homepage
 
 ![homepage thumbnail](public/images/screenshots/thumbnail.png)
-See the [dev](docs/dev.md).
 
+See [development screenshots](docs/dev.md) and [Figma design mockups](docs/mockup.md).
 
 ## Presentation and Demo Video
 
@@ -299,8 +300,6 @@ See the [dev](docs/dev.md).
 
 ## Generative AI Disclosure
 
-Generative AI has assisted portions of the Project 2.
-
 ### Tool and Model
 
 - **Tool:** ChatGPT / Codex.
@@ -309,7 +308,7 @@ Generative AI has assisted portions of the Project 2.
 
 ### How Generative AI Was Used
 
--
+- John Paintsil - ChatGPT was used as an iterative development assistant by supporting tasks such as reviewing project requirements, organizing information architecture, and refining design documentation to enhance overall project quality and accessibility.
 
 ## License
 
