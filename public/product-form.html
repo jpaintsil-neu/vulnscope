@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Products Form -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Create a local product record in your VulnScope guest workspace."
+    />
+    <title>Add Product — VulnScope</title>
+
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/workspace.css" />
+    <link rel="stylesheet" href="/css/product-form.css" />
+
+    <script type="module" src="/js/layout.js"></script>
+    <script type="module" src="/js/product-form.js"></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header id="site-header" class="site-header"></header>
+
+    <main
+      id="main-content"
+      class="page-container record-form-page"
+      tabindex="-1"
+    >
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/products.html?scope=mine">My local records</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Add</span>
+      </nav>
+
+      <h1 id="form-heading">Add Product</h1>
+      <p id="form-instructions" class="page-intro">
+        Describe the product and add your own review notes. Fields marked with * are
+        required. This record belongs to this browser's guest workspace.
+      </p>
+
+      <section class="workspace-panel" aria-labelledby="form-heading">
+        <form
+          id="product-form"
+          class="record-form"
+          aria-labelledby="form-heading"
+          aria-describedby="form-instructions"
+          aria-busy="false"
+          novalidate
+        >
+          <fieldset id="record-fields" disabled>
+            <legend class="visually-hidden">Local product information</legend>
+
+            <div class="record-form-grid">
+              <div class="form-field form-wide">
+                <label for="record-name">Product name *</label>
+                <input
+                  id="record-name"
+                  name="productName"
+                  type="text"
+                  maxlength="200"
+                  required
+                  aria-describedby="productName-error"
+                />
+                <p id="productName-error" class="form-error" hidden></p>
+              </div>
+
+              <div class="form-field">
+                <label for="record-vendor">Vendor *</label>
+                <input
+                  id="record-vendor"
+                  name="vendor"
+                  type="text"
+                  maxlength="200"
+                  required
+                  aria-describedby="vendor-error"
+                />
+                <p id="vendor-error" class="form-error" hidden></p>
+              </div>
+
+              <div class="form-field">
+                <label for="record-version">Version (optional)</label>
+                <input
+                  id="record-version"
+                  name="version"
+                  type="text"
+                  maxlength="100"
+                  aria-describedby="version-help version-error"
+                />
+                <p id="version-help" class="form-help">
+                  Leave blank if the version is not known.
+                </p>
+                <p id="version-error" class="form-error" hidden></p>
+              </div>
+
+              <div class="form-field">
+                <label for="record-type">Product type</label>
+                <select
+                  id="record-type"
+                  name="productType"
+                  aria-describedby="productType-error"
+                >
+                  <option value="application">Application</option>
+                  <option value="operating-system">Operating system</option>
+                  <option value="hardware">Hardware</option>
+                </select>
+                <p id="productType-error" class="form-error" hidden></p>
+              </div>
+
+              <div class="form-field">
+                <label for="record-status">Review status</label>
+                <select
+                  id="record-status"
+                  name="reviewStatus"
+                  aria-describedby="reviewStatus-error"
+                >
+                  <option value="not-reviewed">NOT REVIEWED</option>
+                  <option value="in-review">IN REVEIW</option>
+                  <option value="reviewed">REVIEWED</option>
+                </select>
+                <p id="reviewStatus-error" class="form-error" hidden></p>
+              </div>
+
+              <div class="form-field form-wide">
+                <label for="record-exposure">Exposure notes (optional)</label>
+                <textarea
+                  id="record-exposure"
+                  name="exposureNotes"
+                  rows="4"
+                  maxlength="5000"
+                  aria-describedby="exposureNotes-error"
+                ></textarea>
+                <p id="exposureNotes-error" class="form-error" hidden></p>
+              </div>
+
+              <div class="form-field form-wide">
+                <label for="record-comments">Comments (optional)</label>
+                <textarea
+                  id="record-comments"
+                  name="comments"
+                  rows="4"
+                  maxlength="5000"
+                  aria-describedby="comments-error"
+                ></textarea>
+                <p id="comments-error" class="form-error" hidden></p>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button
+                id="save-record"
+                class="button button-primary"
+                type="submit"
+              >
+                Save record
+              </button>
+              <a
+                class="button button-secondary"
+                href="/products.html?scope=mine"
+              >
+                Cancel
+              </a>
+            </div>
+          </fieldset>
+
+          <p id="form-status" class="form-status" role="status"></p>
+          <button
+            id="form-retry"
+            class="button button-secondary form-retry"
+            type="button"
+            hidden
+          >
+            Try again
+          </button>
+        </form>
+
+        <noscript>
+          <p class="workspace-note">
+            js needs to be enabled
+          </p>
+        </noscript>
+      </section>
+    </main>
+
+    <footer id="site-footer" class="site-footer"></footer>
+  </body>
+</html>
