@@ -43,7 +43,7 @@ other workspace's collection. Imported NVD source data remains separate
 from locally managed records.
 
 The primary implementation focus is the **Homepage, Vulnerabilities, and
-Products** pages. Supporting About, Resources, and FAQs pages provide
+Products** pages. Supporting About and Resources pages provide
 context and cybersecurity learning material.
 
 The project also demonstrates:
@@ -104,7 +104,6 @@ detail views, and local-record CRUD interface.
 
 - [About](./public/about.html) — Platform purpose, workflow, and data context.
 - [Resources](./public/resources.html) — Cybersecurity learning resources.
-- [FAQs](./public/faqs.html) — Frequently asked questions.
 
 See the [user guide](docs/user-guide.md) for page workflows.
 
