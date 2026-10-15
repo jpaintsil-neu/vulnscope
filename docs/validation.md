@@ -184,7 +184,10 @@ Render showed a successful deployment of commit
 [`8b9791e`](https://github.com/jpaintsil-neu/vulnscope/commit/8b9791edfb0affef4e002e07c4047529b26ec14f),
 which updated the README and hosted validation documentation.
 
-**Evidence pending:** Add committed screenshots or logs.
+Committed evidence:
+
+- [Render deployment of `8b9791e`](../public/images/screenshots/deploy/render_deployment_%20commit.png).
+- [Production cookie attributes](../public/images/screenshots/deploy/production_cookie.png).
 
 ## Hosted Responsive and Keyboard Checks
 
@@ -222,6 +225,24 @@ gitleaks git . --log-opts="--all" --redact=100 --no-banner
 The scan covered history reachable from the available Git references.
 No credentials were detected by the scanner's configured rules.
 Production configuration review remains pending.
+
+### Local Usability Follow-up — October 15, 2026
+
+John reported passing manual checks for:
+
+- Empty search results and recovery through Clear Filters.
+- Failed-request feedback and recovery through Try again.
+- Required-field validation.
+- Server-side CVE validation, preserved input, and error-field focus.
+- Successful creation and deletion of a temporary record.
+- VoiceOver announcements for updated results and empty results.
+- VoiceOver reading of the CVE field label and validation error.
+
+Eight sampled CSS text/background combinations exceeded 4.5:1.
+These checks do not establish comprehensive accessibility compliance.
+
+Shared CSS cleanup and database-connection changes were included in
+this local follow-up. Record the resulting commit after committing.
 
 ## Remaining Verification
 

@@ -22,7 +22,7 @@ organize locally managed security reviews.
 
 ### Sania Anwar
 
-- Github: [saniaanwar] (https://github.com/saniaanwar)
+- Github: [saniaanwar](https://github.com/saniaanwar)
 - Responsibility: Product & Technology workspace.
 
 **Course Page:** [CS 5610 — Web Development](https://johnguerra.co/classes/webDevelopment_online_fall_2026/)
@@ -108,6 +108,7 @@ detail views, and local-record CRUD interface.
 
 - [About](./public/about.html) — Platform purpose, workflow, and data context.
 - [Resources](./public/resources.html) — Cybersecurity learning resources.
+- [FAQs](./public/faqs.html) — Platform usage, public data, and guest-workspace guidance.
 
 See the [user guide](docs/user-guide.md) for page workflows.
 
@@ -150,8 +151,7 @@ See the [complete folder/file mapping](docs/architecture.md#folder-and-file-mapp
 Personas, user stories, mockups, and responsibility split are documented in
 the [design overview](docs/design.md).
 
-The [shared mockup index](https://docs.google.com/spreadsheets/d/1OPhlHSFipS1TBg5fY3gODJUL3W921hsAR03a6K-po7k/edit)
-includes the editable Figma reference. Final design-document review is pending.
+The [shared mockup index](https://docs.google.com/spreadsheets/d/1OPhlHSFipS1TBg5fY3gODJUL3W921hsAR03a6K-po7k/edit).
 
 ## Installation and Local Development
 
@@ -218,11 +218,8 @@ See [import behavior](docs/setup.md#nvd-import).
 
 ## Code Quality
 
-**Latest local checkpoint — October 14, 2026:** ESLint, Prettier formatting
+**Latest local checkpoint — October 15, 2026:** ESLint, Prettier formatting
 verification, and Git whitespace checks passed.
-
-**Pending:** Repeat checks after integrating remote updates and further
-changes. Final unused-code review remains open.
 
 ### Run ESLint
 
@@ -278,7 +275,13 @@ Implemented considerations include:
 - Status announcements for loading and errors.
 - Responsive layout rules.
 
-**Pending:** Final accessibility review across all completed pages and forms.
+**Checked on October 15:** Hosted layouts at 360, 768, and 1440 CSS pixels,
+200% zoom, visible focus, skip navigation, mobile-menu behavior, and keyboard
+operation of the completed workflows.
+
+**Pending:** Screen-reader announcements, measured color contrast, and
+revalidation after changes. These manual checks do not establish full
+accessibility compliance.
 
 ## Peer Code Review
 

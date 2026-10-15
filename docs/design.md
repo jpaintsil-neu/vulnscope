@@ -1,5 +1,10 @@
 # Design Overview
 
+- **Updated:** October 15, 2026.
+
+- [Full design document](https://docs.google.com/document/d/1_EBsK1iSNJMkEcqX7na_RYYyHbUdZPt71yt7oZE1Pjw/edit)
+- [Live application](https://vulnscope-d4xk.onrender.com/)
+
 ## Project Description
 
 VulnScope helps people explore public cybersecurity vulnerabilities and
@@ -16,7 +21,13 @@ About, Resources, and FAQs add context and portfolio value.
 | John Paintsil | Vulnerability Awareness & Triage workspace |
 | Sania Anwar   | Product & Technology workspace             |
 
-Products implementation remains pending integration into `main`.
+John also created the initial mockups and index, shared layout, supporting
+pages, repository documentation, and deployment/validation notes. Sania owns
+Products code and its completion/validation notes.
+
+The Vulnerabilities workflow is live on Render with 1,500 imported CVEs in
+MongoDB Atlas. Products frontend files are present; backend, separate
+collection, independent CRUD, and combined testing remain pending integration.
 
 ## User Personas
 

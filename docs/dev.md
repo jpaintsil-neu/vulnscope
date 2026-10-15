@@ -38,3 +38,13 @@ Browse and search imported CVE records, filter vulnerabilities by severity and t
 ### About
 
 ![VulnScope About page purpose and workflow](../public/images/screenshots/devs/about.png)
+
+### Deployment Evidence
+
+These screenshots were committed on October 15, 2026. They document the
+displayed Render deployment and production cookie attributes. See
+[validation status](validation.md) for the scope of the other reported checks.
+
+![Successful Render deployment of documentation commit 8b9791e](../public/images/screenshots/deploy/render_deployment_%20commit.png)
+
+![Production workspace cookie name, path, HttpOnly, Secure, and SameSite attributes](../public/images/screenshots/deploy/production_cookie.png)

@@ -1,41 +1,57 @@
 import "dotenv/config";
 import { MongoClient } from "mongodb";
 
-// Shared MongoDB connection.
+// Shared connection state.
 let client;
 let database;
+let connectionPromise;
 
 /**
- * Returns the VulnScope database connection.
+ * Returns the shared database.
  */
 export async function getDatabase() {
-  // Reuse the existing connection.
-  if (database) {
-    return database;
+  if (database) return database;
+
+  // Share an in-progress connection.
+  if (!connectionPromise) {
+    const uri = process.env.MONGODB_URI;
+    const databaseName = process.env.MONGODB_DB_NAME || "vulnscope";
+
+    if (!uri) {
+      throw new Error("MONGODB_URI is not defined.");
+    }
+
+    client = new MongoClient(uri);
+    connectionPromise = client
+      .connect()
+      .then(() => {
+        database = client.db(databaseName);
+        return database;
+      })
+      .catch(async (error) => {
+        // Allow a clean retry.
+        await client.close().catch(() => {});
+        client = undefined;
+        connectionPromise = undefined;
+        throw error;
+      });
   }
 
-  const uri = process.env.MONGODB_URI;
-  const databaseName = process.env.MONGODB_DB_NAME || "vulnscope";
-
-  if (!uri) {
-    throw new Error("MONGODB_URI is not defined.");
-  }
-
-  client = new MongoClient(uri);
-  await client.connect();
-
-  database = client.db(databaseName);
-
-  return database;
+  return connectionPromise;
 }
+
 /**
- * Closes the active database connection.
+ * Closes the shared connection.
  */
 export async function closeDatabaseConnection() {
-  if (client) {
-    await client.close();
+  // Wait for pending connection work.
+  await connectionPromise?.catch(() => {});
 
+  try {
+    if (client) await client.close();
+  } finally {
     client = undefined;
     database = undefined;
+    connectionPromise = undefined;
   }
 }

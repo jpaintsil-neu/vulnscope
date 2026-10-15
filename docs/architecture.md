@@ -6,6 +6,12 @@ Express serves `public/` and mounts the vulnerability router at
 `/api/vulnerabilities`. Browser ES modules fetch JSON and render records.
 Database operations use the native MongoDB driver and a shared connection.
 
+Render hosts the Express application at
+[the live HTTPS site](https://vulnscope-d4xk.onrender.com/), and MongoDB Atlas
+stores the vulnerability dataset and guest records. Render environment
+variables supply the database configuration; credentials are not committed.
+The `/api/health` route checks HTTP server availability, not database readiness.
+
 There is no frontend bundling step or server-side template engine.
 
 ## Folder and File Mapping

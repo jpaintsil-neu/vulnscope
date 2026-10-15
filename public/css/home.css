@@ -51,17 +51,6 @@
   border: 0;
 }
 
-/* Accessible hidden legend. */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
 /* Persistent search label. */
 .home-search label {
   display: block;
