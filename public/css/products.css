@@ -1,0 +1,39 @@
+#product-results {
+  max-height: min(65vh, 48rem);
+  overflow: auto;
+  scroll-padding-top: 4rem;
+}
+
+#product-results .records-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* column headings */
+#product-results .records-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--background);
+  box-shadow: inset 0 -1px 0 var(--border);
+}
+
+/* products - names */
+#product-results .records-table td:first-child {
+  min-width: 12rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* products version column */
+#product-results .records-table td:nth-child(3) {
+  min-width: 0;
+}
+
+.results-pagination-top {
+  margin: 0 0 1rem;
+}
+
+#review-status-field[hidden] {
+  display: none;
+}
