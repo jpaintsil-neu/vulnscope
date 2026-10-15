@@ -1,0 +1,97 @@
+.page-container .detail-status {
+  margin-top: 1rem;
+  color: var(--muted);
+}
+
+/* retry action */
+.detail-retry {
+  margin-top: 1rem;
+}
+
+/* product details section */
+.product-details .detail-panel {
+  margin-top: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+}
+
+/* records */
+.detail-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 2rem;
+  margin: 0;
+}
+
+.detail-facts dt {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.detail-facts dd {
+  margin: 0.35rem 0 0;
+  color: var(--navy);
+  overflow-wrap: anywhere;
+}
+
+.detail-fact-wide {
+  grid-column: 1 / -1;
+}
+
+.detail-copy {
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.page-container .detail-help {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.product-details [hidden] {
+  display: none;
+}
+
+/* product names format */
+#product-title {
+  overflow-wrap: anywhere;
+}
+
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* delete action */
+.detail-actions .button-danger {
+  border: 1px solid #b91c1c;
+  background: #b91c1c;
+  color: #fff;
+}
+
+.detail-actions .button-danger:hover:not(:disabled) {
+  border-color: #991b1b;
+  background: #991b1b;
+}
+
+.detail-actions .button:disabled,
+.detail-actions a[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .detail-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .product-details .detail-panel {
+    padding: 1rem;
+  }
+}
