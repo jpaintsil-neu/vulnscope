@@ -9,9 +9,9 @@ VulnScope helps everyday technology users, cybersecurity students, and
 security professionals explore publicly disclosed vulnerabilities and
 organize locally managed security reviews.
 
-- **Live Site:** Pending — public deployment has not been completed.
+- **Live Site:** [VulnScope](https://vulnscope-d4xk.onrender.com/)
 - **Repository:** [jpaintsil-neu/vulnscope](https://github.com/jpaintsil-neu/vulnscope)
-- **Progress Updated:** October 14, 2026
+- **Progress Updated:** October 15, 2026
 
 ## Authors
 
@@ -56,11 +56,14 @@ The project also demonstrates:
 - Semantic controls, responsive layouts, and accessible navigation.
 - ESLint, Prettier, and Git/GitHub workflow.
 
-**Current milestone:** A successful local development import loaded
-**1,500 CVE records**. Public CVE browsing and guest-workspace creation,
-search, details, editing, and confirmed deletion are implemented.
-Local records support review-status filtering, and active filters are preserved when refreshing the results page.
-Imported CVEs remain read-only. Products integration, public deployment,
+**Current milestone:** VulnScope is publicly deployed on Render with
+MongoDB Atlas containing **1,500 imported CVE records**. Hosted checks
+passed for public CVE search, severity filtering, pagination, details,
+and guest-workspace record creation, editing, persistence, and deletion.
+Separate-browser guest isolation was also checked.
+
+Local records support review-status filtering, and active filters are
+preserved in the URL. Imported CVEs remain read-only. Products integration
 and final submission deliverables remain pending.
 
 ## Pages
@@ -247,11 +250,17 @@ On October 14, 2026, all seven checked HTML source files and six rendered
 Vulnerabilities views passed W3C Nu HTML Checker validation with zero
 errors and zero warnings.
 
+On October 15, hosted checks passed against the Render application and
+MongoDB Atlas for public CVE browsing, search, severity filters, pagination,
+details, guest-record CRUD, persistence, and separate-browser isolation.
+The deployed vulnerability dataset contained 1,500 imported records.
+
 See [validation results, corrections, and remaining checks](docs/validation.md)
 for the detailed record and testing instructions.
 
-**Pending:** Revalidation after integrating remote updates, final
-accessibility/responsive checks, and combined application/deployment testing.
+**Pending:** Final accessibility/responsive review, additional rendered
+states, and combined application testing after Products integration.
+Repeat relevant checks after further changes.
 
 ## Accessibility
 
@@ -300,7 +309,8 @@ See [development screenshots](docs/dev.md) and [Figma design mockups](docs/mocku
 - Products collection, data import, APIs, and full CRUD interface.
 - Product-specific homepage search integration.
 - Final design-document, usability, accessibility, and code-quality review.
-- Public deployment with both workflows and more than 1,000 records.
+- Deploy and validate Products after integration; the Vulnerabilities
+  workflow is already live with 1,500 imported records.
 - Screenshots, presentation, narrated video, and code review.
 - Google Form submission and working thumbnail/links.
 - Code freeze 24 hours before class; deployment, video, and slides before class.
