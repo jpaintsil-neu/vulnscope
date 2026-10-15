@@ -214,13 +214,11 @@ See [import behavior](docs/setup.md#nvd-import).
 
 ## Code Quality
 
-**Current checkpoint:** ESLint passed without errors after the public CVE
-detail-rendering correction on October 13, 2026. Changed files were
-formatted with Prettier.
+**Latest local checkpoint — October 14, 2026:** ESLint, Prettier formatting
+verification, and Git whitespace checks passed.
 
-**Pending:** Final repository-wide formatting verification and unused-code
-cleanup. Repeat lint and formatting checks after further implementation
-and before submission.
+**Pending:** Repeat checks after integrating remote updates and further
+changes. Final unused-code review remains open.
 
 ### Run ESLint
 
@@ -243,7 +241,17 @@ npm run format:check
 Source modules include brief purpose comments and short documentation for
 reusable functions.
 
-**Pending:** Final whole-project lint/format verification and unused-code cleanup.
+## Validation
+
+On October 14, 2026, all seven checked HTML source files and six rendered
+Vulnerabilities views passed W3C Nu HTML Checker validation with zero
+errors and zero warnings.
+
+See [validation results, corrections, and remaining checks](docs/validation.md)
+for the detailed record and testing instructions.
+
+**Pending:** Revalidation after integrating remote updates, final
+accessibility/responsive checks, and combined application/deployment testing.
 
 ## Accessibility
 
