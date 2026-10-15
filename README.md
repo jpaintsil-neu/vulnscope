@@ -22,6 +22,7 @@ organize locally managed security reviews.
 
 ### Sania Anwar
 
+- Github: [saniaanwar] (https://github.com/saniaanwar)
 - Responsibility: Product & Technology workspace.
 
 **Course Page:** [CS 5610 — Web Development](https://johnguerra.co/classes/webDevelopment_online_fall_2026/)
