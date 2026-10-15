@@ -14,7 +14,6 @@ John's recorded checks cover the Homepage, Vulnerabilities workspace,
 shared layout, About, Resources, and FAQs. Products implementation and
 validation belong to Sania; no Products completion is claimed here.
 
-Results apply to the local development snapshot tested on October 14.
 Synchronization with newer remote commits and validation of the combined
 build remain pending confirmation. Record the tested commit when completing
 the next checkpoint.
@@ -25,7 +24,7 @@ accessibility, security, or deployment requirements are fully satisfied.
 ## Local Code Quality Checks
 
 The following commands completed successfully in John's local repository
-on October 14:
+on October 14 and again on October 15 before the deployment-documentation commit:
 
 | Check      | Command                | Recorded result                           |
 | ---------- | ---------------------- | ----------------------------------------- |
@@ -166,11 +165,47 @@ change was not recorded.
 
 These checks establish the tested Vulnerabilities workflows. They do not
 establish Products completion, a comprehensive security audit, or final
-accessibility compliance. Cookie attributes have not been independently
-recorded in the hosted evidence.
+accessibility compliance.
 
-**Evidence pending:** Record the tested deployment's Source commit from
-Render and add committed screenshots or logs for the hosted checkpoint.
+### Production Cookie and Deployment Evidence
+
+On October 15, 2026, Chrome DevTools confirmed the following attributes
+on the live HTTPS application:
+
+| Cookie attribute | Observed value               |
+| ---------------- | ---------------------------- |
+| Name             | `__Host-vulnscope-workspace` |
+| Path             | `/`                          |
+| HttpOnly         | Enabled                      |
+| Secure           | Enabled                      |
+| SameSite         | `Strict`                     |
+
+Render showed a successful deployment of commit
+[`8b9791e`](https://github.com/jpaintsil-neu/vulnscope/commit/8b9791edfb0affef4e002e07c4047529b26ec14f),
+which updated the README and hosted validation documentation.
+
+**Evidence pending:** Add committed screenshots or logs.
+
+## Hosted Responsive and Keyboard Checks
+
+On October 15, 2026, John reported successful manual checks on the live
+Render application.
+
+| Check                                                       | Result |
+| ----------------------------------------------------------- | ------ |
+| Responsive layouts at 360, 768, and 1440 CSS pixels         | Passed |
+| Usability at 200% browser zoom                              | Passed |
+| Mobile navigation and Escape behavior                       | Passed |
+| Table scrolling and sticky-header visibility                | Passed |
+| Visible focus, logical tab order, and skip navigation       | Passed |
+| Keyboard operation of links, filters, pagination, and forms | Passed |
+| No observed keyboard traps                                  | Passed |
+
+Scope included Home, Vulnerabilities, public/local details, Add/Edit forms,
+About, Resources, and FAQs. Products testing remains Sania's responsibility.
+
+These manual checks do not establish comprehensive accessibility compliance.
+Screen-reader announcements and measured color contrast remain unverified.
 
 ## Credential Scan
 
@@ -195,12 +230,12 @@ Production configuration review remains pending.
 | Repository synchronization       | Record the tested Render deployment commit and synchronize local work before the next commit.                                                                                                                                        |
 | Code quality                     | Repeat lint, formatting, and whitespace checks after integration; finish unused-code review.                                                                                                                                         |
 | Regression                       | Hosted Vulnerabilities checks passed on October 15. Repeat affected checks after further changes and Products integration.                                                                                                           |
-| Accessibility and responsiveness | Complete final keyboard, focus, labels, announcements, contrast, and viewport checks. HTML validity alone is insufficient.                                                                                                           |
+| Accessibility and responsiveness | Hosted responsive, zoom, and keyboard checks passed on October 15. Verify screen-reader announcements and measured color contrast; repeat affected checks after changes.                                                             |
 | Additional rendered states       | Visible server-side field errors, loading/empty/failure states, and separately captured rendered Home/About/Resources/FAQs views are not established by the recorded snapshots.                                                      |
 | Products                         | Sania verifies her independent collection, APIs, forms, ownership, and CRUD. John does not implement Products without Prof. Gomez's authorization.                                                                                   |
 | Combined application             | Verify both workspaces and all navigation after Products integration.                                                                                                                                                                |
 | Security and configuration       | Environment-file checks and Git-history credential scan completed. Review production configuration and repeat scanning after further changes.                                                                                        |
-| Deployment                       | Vulnerabilities is live with 1,500 imported records; hosted browsing, guest CRUD, persistence, and separate-browser isolation passed. Record HTTPS cookie attributes and verify the combined application after Products integration. |
+| Deployment                       | Vulnerabilities is live with 1,500 imported records; hosted browsing, guest CRUD, persistence, and separate-browser isolation passed. HTTPS cookie attributes confirmed. Verify the combined application after Products integration. |
 | Evidence                         | Add final result screenshots/log links and verify submission links and thumbnail display.                                                                                                                                            |
 
 ## Repeating the Checks
