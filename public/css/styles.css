@@ -675,46 +675,6 @@ svg {
   margin-top: 1rem;
 }
 
-/* Shared FAQ containers. */
-.faq-item {
-  margin-top: 0.85rem;
-  border: 1px solid var(--border);
-  border-radius: 0.65rem;
-  background: var(--surface);
-}
-
-/* Native expandable question control. */
-.faq-item summary {
-  padding: 1.1rem 1.25rem;
-  border-radius: inherit;
-  color: var(--navy);
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* Preserve the disclosure indicator. */
-.faq-item summary::marker {
-  color: var(--blue);
-}
-
-/* Question hover treatment. */
-.faq-item summary:hover {
-  background: var(--background);
-}
-
-/* Visible question keyboard focus. */
-.faq-item summary:focus-visible {
-  outline: 3px solid var(--teal);
-  outline-offset: 3px;
-}
-
-/* Separate expanded questions and answers. */
-.faq-item[open] summary {
-  border-bottom: 1px solid var(--border);
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
 /* Shared accessible text helper. */
 .visually-hidden {
   position: absolute;
