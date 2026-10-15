@@ -129,6 +129,22 @@ These are reported development checkpoints. The HTML checker did not
 execute these workflows, and they have not been repeated against the
 pending combined build in this validation checkpoint.
 
+## Credential Scan
+
+On October 14, 2026, Gitleaks scanned 37 commits and approximately
+352 KB of Git history after refreshing the remote references.
+
+```bash
+git fetch origin
+gitleaks git . --log-opts="--all" --redact=100 --no-banner
+```
+
+**Result:** No leaks found.
+
+The scan covered history reachable from the available Git references.
+No credentials were detected by the scanner's configured rules.
+Production configuration review remains pending.
+
 ## Remaining Verification
 
 | Area                             | Remaining work                                                                                                                                                                  |
@@ -140,7 +156,7 @@ pending combined build in this validation checkpoint.
 | Additional rendered states       | Visible server-side field errors, loading/empty/failure states, and separately captured rendered Home/About/Resources/FAQs views are not established by the recorded snapshots. |
 | Products                         | Sania verifies her independent collection, APIs, forms, ownership, and CRUD. John does not implement Products without Prof. Gomez's authorization.                              |
 | Combined application             | Verify both workspaces and all navigation after Products integration.                                                                                                           |
-| Security and configuration       | Complete credentials/history and production-configuration review.                                                                                                               |
+| Security and configuration       | Environment-file checks and Git-history credential scan completed. Review production configuration and repeat scanning after further changes.                                                                                                               |
 | Deployment                       | Verify public access, HTTPS workspace cookies, MongoDB connectivity, production CRUD, and more than 1,000 deployed records.                                                     |
 | Evidence                         | Add final result screenshots/log links and verify submission links and thumbnail display.                                                                                       |
 
