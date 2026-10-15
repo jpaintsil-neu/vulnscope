@@ -41,7 +41,6 @@ function recordLabel() {
   return activeFilters.scope === "mine" ? "local records" : "public products";
 }
 
-
 function showTableMessage(message) {
   const row = document.createElement("tr");
   const cell = document.createElement("td");
@@ -286,9 +285,7 @@ activeFilters = {
 function updateScopeView() {
   const isLocal = activeFilters.scope === "mine";
 
-  resultsHeading.textContent = isLocal
-    ? "My Local Records"
-    : "Product Records";
+  resultsHeading.textContent = isLocal ? "My Local Records" : "Product Records";
   tableCaption.textContent = isLocal
     ? "Guest workspace product records"
     : "Public product records";
@@ -341,7 +338,7 @@ function applyFilters() {
     reviewStatus: scope === "mine" ? reviewStatusSelect.value : "",
   };
 
-// reset prev. results
+  // reset prev. results
   currentPage = 1;
   totalPages = 0;
   hasLoaded = false;
