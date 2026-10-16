@@ -17,7 +17,6 @@ const KEYWORDS = [
   "intel",
   "zoom",
   "vmware",
-  "wordpress",
   "apache",
   "android",
   "windows",
@@ -38,10 +37,18 @@ try {
 
     console.log(`Fetching products for "${keyword}"...`);
 
-    const data = await fetchNvdCpes({
-      keywordSearch: keyword,
-      resultsPerPage: RESULTS_PER_KEYWORD,
-    });
+    let data;
+
+    try {
+      data = await fetchNvdCpes({
+        keywordSearch: keyword,
+        resultsPerPage: RESULTS_PER_KEYWORD,
+      });
+    } catch (error) {
+      // skip keywords that NVD rejects and continues importing
+      console.warn(`Skipped "${keyword}": ${error.message}`);
+      continue;
+    }
 
     // convert accepted source records and remove any duplicates
     for (const { cpe } of data.products) {
