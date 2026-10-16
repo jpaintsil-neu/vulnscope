@@ -1,6 +1,7 @@
 import express from "express";
 import { fileURLToPath } from "node:url";
 import vulnerabilitiesRouter from "./routes/vulnerabilities.js";
+import productsRouter from "./routes/products.js";
 
 // Shared Express application.
 const app = express();
@@ -17,6 +18,9 @@ app.use(express.static(publicDirectory));
 
 // Mount the vulnerability API.
 app.use("/api/vulnerabilities", vulnerabilitiesRouter);
+
+// Mounting the product API
+app.use("/api/products", productsRouter);
 
 // Basic server health check.
 app.get("/api/health", (req, res) => {

@@ -24,7 +24,7 @@ const STATUS_LABELS = new Map([
   ["reviewed", "Reviewed"],
 ]);
 
-// current
+// current paging and filter state
 let currentPage = 1;
 let totalPages = 0;
 let requestedPage = 1;
@@ -213,7 +213,7 @@ async function loadPage(page, focusResults = false) {
     console.error("Product loading failed:", error.name);
 
     if (!hasLoaded) {
-      showTableMessage(`${recordLabel()} could not be loaded.`);
+      showTableMessage(`The ${recordLabel()} could not be loaded.`);
       resultsCount.textContent = "Unavailable";
     }
 
@@ -226,7 +226,7 @@ async function loadPage(page, focusResults = false) {
   }
 }
 
-// connection
+// paging buttons - top and bottom
 for (const button of previousButtons) {
   button.addEventListener("click", () => loadPage(currentPage - 1, true));
 }
@@ -291,7 +291,7 @@ function updateScopeView() {
     : "Public product records";
   extraHeading.textContent = isLocal ? "Review status" : "Source";
 
-  // review status is for local records ony
+  // review status is for local records only
   reviewStatusField.hidden = !isLocal;
   reviewStatusSelect.disabled = !isLocal;
 
@@ -309,7 +309,7 @@ function updateScopeView() {
     url.searchParams.delete("scope");
   }
 
-  // refrsh
+  // keeps filters in the URL so refresh can restore them
   for (const [name, value] of [
     ["q", activeFilters.q],
     ["productType", activeFilters.productType],

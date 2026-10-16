@@ -119,7 +119,7 @@ function renderRecord(record) {
   );
 }
 
-//
+// requested record ID
 
 const id = parameters.get("id");
 let deleting = false;
@@ -177,7 +177,7 @@ async function loadRecord(focusHeading = false) {
   content.hidden = true;
   retryButton.hidden = true;
 
-  // reject wrrong ids
+  // rejects any wrong ObjectIds before requesting
   if (!id || !/^[a-fA-F0-9]{24}$/.test(id)) {
     status.textContent = "Choose a product from the results list.";
     return;
@@ -209,7 +209,7 @@ async function loadRecord(focusHeading = false) {
     const { record } = await response.json();
     const expectedSource = isLocal ? "local" : "nvd";
 
-    // pull record
+    // verifies the response matches the requested record before the record is pulled
     if (
       record?.source !== expectedSource ||
       record?._id !== id.toLowerCase() ||
@@ -245,7 +245,7 @@ async function loadRecord(focusHeading = false) {
 // retry request
 retryButton.addEventListener("click", () => loadRecord(true));
 
-// deletion of requests
+// deletes a local record after confirmation
 async function deleteLocalRecord(record, deleteButton, editLink) {
   if (
     deleting ||

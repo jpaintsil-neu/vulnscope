@@ -33,6 +33,14 @@ function navigationState(href) {
   }
 
   return "";
+
+  // keeps product record pages within products
+  if (
+    ["/product-details.html", "/product-form.html"].includes(currentPath) &&
+    href === "/products.html"
+  ) {
+    return 'aria-current="true"';
+  }
 }
 
 /**
