@@ -182,9 +182,7 @@
 
         <p>
           The current vulnerability workspace uses an imported sample of NVD CVE
-          records. Product integration is planned around the Common Platform
-          Enumeration (CPE) Dictionary and its standardized technology
-          identifiers.
+          records.
         </p>
 
         <!-- Distinguish record origins visually. -->
@@ -208,6 +206,48 @@
 
             <ul>
               <li>Create, read, edit, and delete your records.</li>
+              <li>
+                Access is associated with the creating browser's workspace
+                cookie.
+              </li>
+              <li>Local changes leave the public NVD records unchanged.</li>
+            </ul>
+          </article>
+        </div>
+
+        <!-- Products workspace -->
+        <h3 class="data-workspace-heading">Products Workspace</h3>
+        <p>
+          The Products workspace uses an imported sample of more than 6,000
+          entries from the NVD Common Platform Enumeration (CPE) Dictionary.
+          Each CPE name is converted into a vendor, product, version, and
+          product type.
+        </p>
+
+        <div class="data-comparison">
+          <article class="data-origin data-origin-product">
+            <p class="origin-label">Public source</p>
+            <h4>Imported NVD product records</h4>
+            <p>A development sample of standardized product identifiers.</p>
+
+            <ul>
+              <li>Browse vendors, products, versions, and product types.</li>
+              <li>Each record keeps its original CPE name.</li>
+              <li>Read-only within VulnScope.</li>
+            </ul>
+          </article>
+
+          <article
+            class="data-origin data-origin-product data-origin-product-local"
+          >
+            <p class="origin-label">Your workspace</p>
+            <h4>Local product review records</h4>
+            <p>
+              Your own product records, exposure notes, and review statuses.
+            </p>
+
+            <ul>
+              <li>Create, read, edit, and delete your own records.</li>
               <li>
                 Access is associated with the creating browser's workspace
                 cookie.

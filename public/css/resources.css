@@ -81,6 +81,32 @@
   font-size: 0.9rem;
 }
 
+/* products card */
+.info-card.resource-card-product {
+  background: #eef6fd;
+}
+
+.resource-card-product .resource-visual {
+  background: linear-gradient(135deg, #dbeafe, #dcfce7);
+  color: #166534;
+}
+
+.resource-card-product .resource-example {
+  background: var(--surface);
+}
+
+/* products button. */
+.action-links .button-product {
+  border-color: #166534;
+  background: #166534;
+  color: #fff;
+}
+
+.action-links .button-product:hover {
+  border-color: #14532d;
+  background: #14532d;
+}
+
 /* Stack learning steps on smaller screens. */
 @media (max-width: 900px) {
   .learning-path {

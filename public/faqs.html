@@ -101,8 +101,7 @@
             <p>
               The current vulnerability workspace uses an imported sample of CVE
               records from the National Vulnerability Database (NVD), maintained
-              by NIST. Product integration is planned around the Common Platform
-              Enumeration (CPE) Dictionary.
+              by NIST.
             </p>
           </div>
         </details>
@@ -155,9 +154,9 @@
           <div class="faq-answer">
             <p>
               Vulnerability reviews focus on security issues, triage statuses,
-              and analyst notes. Product reviews are planned to focus on
-              technology identifiers, product details, review statuses, and
-              notes in their own workspace.
+              and analyst notes. Product reviews focus on technology
+              identifiers, product details, review statuses, and notes in their
+              own workspace.
             </p>
           </div>
         </details>
@@ -170,6 +169,99 @@
               broader keywords and remove restrictive filters. An empty result
               does not establish that a product has no vulnerabilities.
             </p>
+          </div>
+        </details>
+      </section>
+
+      <!-- Products workspace questions. -->
+      <section aria-labelledby="products-heading">
+        <h2 id="products-heading">Products Workspace</h2>
+
+        <details class="faq-item">
+          <summary>Where does the product data come from?</summary>
+          <div class="faq-answer">
+            <p>
+              Public products are an imported sample of the NVD Common Platform
+              Enumeration (CPE) Dictionary, maintained by NIST. The data
+              reflects the last successful import.
+            </p>
+            <a
+              class="text-link"
+              href="https://nvd.nist.gov/developers/products"
+            >
+              NVD Product Documentation
+            </a>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What is a CPE name?</summary>
+          <div class="faq-answer">
+            <p>
+              A CPE name is a standardized identifier for a specific technology.
+              It records the product type, vendor, product, and version.
+              VulnScope shows these as separate columns and keeps the full CPE
+              name on each product's details page.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Why does the same product appear more than once?</summary>
+          <div class="faq-answer">
+            <p>
+              The CPE Dictionary has a separate entry for each
+              <bold>version</bold> of a product, so each version appears as its
+              own record.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What does "Not specified" mean for a version?</summary>
+          <div class="faq-answer">
+            <p>
+              This means that the CPE entry doesn't name a specific version. It
+              either covers any version or a version does not apply.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Does a listed product have known vulnerabilities?</summary>
+          <div class="faq-answer">
+            <p>
+              Not necessarily. A product record only identifies the technology.
+              Search the Vulnerabilities workspace and check vendor advisories
+              to see if a product or version is affected.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What does a local product record save?</summary>
+          <div class="faq-answer">
+            <p>
+              The local product records store the product name, vendor, optional
+              version, product type, review status, exposure notes, and
+              comments. They also have the creation/update dates and your
+              workspace identifier.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How do I add, edit, or delete a product record?</summary>
+          <div class="faq-answer">
+            <p>
+              Click on 'Add Product' on the Products page. To edit or delete,
+              choose 'My local records', open the record, and select 'Edit
+              record' or 'Delete record'. All the public product records are
+              read-only.
+            </p>
+            <a class="text-link" href="/products.html?scope=mine">
+              Open My local product records
+            </a>
           </div>
         </details>
       </section>

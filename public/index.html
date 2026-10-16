@@ -97,6 +97,37 @@
           Search public vulnerabilities by CVE ID or keywords, including product
           and vendor names mentioned in their descriptions.
         </p>
+
+        <!-- Search public product records. -->
+        <form
+          class="home-product-search"
+          action="/products.html"
+          method="get"
+          role="search"
+          aria-label="Search products"
+        >
+          <label for="home-product-query">Vendor, product, or version</label>
+
+          <div class="search-controls">
+            <input
+              id="home-product-query"
+              name="q"
+              type="search"
+              placeholder="Example: Firefox or Apple"
+              maxlength="200"
+              aria-describedby="product-search-note"
+            />
+
+            <button class="button button-product" type="submit">
+              Search products
+            </button>
+          </div>
+        </form>
+
+        <!-- product search description -->
+        <p id="product-search-note" class="search-note">
+          Search public products by vendor, product, or version.
+        </p>
       </section>
 
       <!-- Introduce independent workspaces. -->

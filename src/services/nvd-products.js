@@ -28,7 +28,7 @@ function unescapeCpe(value) {
 function toDisplayName(value) {
   return unescapeCpe(value)
     .replaceAll("_", " ")
-    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+    .replace(/(^|\s)\S/g, (start) => start.toUpperCase());
 }
 
 // cpe object conversion from nvd api

@@ -62,7 +62,8 @@
   border-top-color: var(--teal);
 }
 
-.data-origin h3 {
+.data-origin h3,
+.data-origin h4 {
   margin: 0 0 0.75rem;
   color: var(--navy);
   font-size: 1.1rem;
@@ -83,6 +84,22 @@
 
 .data-origin li + li {
   margin-top: 0.45rem;
+}
+
+/* products workspace */
+.data-workspace-heading {
+  margin: 2.5rem 0 0.75rem;
+  color: var(--navy);
+}
+
+/* product cards */
+.data-comparison .data-origin-product {
+  border-top-color: #166534;
+  background: #eef6fd;
+}
+
+.data-comparison .data-origin-product-local {
+  border-top-color: var(--teal);
 }
 
 /* Stack the workflow and comparisons. */

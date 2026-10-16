@@ -32,8 +32,6 @@ function navigationState(href) {
     return 'aria-current="true"';
   }
 
-  return "";
-
   // keeps product record pages within products
   if (
     ["/product-details.html", "/product-form.html"].includes(currentPath) &&
@@ -41,6 +39,8 @@ function navigationState(href) {
   ) {
     return 'aria-current="true"';
   }
+
+  return "";
 }
 
 /**
@@ -84,13 +84,6 @@ const icon = (content) => `
     ${content}
   </svg>
 `;
-
-// Header account icon.
-const accountIcon = icon(`
-  <circle cx="12" cy="12" r="9" />
-  <circle cx="12" cy="9" r="3" />
-  <path d="M6 18c1-5 11-5 12 0" />
-`);
 
 // Footer reference icons.
 const dataIcon = icon(`
@@ -147,17 +140,6 @@ document.querySelector("#site-header").innerHTML = `
         .join("")}
     </nav>
 
-    <!-- Account workflow placeholder. -->
-    <button
-      class="account-control"
-      type="button"
-      disabled
-      aria-label="Create Account / Log In — coming soon"
-      title="Account access is coming soon"
-    >
-      ${accountIcon}
-      <span>Create Account / Log In</span>
-    </button>
   </div>
 `;
 
