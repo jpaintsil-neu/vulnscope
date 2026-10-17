@@ -60,16 +60,30 @@
   font-weight: 600;
 }
 
-/* Search input and action. */
+/* Align labeled search controls. */
 .search-controls {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: flex;
+  align-items: flex-end;
   gap: 0.75rem;
 }
 
-/* Shared input typography. */
-.search-controls input {
+/* Compact category selector. */
+.search-scope {
+  flex: 0 1 12rem;
   min-width: 0;
+}
+
+/* Give the query remaining space. */
+.search-query {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Shared control typography. */
+.search-controls input,
+.search-controls select {
+  min-width: 0;
+  min-height: 3rem;
   width: 100%;
   padding: 0.85rem 1rem;
   border: 1px solid var(--border);
@@ -79,10 +93,18 @@
   font: inherit;
 }
 
-/* Search input keyboard focus. */
-.search-controls input:focus-visible {
+/* Visible keyboard focus. */
+.search-controls input:focus-visible,
+.search-controls select:focus-visible,
+.search-controls .button:focus-visible {
   outline: 3px solid var(--teal);
   outline-offset: 3px;
+}
+
+/* Keep the search action aligned. */
+.search-controls .button {
+  flex-shrink: 0;
+  min-height: 3rem;
 }
 
 /* Readable placeholder text. */
@@ -108,7 +130,15 @@
 
 /* Stack compact homepage content. */
 @media (max-width: 700px) {
-  .search-controls,
+  .search-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-scope {
+    flex: auto;
+  }
+
   .home-workspaces {
     grid-template-columns: 1fr;
   }
@@ -120,20 +150,4 @@
   .search-controls .button {
     width: 100%;
   }
-}
-
-/* product search */
-.home-product-search {
-  margin-top: 1.75rem;
-}
-
-.home-search .button-product {
-  border-color: #166534;
-  background: #166534;
-  color: #fff;
-}
-
-.home-search .button-product:hover {
-  border-color: #14532d;
-  background: #14532d;
 }

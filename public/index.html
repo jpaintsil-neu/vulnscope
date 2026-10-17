@@ -28,6 +28,7 @@
     <!-- Shared styles and layout module. -->
     <link rel="stylesheet" href="/css/styles.css" />
     <script type="module" src="/js/layout.js"></script>
+    <script type="module" src="/js/home-search.js"></script>
 
     <!-- Homepage styles. -->
     <link rel="stylesheet" href="/css/home.css" />
@@ -58,32 +59,43 @@
       </section>
 
       <!-- Shared search entry point. -->
-      <!-- Search public vulnerabilities. -->
       <section class="home-search" aria-labelledby="search-heading">
         <h2 id="search-heading">What would you like to explore?</h2>
 
         <form
+          id="home-search-form"
           action="/vulnerabilities.html"
           method="get"
           role="search"
           aria-labelledby="search-heading"
         >
           <fieldset>
-            <legend class="visually-hidden">
-              Search public vulnerabilities
-            </legend>
-
-            <label for="home-query">CVE ID or vulnerability keyword</label>
+            <legend class="visually-hidden">Search public records</legend>
 
             <div class="search-controls">
-              <input
-                id="home-query"
-                name="q"
-                type="search"
-                placeholder="For example: a CVE ID or Firefox"
-                maxlength="200"
-                aria-describedby="search-availability"
-              />
+              <!-- Reveal the selector when routing is ready. -->
+              <div id="home-search-scope-field" class="search-scope" hidden>
+                <label for="home-search-scope">Search in</label>
+                <select id="home-search-scope">
+                  <option value="vulnerabilities">Vulnerabilities</option>
+                  <option value="products">Products</option>
+                </select>
+              </div>
+
+              <!-- Keep one shared query field. -->
+              <div class="search-query">
+                <label id="home-query-label" for="home-query">
+                  CVE ID or vulnerability keyword
+                </label>
+                <input
+                  id="home-query"
+                  name="q"
+                  type="search"
+                  placeholder="For example: a CVE ID or Firefox"
+                  maxlength="200"
+                  aria-describedby="search-availability"
+                />
+              </div>
 
               <button class="button button-primary" type="submit">
                 Search
@@ -92,41 +104,10 @@
           </fieldset>
         </form>
 
-        <!-- Explain the search scope. -->
-        <p id="search-availability" class="search-note">
+        <!-- Explain the selected search. -->
+        <p id="search-availability" class="search-note" aria-live="polite">
           Search public vulnerabilities by CVE ID or keywords, including product
           and vendor names mentioned in their descriptions.
-        </p>
-
-        <!-- Search public product records. -->
-        <form
-          class="home-product-search"
-          action="/products.html"
-          method="get"
-          role="search"
-          aria-label="Search products"
-        >
-          <label for="home-product-query">Vendor, product, or version</label>
-
-          <div class="search-controls">
-            <input
-              id="home-product-query"
-              name="q"
-              type="search"
-              placeholder="Example: Firefox or Apple"
-              maxlength="200"
-              aria-describedby="product-search-note"
-            />
-
-            <button class="button button-product" type="submit">
-              Search products
-            </button>
-          </div>
-        </form>
-
-        <!-- product search description -->
-        <p id="product-search-note" class="search-note">
-          Search public products by vendor, product, or version.
         </p>
       </section>
 
