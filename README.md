@@ -319,21 +319,8 @@ See [development screenshots](docs/dev.md) and [Figma design mockups](docs/mocku
 ## Presentation and Demo Video
 
 - **Google Slides Presentation (John):** [John's Presentation](https://docs.google.com/presentation/d/1VAJmpa_GvycCUX-Re0htSbg_81e-8JJs4MOuBCO9C20/edit?usp=drive_link)
-- **Google Slides Presentation (Sania):** [Sania's presentation](link)
-- **Short Public Narrated Demo Video:** Pending.
-- **Published Demo Link:** Pending.
-
-## Development Status
-
-### In Progress / Next
-
-- Import products into Atlas and validate Products on the live site.
-- Products mockups, screenshots, and design-document updates.
-- Final design-document, usability, accessibility, and code-quality review.
-- Deploy and validate Products on Render; the Vulnerabilities workflow is already live with 1,500 imported records.
-- Screenshots, presentation, narrated video, and code review.
-- Google Form submission and working thumbnail/links.
-- Code freeze 24 hours before class; deployment, video, and slides before class.
+- **Google Slides Presentation (Sania):** [Sania's presentation](https://docs.google.com/presentation/d/1bH6_mhe3n3b-y8X_ObTOzPIioFuBz1YehroUM92Tutg/edit?usp=sharing)
+- **Demo Video** [Demo Video](add link)
 
 ## Generative AI Disclosure
 
