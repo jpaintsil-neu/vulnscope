@@ -11,7 +11,7 @@ organize locally managed security reviews.
 
 - **Live Site:** [VulnScope](https://vulnscope-d4xk.onrender.com/)
 - **Repository:** [jpaintsil-neu/vulnscope](https://github.com/jpaintsil-neu/vulnscope)
-- **Progress Updated:** October 15, 2026
+- **Progress Updated:** October 16, 2026
 
 ## Authors
 
@@ -22,7 +22,7 @@ organize locally managed security reviews.
 
 ### Sania Anwar
 
-- Github: [saniaanwar](https://github.com/saniaanwar)
+- GitHub: [saniaanwar](https://github.com/saniaanwar)
 - Responsibility: Product & Technology workspace.
 
 **Course Page:** [CS 5610 — Web Development](https://johnguerra.co/classes/webDevelopment_online_fall_2026/)
@@ -32,7 +32,7 @@ organize locally managed security reviews.
 The goal is to build a useful, approachable application using semantic HTML,
 modular CSS, vanilla JavaScript, Node.js, Express, and MongoDB.
 
-The application has two planned independent feature areas:
+The application has two independent feature areas:
 
 - **Vulnerability Awareness & Triage:** Explore CVEs and manage local
   vulnerability records, review statuses, and analyst notes.
@@ -64,8 +64,12 @@ and guest-workspace record creation, editing, persistence, and deletion.
 Separate-browser guest isolation was also checked.
 
 Local records support review-status filtering, and active filters are
-preserved in the URL. Imported CVEs remain read-only. Products integration
-and final submission deliverables remain pending.
+preserved in the URL. Imported CVEs remain read-only.
+
+The Products workspace is implemented with its own `products` collection,
+API, search/filtering, detail views, and guest-owned CRUD. It was tested
+locally with 6,344 imported NVD CPE records; the Atlas import for the live
+site and final submission deliverables remain pending.
 
 ## Pages
 
@@ -81,7 +85,8 @@ Implemented:
 - Search navigation to the Vulnerabilities page with the query applied.
 - Overview of the vulnerability and product workspaces.
 
-**Pending:** Product-specific search after Products integration.
+- Working public product search by vendor, product, or version.
+- Search navigation to the Products page with the query applied.
 
 ### Vulnerabilities — [`public/vulnerabilities.html`](./public/vulnerabilities.html)
 
@@ -99,10 +104,18 @@ The workspace supports:
 - Active search, severity, and local review-status filters preserved in the URL.
 - Filter-aware overview cards and charts.
 
-### Products — Pending Integration
+### Products — [`public/products.html`](./public/products.html)
 
-**Pending:** Product data import, MongoDB collection, APIs, search/filtering,
-detail views, and local-record CRUD interface.
+- Public products and local records views.
+- Vendor, product, and version keyword search.
+- Product type filtering: Application, Operating system, Hardware.
+- Local review-status filtering: Not reviewed, In review, and Reviewed.
+- Results in pages of up to 20 records.
+- Sticky column headings and top Previous/Next controls.
+- Links to public and local product details, including the original CPE name.
+- Loading, empty-result, error, and retry states.
+- Add Product link to the local-record form, with editing and confirmed deletion.
+- Active search, type, and review-status filters preserved in the URL.
 
 ### Supporting Pages
 
@@ -151,7 +164,7 @@ See the [complete folder/file mapping](docs/architecture.md#folder-and-file-mapp
 Personas, user stories, mockups, and responsibility split are documented in
 the [design overview](docs/design.md).
 
-The [shared mockup index](https://docs.google.com/spreadsheets/d/1OPhlHSFipS1TBg5fY3gODJUL3W921hsAR03a6K-po7k/edit).
+All Mockups: [insert link]
 
 ## Installation and Local Development
 
@@ -165,9 +178,10 @@ cd vulnscope
 npm ci
 cp .env.example .env
 
-# Prepare MongoDB and import CVEs.
+# Prepare MongoDB and import CVEs and products.
 node scripts/setup-database.js
 node scripts/import-vulnerabilities.js
+node scripts/import-products.js
 
 # Start the application.
 npm run dev
@@ -194,6 +208,10 @@ Search from Home, or open Vulnerabilities and choose Public CVEs or My local
 records. Apply search/severity filters; local records also support review status.
 Open a record for details, or use Add Vulnerability to create a local record.
 
+For products, open Products and choose Public products or My local records.
+Search by vendor, product, or version and filter by product type; local
+records also support review status. Use Add Product to create a local record.
+
 Guest records belong to the browser workspace that created them.
 Clearing its cookie removes access. Public CVEs remain read-only.
 
@@ -206,19 +224,21 @@ Local searches support `triageStatus` alongside search and severity.
 
 See the [API reference](docs/api.md) for endpoints, validation, and examples.
 
-**Pending:** Products endpoints.
+Products uses `/api/products` for public CPE browsing and
+`/api/products/local` for guest-owned CRUD, with `productType` and local
+`reviewStatus` filters.
 
 ## Public Data Sources
 
 - [NIST NVD CVE API](https://nvd.nist.gov/developers/vulnerabilities) — implemented.
-- [NIST NVD CPE/Product API](https://nvd.nist.gov/developers/products) — planned.
+- [NIST NVD CPE/Product API](https://nvd.nist.gov/developers/products) — implemented.
 
 The development import is manual; the dataset reflects its last successful run.
 See [import behavior](docs/setup.md#nvd-import).
 
 ## Code Quality
 
-**Latest local checkpoint — October 15, 2026:** ESLint, Prettier formatting
+**Latest local checkpoint — October 16, 2026:** ESLint, Prettier formatting
 verification, and Git whitespace checks passed.
 
 ### Run ESLint
@@ -256,10 +276,6 @@ The deployed vulnerability dataset contained 1,500 imported records.
 See [validation results, corrections, and remaining checks](docs/validation.md)
 for the detailed record and testing instructions.
 
-**Pending:** Final accessibility/responsive review, additional rendered
-states, and combined application testing after Products integration.
-Repeat relevant checks after further changes.
-
 ## Accessibility
 
 Implemented considerations include:
@@ -275,7 +291,7 @@ Implemented considerations include:
 - Status announcements for loading and errors.
 - Responsive layout rules.
 
-**Checked on October 15:** Hosted layouts at 360, 768, and 1440 CSS pixels,
+**Checked on October 65:** Hosted layouts at 360, 768, and 1440 CSS pixels,
 200% zoom, visible focus, skip navigation, mobile-menu behavior, and keyboard
 operation of the completed workflows.
 
@@ -302,7 +318,8 @@ See [development screenshots](docs/dev.md) and [Figma design mockups](docs/mocku
 
 ## Presentation and Demo Video
 
-- **Google Slides Presentation:** [Project 2 — Presentation](https://docs.google.com/presentation/d/1VAJmpa_GvycCUX-Re0htSbg_81e-8JJs4MOuBCO9C20/edit?usp=drive_link) In-progress.
+- **Google Slides Presentation (John):** [John's Presentation](https://docs.google.com/presentation/d/1VAJmpa_GvycCUX-Re0htSbg_81e-8JJs4MOuBCO9C20/edit?usp=drive_link)
+- **Google Slides Presentation (Sania):** [Sania's presentation](link)
 - **Short Public Narrated Demo Video:** Pending.
 - **Published Demo Link:** Pending.
 
@@ -310,11 +327,10 @@ See [development screenshots](docs/dev.md) and [Figma design mockups](docs/mocku
 
 ### In Progress / Next
 
-- Products collection, data import, APIs, and full CRUD interface.
-- Product-specific homepage search integration.
+- Import products into Atlas and validate Products on the live site.
+- Products mockups, screenshots, and design-document updates.
 - Final design-document, usability, accessibility, and code-quality review.
-- Deploy and validate Products after integration; the Vulnerabilities
-  workflow is already live with 1,500 imported records.
+- Deploy and validate Products on Render; the Vulnerabilities workflow is already live with 1,500 imported records.
 - Screenshots, presentation, narrated video, and code review.
 - Google Form submission and working thumbnail/links.
 - Code freeze 24 hours before class; deployment, video, and slides before class.
@@ -323,13 +339,15 @@ See [development screenshots](docs/dev.md) and [Figma design mockups](docs/mocku
 
 ### Tool and Model
 
-- **Tool:** ChatGPT / Codex.
-- **Provider:** OpenAI.
-- **Model/version details:** Pending final documentation of the models used.
+- **Tool:** ChatGPT / Codex / Claude.
+- **Provider:** OpenAI / Anthropic.
+- **Model/version details:** Claude Opus 5.5.
 
 ### How Generative AI Was Used
 
 - John Paintsil - ChatGPT was used as an iterative development assistant by supporting tasks such as reviewing project requirements, organizing information architecture, and refining design documentation to enhance overall project quality and accessibility.
+
+- Sania Anwar - I used Claude to organize the README and design documentation on github. I also used it to help me with the database connection issues.
 
 ## License
 

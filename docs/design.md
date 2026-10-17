@@ -1,6 +1,6 @@
 # Design Overview
 
-- **Updated:** October 15, 2026.
+- **Updated:** October 16, 2026.
 
 - [Full design document](https://docs.google.com/document/d/1_EBsK1iSNJMkEcqX7na_RYYyHbUdZPt71yt7oZE1Pjw/edit)
 - [Live application](https://vulnscope-d4xk.onrender.com/)
@@ -26,8 +26,7 @@ pages, repository documentation, and deployment/validation notes. Sania owns
 Products code and its completion/validation notes.
 
 The Vulnerabilities workflow is live on Render with 1,500 imported CVEs in
-MongoDB Atlas. Products frontend files are present; backend, separate
-collection, independent CRUD, and combined testing remain pending integration.
+MongoDB Atlas. Products is implemented with its own products collection, API routes, search/filtering, detail views, and CRUD. It has been tested locally with 6,344 imported NVD CPE records and is live on Render.
 
 ## User Personas
 
@@ -46,8 +45,7 @@ collection, independent CRUD, and combined testing remain pending integration.
 - As Ahmed, I want vendor, product, and version details so I can understand technology-related risks.
 - As Fatima, I want to manage local product records and notes so I can maintain a product-security workspace.
 
-These stories describe the intended complete application. Product workflows
-and product-specific search remain pending integration.
+Product stories are supported by the Products workspace and the homepage product search.
 
 ## Mockups and Shared References
 
@@ -62,7 +60,7 @@ Keep editable designs and exported references in their existing shared locations
 - Navy theme, contrasting wordmark, light surfaces, and generous spacing.
 - Shared logo, centered navigation, sticky header, and responsive mobile menu.
 - Navigation: Home, Vulnerabilities, Products, Resources, About.
-- Account control remains a placeholder.
+- Local records use anonymous guest workspaces.
 - Search and record management use standard HTML controls.
 - Public source records are read-only; guest-owned local records support CRUD.
 - Table headings remain visible during scrolling, with pagination above the table.
