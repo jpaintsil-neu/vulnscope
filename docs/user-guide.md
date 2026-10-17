@@ -7,7 +7,8 @@ The Vulnerabilities page opens with the query applied to public CVEs.
 A blank query opens the unfiltered public list.
 
 Keywords can match product/vendor names mentioned in CVE content.
-Product-catalog search remains pending.
+To search the product catalog, use the product search on Home; it opens
+Products with the query applied.
 
 ## Browse and Filter
 
@@ -68,6 +69,39 @@ errors; the form retains input and focuses the first affected control.
 
 If saving cannot be confirmed, check My local records before submitting again.
 Use retry controls to reload failed results or record-loading requests.
+
+## Products
+
+### Browse and Filter Products
+
+1. Open Products and choose Public products or My local records.
+2. Enter a vendor, product, or version and optionally select a product type.
+3. For local records, optionally select Not reviewed, In review, or Reviewed.
+4. Click Apply Filters.
+5. Use Previous/Next above the table to browse pages of up to 20 records.
+6. Open a product name for details.
+
+Search, type, and local review status are preserved in the URL on refresh.
+A product can appear many times because each version is a separate record.
+
+### Read Product Details
+
+Public product details show the vendor, version, type, last-modified date,
+and original CPE name. Public products are read-only.
+
+Local product details show review status, exposure notes, comments, and
+creation/update dates.
+
+### Create, Edit, and Delete a Local Product
+
+1. Click Add Product, enter a product name and vendor, and set the optional
+   fields. Click Save record to open the saved details.
+2. To edit, open the record, click Edit record, change fields, and click
+   Save changes.
+3. To delete, open the record, click Delete record, and confirm. You return
+   to My local records.
+
+Product name and vendor are required. Version can be left blank when unknown.
 
 ## Workspace Access
 

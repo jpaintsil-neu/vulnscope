@@ -3,12 +3,12 @@
 ## Application Structure
 
 Express serves `public/` and mounts the vulnerability router at
-`/api/vulnerabilities`. Browser ES modules fetch JSON and render records.
+`/api/vulnerabilities` and the product router at /api/products. Browser ES modules fetch JSON and render records.
 Database operations use the native MongoDB driver and a shared connection.
 
 Render hosts the Express application at
 [the live HTTPS site](https://vulnscope-d4xk.onrender.com/), and MongoDB Atlas
-stores the vulnerability dataset and guest records. Render environment
+stores the vulnerability dataset, product datasets, and guest records. Render environment
 variables supply the database configuration; credentials are not committed.
 The `/api/health` route checks HTTP server availability, not database readiness.
 
@@ -47,8 +47,19 @@ There is no frontend bundling step or server-side template engine.
 | Root             | `package.json`, `package-lock.json`                                                                   | Scripts and dependencies                                  |
 | Root             | `eslint.config.js`, `prettier.config.js`, `.prettierignore`                                           | Quality-tool configuration                                |
 | Root             | `.env.example`, `.gitignore`                                                                          | Configuration example and ignored local files             |
-
-**Pending:** Products modules and application screenshots.
+| `public/`        | `products.html`                                                                                       | Product search/filter controls and records table          |
+| `public/`        | `product-details.html`                                                                                | Public/local product details                              |
+| `public/`        | `product-form.html`                                                                                   | Local product creation/editing form                       |
+| `public/css/`    | `products.css`, `product-details.css`, `product-form.css`                                             | Products table, detail panels, and form layout            |
+| `public/js/`     | `products.js`                                                                                         | Product results, filters, URL state, pagination           |
+| `public/js/`     | `product-details.js`                                                                                  | Product detail rendering and confirmed deletion           |
+| `public/js/`     | `product-form.js`                                                                                     | Product loading, validation feedback, POST/PUT            |
+| `src/db/`        | `products.js`                                                                                         | Product indexes and public/local operations               |
+| `src/models/`    | `product.js`                                                                                          | Product defaults, types, and review statuses              |
+| `src/routes/`    | `products.js`                                                                                         | Product HTTP validation and responses                     |
+| `src/services/`  | `product-validation.js`                                                                               | Product field validation                                  |
+| `src/services/`  | `nvd-products.js`                                                                                     | NVD CPE retrieval and conversion                          |
+| `scripts/`       | `check-nvd-products.js`, `import-products.js`                                                         | Product sample check and import                           |
 
 ## Collections and Record Origin
 
@@ -71,9 +82,18 @@ Updates preserve `createdAt` and refresh `updatedAt`.
 Indexes support public date/severity browsing, owner-based local browsing,
 and uniqueness of imported CVE IDs. Local records may share a CVE ID.
 
-**Pending:** Products integration must add a second MongoDB collection with
-its own CRUD workflow. Two source values in one collection do not satisfy
-the two-collection rubric requirement.
+The `products` collection is separate and contains imported CPE records
+(`source: "nvd"`) and guest records (`source: "local"`).
+
+| Field group     | Fields                                             |
+| --------------- | -------------------------------------------------- |
+| Identity/origin | `_id`, `source`, `ownerId`, `cpeName`, `cpeNameId` |
+| Main content    | `productName`, `vendor`, `version`, `productType`  |
+| Local review    | `reviewStatus`, `exposureNotes`, `comments`        |
+| Dates           | `lastModifiedAt`, `createdAt`, `updatedAt`         |
+
+Indexes support vendor/name browsing, type filtering, owner-based local
+browsing, and uniqueness of imported CPE IDs.
 
 ## Guest Workspace Identity
 

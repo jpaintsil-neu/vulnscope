@@ -39,8 +39,15 @@ node scripts/setup-database.js
 # Check a known CVE conversion.
 node scripts/check-nvd.js
 
-# Import the development dataset.
+# Import the development datasets.
 node scripts/import-vulnerabilities.js
+node scripts/import-products.js
+
+# Check a sample product conversion.
+node scripts/check-nvd-products.js
+
+# Import the product dataset.
+node scripts/import-products.js
 ```
 
 The sample check and import are separate operations. A CVE used by the
@@ -58,6 +65,16 @@ are refreshed; creation dates and authored notes/guidance are preserved.
 The import is manual, not scheduled. It is a development dataset rather
 than the complete NVD. Data is not bundled in Git and must be populated
 separately for a fresh environment or deployment.
+
+## Product Import
+
+The product importer requests up to 500 CPE entries for each of a set of
+well-known vendor and product keywords, waiting between requests to respect
+NVD rate limits. Keywords NVD rejects as too broad are skipped.
+
+It requires more than 1,000 usable products before writing. Records are
+upserted by CPE name ID, so rerunning refreshes existing products instead
+of duplicating them. A local development run imported 6,344 products.
 
 ## Run
 
@@ -87,8 +104,6 @@ Express serves the browser files and API together.
 | Port is occupied                      | Stop the conflicting server or change `PORT` in `.env`                          |
 | Local record is unavailable           | Use the browser workspace that created it; check whether its cookie was cleared |
 | A save/delete cannot be confirmed     | Recheck the record before repeating the operation                               |
-
-**Pending:** Public hosting instructions, production database configuration,
-and deployment verification.
+| Products page shows 0 products        | Run `node scripts/import-products.js` against the configured database           |
 
 [Back to project overview](../README.md)

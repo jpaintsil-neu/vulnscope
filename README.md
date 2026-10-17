@@ -11,7 +11,7 @@ organize locally managed security reviews.
 
 - **Live Site:** [VulnScope](https://vulnscope-d4xk.onrender.com/)
 - **Repository:** [jpaintsil-neu/vulnscope](https://github.com/jpaintsil-neu/vulnscope)
-- **Progress Updated:** October 16, 2026
+- **Progress Updated:** October 17, 2026
 
 ## Authors
 

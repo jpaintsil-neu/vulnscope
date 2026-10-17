@@ -142,6 +142,60 @@ curl -b /tmp/vulnscope-cookies \
   'http://localhost:3000/api/vulnerabilities/local?triageStatus=new'
 ```
 
-**Pending:** Products API integration.
+## Products API
+
+| Method | Endpoint                  | Purpose                                                          |
+| ------ | ------------------------- | ---------------------------------------------------------------- |
+| GET    | `/api/products`           | Public product search/pagination                                 |
+| GET    | `/api/products/:id`       | Public product details                                           |
+| POST   | `/api/products/local`     | Create a local record and establish/refresh its workspace cookie |
+| GET    | `/api/products/local`     | Search the requesting workspace's local records                  |
+| GET    | `/api/products/local/:id` | Read an owned local record                                       |
+| PUT    | `/api/products/local/:id` | Update an owned local record                                     |
+| DELETE | `/api/products/local/:id` | Delete an owned local record                                     |
+
+### Product List Parameters
+
+| Parameter      | Accepted values                                                         |
+| -------------- | ----------------------------------------------------------------------- |
+| `page`         | Integer 1–10000; default 1                                              |
+| `q`            | Search text up to 200 characters; matches product name, vendor, version |
+| `productType`  | application, operating-system, hardware; blank includes all             |
+| `reviewStatus` | Local list only: not-reviewed, in-review, reviewed; blank includes all  |
+
+Lists return `records` and `pagination` (`page`, `pageSize`, `total`,
+`totalPages`). Page size is 20. Search text is matched literally and
+case-insensitively. Sending `reviewStatus` to the public list returns 400.
+
+### Local Product Fields
+
+| Field           | Validation/default                                 |
+| --------------- | -------------------------------------------------- |
+| `productName`   | Required text, up to 200 characters                |
+| `vendor`        | Required text, up to 200 characters                |
+| `version`       | Optional text, up to 100 characters; blank is null |
+| `productType`   | Supported product type; default application        |
+| `reviewStatus`  | Supported review status; default not-reviewed      |
+| `exposureNotes` | Optional text, up to 5000 characters               |
+| `comments`      | Optional text, up to 5000 characters               |
+
+Text is trimmed and null characters are rejected. Fields other than these
+are rejected. PUT submits a complete record; omitted optional fields reset
+to their defaults.
+
+```json
+{
+  "productName": "Firefox",
+  "vendor": "Mozilla",
+  "version": "115.0",
+  "productType": "application",
+  "reviewStatus": "in-review",
+  "exposureNotes": "Installed on team laptops.",
+  "comments": ""
+}
+```
+
+Status codes, cookie behavior, and ownership rules match the
+vulnerability API above.
 
 [Back to project overview](../README.md)

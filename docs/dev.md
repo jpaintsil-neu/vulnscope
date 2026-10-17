@@ -29,11 +29,15 @@ Browse and search imported CVE records, filter vulnerabilities by severity and t
 
 ### Products Workspace
 
-**Pending:** Products screenshot after integration.
+![VulnScope product page](../public/images/screenshots/devs/Sproduct.png)
+
+### Product Form
+
+![VulnScope product form page](../public/images/screenshots/devs/SproductForm.png)
 
 ### Resources
 
-![VulnScope Resources learning cards](../public/images/screenshots/devs/resources.png)
+![VulnScope Resources learning cards](../public/images/screenshots/devs/resources1.png)
 
 ### About
 
