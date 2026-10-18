@@ -321,7 +321,7 @@ homepage search and Products views need their own final manual confirmation.
 
 ## Peer Code Review
 
-**Pending assignment after Canvas submission.** 
+**Pending assignment after Canvas submission.**
 
 ## Screenshot
 
@@ -336,7 +336,6 @@ See [development screenshots](docs/dev.md) and [Figma design mockups](docs/mocku
 - **Google Slides Presentation (John):** [John's presentation](https://docs.google.com/presentation/d/13cx7LqqmMWwijsvRJpnUI7jwwlo0HvpCHUYRvUAL6HQ/edit)
 - **Google Slides Presentation (Sania):** [Sania's presentation](https://docs.google.com/presentation/d/1bH6_mhe3n3b-y8X_ObTOzPIioFuBz1YehroUM92Tutg/edit?usp=sharing)
 - **Published video demo (Bluesky):** [Watch the VulnScope demo](https://bsky.app/profile/jpaintsil.bsky.social/post/3my54rlsyjc2o) — published October 18, 2026.
-
 
 ## Generative AI Disclosure
 
