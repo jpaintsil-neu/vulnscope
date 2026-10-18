@@ -344,13 +344,14 @@ See [development screenshots](docs/dev.md) and [Figma design mockups](docs/mocku
 
 - **Google Slides Presentation (John):** [John's presentation](https://docs.google.com/presentation/d/13cx7LqqmMWwijsvRJpnUI7jwwlo0HvpCHUYRvUAL6HQ/edit)
 - **Google Slides Presentation (Sania):** [Sania's presentation](https://docs.google.com/presentation/d/1bH6_mhe3n3b-y8X_ObTOzPIioFuBz1YehroUM92Tutg/edit?usp=sharing)
+- **Published video demo (Bluesky):** [Watch the VulnScope demo](https://bsky.app/profile/jpaintsil.bsky.social/post/3my54rlsyjc2o) — published October 18, 2026.
 - **Combined presentation and website demo:** [John and Sania — 1080p video](https://drive.google.com/file/d/1hT3PxPNHPnn4Kedygqcq3sNCSdnDHBZd/view) (approximately 9 minutes 34 seconds).
 
 Before submitting, confirm that the design document, slides, and video open
 without an account invitation, the submission thumbnail displays correctly,
-and the Canvas/Google Form submission is complete. Public video playback,
-submission receipts, and acceptance of the combined runtime are not verified
-by the repository review.
+and the Canvas/Google Form submission is complete. The Bluesky post and its
+video embed are publicly accessible. Google Drive video playback, submission
+receipts, and acceptance of the combined runtime still require final confirmation.
 
 ## Generative AI Disclosure
 
