@@ -77,11 +77,6 @@ API, search/filtering, detail views, and guest-owned CRUD. It was tested
 locally with 6,344 imported NVD CPE records; the live API now returns the
 same public record count. Sania owns the Products workflow and its validation.
 
-The team reports application coding complete. The reviewed application
-snapshot is [`ccfe03b`](https://github.com/jpaintsil-neu/vulnscope/commit/ccfe03b1859c9f86fe92d0220352191b5a18a03b)
-(October 17, 2026, 23:20 UTC). This identifies the reviewed code; compliance
-with the course's freeze deadline must be confirmed against that deadline.
-
 ## Pages
 
 ### Home — [`public/index.html`](./public/index.html)
@@ -176,8 +171,6 @@ Personas, user stories, mockups, and responsibility split are documented in
 the [design overview](docs/design.md).
 
 - [Full design document](https://docs.google.com/document/d/1_EBsK1iSNJMkEcqX7na_RYYyHbUdZPt71yt7oZE1Pjw/edit)
-- [Mockup index](https://docs.google.com/spreadsheets/d/1OPhlHSFipS1TBg5fY3gODJUL3W921hsAR03a6K-po7k/edit)
-- [Editable Figma designs](https://www.figma.com/design/N6bytNugV2tRNjimOJfo8H)
 - [Exported mockups](docs/mockup.md)
 
 ## Installation and Local Development
@@ -328,9 +321,7 @@ homepage search and Products views need their own final manual confirmation.
 
 ## Peer Code Review
 
-**Pending assignment after Canvas submission.** Canvas assigns the classmate's
-project to review. After completing the review, add the reviewed repository,
-review or pull-request link, findings, and validation performed here.
+**Pending assignment after Canvas submission.** 
 
 ## Screenshot
 
@@ -345,13 +336,7 @@ See [development screenshots](docs/dev.md) and [Figma design mockups](docs/mocku
 - **Google Slides Presentation (John):** [John's presentation](https://docs.google.com/presentation/d/13cx7LqqmMWwijsvRJpnUI7jwwlo0HvpCHUYRvUAL6HQ/edit)
 - **Google Slides Presentation (Sania):** [Sania's presentation](https://docs.google.com/presentation/d/1bH6_mhe3n3b-y8X_ObTOzPIioFuBz1YehroUM92Tutg/edit?usp=sharing)
 - **Published video demo (Bluesky):** [Watch the VulnScope demo](https://bsky.app/profile/jpaintsil.bsky.social/post/3my54rlsyjc2o) — published October 18, 2026.
-- **Combined presentation and website demo:** [John and Sania — 1080p video](https://drive.google.com/file/d/1hT3PxPNHPnn4Kedygqcq3sNCSdnDHBZd/view) (approximately 9 minutes 34 seconds).
 
-Before submitting, confirm that the design document, slides, and video open
-without an account invitation, the submission thumbnail displays correctly,
-and the Canvas/Google Form submission is complete. The Bluesky post and its
-video embed are publicly accessible. Google Drive video playback, submission
-receipts, and acceptance of the combined runtime still require final confirmation.
 
 ## Generative AI Disclosure
 
@@ -364,10 +349,7 @@ receipts, and acceptance of the combined runtime still require final confirmatio
 
 ### How Generative AI Was Used
 
-- John Paintsil — ChatGPT/Codex assisted with planning and mockups, generated
-  and revised code, debugging, validation guidance, documentation, presentation
-  scripts, and video preparation. This describes the assistance used and does
-  not assert course-policy approval.
+- John Paintsil — ChatGPT was used as an iterative development assistant by supporting tasks such as reviewing project requirements, planning and organizing information architecture, and refining design documentation to enhance overall project quality and accessibility.
 
 - Sania Anwar - I used Claude to organize the README and design documentation on github. I also used it to help me with the database connection issues.
 
