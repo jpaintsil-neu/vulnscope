@@ -16,50 +16,55 @@ There is no frontend bundling step or server-side template engine.
 
 ## Folder and File Mapping
 
-| Location         | Files                                                                                                 | Responsibility                                            |
-| ---------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `public/`        | `index.html`                                                                                          | Homepage and public vulnerability search entry            |
-| `public/`        | `vulnerabilities.html`                                                                                | Search/filter controls and records table                  |
-| `public/`        | `vulnerability.html`                                                                                  | Public/local record details                               |
-| `public/`        | `vulnerability-form.html`                                                                             | Local creation/editing form                               |
-| `public/`        | `about.html`, `resources.html`, `faqs.html`                                                           | Supporting content                                        |
-| `public/css/`    | `styles.css`                                                                                          | Shared theme, header, footer, and controls                |
-| `public/css/`    | `home.css`                                                                                            | Homepage layout                                           |
-| `public/css/`    | `workspace.css`                                                                                       | Filters, results table, and pagination                    |
-| `public/css/`    | `vulnerability.css`                                                                                   | Detail panels and local actions                           |
-| `public/css/`    | `vulnerability-form.css`                                                                              | Form layout and errors                                    |
-| `public/js/`     | `layout.js`                                                                                           | Shared layout and mobile navigation                       |
-| `public/js/`     | `vulnerabilities.js`                                                                                  | Results, filters, URL state, and pagination               |
-| `public/js/`     | `vulnerability.js`                                                                                    | Detail rendering and confirmed deletion                   |
-| `public/js/`     | `vulnerability-form.js`                                                                               | Loading, validation feedback, and POST/PUT saves          |
-| `public/images/` | `logo.png`                                                                                            | Shared branding                                           |
-| `src/`           | `server.js`                                                                                           | Express startup, static files, and API mounting           |
-| `src/db/`        | `connection.js`                                                                                       | Environment configuration and reusable MongoDB connection |
-| `src/db/`        | `vulnerabilities.js`                                                                                  | Collection indexes and public/local database operations   |
-| `src/models/`    | `vulnerability.js`                                                                                    | Record defaults, severity levels, and review statuses     |
-| `src/routes/`    | `vulnerabilities.js`                                                                                  | HTTP input validation and responses                       |
-| `src/services/`  | `local-workspace.js`                                                                                  | Guest cookie and server-side owner identity               |
-| `src/services/`  | `vulnerability-validation.js`                                                                         | Editable-field validation and normalization               |
-| `src/services/`  | `nvd.js`                                                                                              | NVD retrieval and CVE conversion                          |
-| `scripts/`       | `setup-database.js`, `check-nvd.js`, `import-vulnerabilities.js`                                      | Index setup, sample check, and import                     |
-| `docs/`          | `design.md`, `architecture.md`, `setup.md`, `user-guide.md`, `api.md`, `validation.md`, `ai-usage.md` | Detailed documentation                                    |
-| Root             | `README.md`, `LICENSE`                                                                                | Project overview and MIT license                          |
-| Root             | `package.json`, `package-lock.json`                                                                   | Scripts and dependencies                                  |
-| Root             | `eslint.config.js`, `prettier.config.js`, `.prettierignore`                                           | Quality-tool configuration                                |
-| Root             | `.env.example`, `.gitignore`                                                                          | Configuration example and ignored local files             |
-| `public/`        | `products.html`                                                                                       | Product search/filter controls and records table          |
-| `public/`        | `product-details.html`                                                                                | Public/local product details                              |
-| `public/`        | `product-form.html`                                                                                   | Local product creation/editing form                       |
-| `public/css/`    | `products.css`, `product-details.css`, `product-form.css`                                             | Products table, detail panels, and form layout            |
-| `public/js/`     | `products.js`                                                                                         | Product results, filters, URL state, pagination           |
-| `public/js/`     | `product-details.js`                                                                                  | Product detail rendering and confirmed deletion           |
-| `public/js/`     | `product-form.js`                                                                                     | Product loading, validation feedback, POST/PUT            |
-| `src/db/`        | `products.js`                                                                                         | Product indexes and public/local operations               |
-| `src/models/`    | `product.js`                                                                                          | Product defaults, types, and review statuses              |
-| `src/routes/`    | `products.js`                                                                                         | Product HTTP validation and responses                     |
-| `src/services/`  | `product-validation.js`                                                                               | Product field validation                                  |
-| `src/services/`  | `nvd-products.js`                                                                                     | NVD CPE retrieval and conversion                          |
-| `scripts/`       | `check-nvd-products.js`, `import-products.js`                                                         | Product sample check and import                           |
+| Location                     | Files                                                                                                         | Responsibility                                                                   |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `public/`                    | `index.html`                                                                                                  | Homepage and shared public-catalog search                                        |
+| `public/`                    | `vulnerabilities.html`                                                                                        | Search/filter controls and records table                                         |
+| `public/`                    | `vulnerability.html`                                                                                          | Public/local record details                                                      |
+| `public/`                    | `vulnerability-form.html`                                                                                     | Local creation/editing form                                                      |
+| `public/`                    | `about.html`, `resources.html`, `faqs.html`                                                                   | Supporting content                                                               |
+| `public/css/`                | `styles.css`                                                                                                  | Shared theme, header, footer, and controls                                       |
+| `public/css/`                | `home.css`                                                                                                    | Homepage layout                                                                  |
+| `public/css/`                | `workspace.css`                                                                                               | Filters, results table, and pagination                                           |
+| `public/css/`                | `vulnerability.css`                                                                                           | Detail panels and local actions                                                  |
+| `public/css/`                | `vulnerability-form.css`                                                                                      | Form layout and errors                                                           |
+| `public/js/`                 | `layout.js`                                                                                                   | Shared layout and mobile navigation                                              |
+| `public/js/`                 | `home-search.js`                                                                                              | Homepage category selection and search destination                               |
+| `public/js/`                 | `vulnerability-overview.js`                                                                                   | Filter-aware overview cards and charts                                           |
+| `public/css/`                | `vulnerability-overview.css`, `about.css`, `resources.css`                                                    | Overview and supporting-page visuals                                             |
+| `public/js/`                 | `vulnerabilities.js`                                                                                          | Results, filters, URL state, and pagination                                      |
+| `public/js/`                 | `vulnerability.js`                                                                                            | Detail rendering and confirmed deletion                                          |
+| `public/js/`                 | `vulnerability-form.js`                                                                                       | Loading, validation feedback, and POST/PUT saves                                 |
+| `public/images/`             | `logo.png`                                                                                                    | Shared branding                                                                  |
+| `public/images/screenshots/` | `thumbnail.png`, `devs/`, `deploy/`, `mockups/`, `screenshots_sania/`                                         | Submission thumbnail, application views, deployment evidence, and design exports |
+| `src/`                       | `server.js`                                                                                                   | Express startup, static files, and API mounting                                  |
+| `src/db/`                    | `connection.js`                                                                                               | Environment configuration and reusable MongoDB connection                        |
+| `src/db/`                    | `vulnerabilities.js`                                                                                          | Collection indexes and public/local database operations                          |
+| `src/models/`                | `vulnerability.js`                                                                                            | Record defaults, severity levels, and review statuses                            |
+| `src/routes/`                | `vulnerabilities.js`                                                                                          | HTTP input validation and responses                                              |
+| `src/services/`              | `local-workspace.js`                                                                                          | Guest cookie and server-side owner identity                                      |
+| `src/services/`              | `vulnerability-validation.js`                                                                                 | Editable-field validation and normalization                                      |
+| `src/services/`              | `nvd.js`                                                                                                      | NVD retrieval and CVE conversion                                                 |
+| `src/services/`              | `vulnerability-summary.js`                                                                                    | Severity and review-status aggregation results                                   |
+| `scripts/`                   | `setup-database.js`, `check-nvd.js`, `import-vulnerabilities.js`                                              | Index setup, sample check, and import                                            |
+| `docs/`                      | `design.md`, `architecture.md`, `setup.md`, `user-guide.md`, `api.md`, `validation.md`, `dev.md`, `mockup.md` | Detailed documentation and image galleries                                       |
+| Root                         | `README.md`, `LICENSE`                                                                                        | Project overview and MIT license                                                 |
+| Root                         | `package.json`, `package-lock.json`                                                                           | Scripts and dependencies                                                         |
+| Root                         | `eslint.config.js`, `prettier.config.js`, `.prettierignore`                                                   | Quality-tool configuration                                                       |
+| Root                         | `.env.example`, `.gitignore`                                                                                  | Configuration example and ignored local files                                    |
+| `public/`                    | `products.html`                                                                                               | Product search/filter controls and records table                                 |
+| `public/`                    | `product-details.html`                                                                                        | Public/local product details                                                     |
+| `public/`                    | `product-form.html`                                                                                           | Local product creation/editing form                                              |
+| `public/css/`                | `products.css`, `product-details.css`, `product-form.css`                                                     | Products table, detail panels, and form layout                                   |
+| `public/js/`                 | `products.js`                                                                                                 | Product results, filters, URL state, pagination                                  |
+| `public/js/`                 | `product-details.js`                                                                                          | Product detail rendering and confirmed deletion                                  |
+| `public/js/`                 | `product-form.js`                                                                                             | Product loading, validation feedback, POST/PUT                                   |
+| `src/db/`                    | `products.js`                                                                                                 | Product indexes and public/local operations                                      |
+| `src/models/`                | `product.js`                                                                                                  | Product defaults, types, and review statuses                                     |
+| `src/routes/`                | `products.js`                                                                                                 | Product HTTP validation and responses                                            |
+| `src/services/`              | `product-validation.js`                                                                                       | Product field validation                                                         |
+| `src/services/`              | `nvd-products.js`                                                                                             | NVD CPE retrieval and conversion                                                 |
+| `scripts/`                   | `check-nvd-products.js`, `import-products.js`                                                                 | Product sample check and import                                                  |
 
 ## Collections and Record Origin
 

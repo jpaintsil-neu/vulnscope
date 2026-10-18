@@ -11,7 +11,7 @@ organize locally managed security reviews.
 
 - **Live Site:** [VulnScope](https://vulnscope-d4xk.onrender.com/)
 - **Repository:** [jpaintsil-neu/vulnscope](https://github.com/jpaintsil-neu/vulnscope)
-- **Progress Updated:** October 17, 2026
+- **Final Review:** October 18, 2026
 
 ## Authors
 
@@ -19,11 +19,14 @@ organize locally managed security reviews.
 
 - GitHub: [jpaintsil-neu](https://github.com/jpaintsil-neu)
 - Responsibility: Vulnerability Awareness & Triage workspace.
+- Shared work: initial Figma mockups, site layout, supporting pages,
+  documentation, and deployment coordination.
 
 ### Sania Anwar
 
 - GitHub: [saniaanwar](https://github.com/saniaanwar)
 - Responsibility: Product & Technology workspace.
+- Includes the Products collection, import, API, browser views, and forms.
 
 **Course Page:** [CS 5610 — Web Development](https://johnguerra.co/classes/webDevelopment_online_fall_2026/)
 
@@ -39,9 +42,10 @@ The application has two independent feature areas:
 - **Product & Technology:** Explore technology products and manage local
   product-security records and review notes.
 
-Each workspace must support its own CRUD workflow without depending on the
-other workspace's collection. Imported NVD source data remains separate
-from locally managed records.
+Each workspace supports its own create, read, update, and delete (CRUD)
+workflow without depending on the other workspace's collection. Each
+collection distinguishes imported National Vulnerability Database (NVD)
+records from guest-authored records using its `source` field.
 
 The primary implementation focus is the **Homepage, Vulnerabilities, and
 Products** pages. Supporting About and Resources pages provide
@@ -57,8 +61,10 @@ The project also demonstrates:
 - Semantic controls, responsive layouts, and accessible navigation.
 - ESLint, Prettier, and Git/GitHub workflow.
 
-**Current milestone:** VulnScope is publicly deployed on Render with
-MongoDB Atlas containing **1,500 imported CVE records**. Hosted checks
+**Final build:** VulnScope is publicly deployed on Render with MongoDB Atlas.
+Read-only API checks on October 18 confirmed **1,500 imported Common
+Vulnerabilities and Exposures (CVE) records** and **6,344 imported Common
+Platform Enumeration (CPE) product records**. Hosted Vulnerabilities checks
 passed for public CVE search, severity filtering, pagination, details,
 and guest-workspace record creation, editing, persistence, and deletion.
 Separate-browser guest isolation was also checked.
@@ -68,8 +74,8 @@ preserved in the URL. Imported CVEs remain read-only.
 
 The Products workspace is implemented with its own `products` collection,
 API, search/filtering, detail views, and guest-owned CRUD. It was tested
-locally with 6,344 imported NVD CPE records; the Atlas import for the live
-site and final submission deliverables remain pending.
+locally with 6,344 imported NVD CPE records; the live API now returns the
+same public record count. Sania owns the Products workflow and its validation.
 
 ## Pages
 
@@ -81,12 +87,11 @@ Implemented:
 
 - Minimal navy gradient banner.
 - Shared logo, navigation, sticky header, and footer.
-- Working public vulnerability search by CVE ID or keyword.
-- Search navigation to the Vulnerabilities page with the query applied.
+- One search field with a Vulnerabilities/Products category selector.
+- Vulnerability search by CVE ID or keyword; product search by vendor,
+  product, or version.
+- Navigation to the selected workspace with the query applied.
 - Overview of the vulnerability and product workspaces.
-
-- Working public product search by vendor, product, or version.
-- Search navigation to the Products page with the query applied.
 
 ### Vulnerabilities — [`public/vulnerabilities.html`](./public/vulnerabilities.html)
 
@@ -127,7 +132,7 @@ See the [user guide](docs/user-guide.md) for page workflows.
 
 ## Original JavaScript Functionality
 
-Vanilla JavaScript renders API results, switches collections, manages
+Vanilla JavaScript renders API results, switches public/local views, manages
 filters and pagination, and handles local-record forms and actions.
 Active filters are preserved in the URL.
 
@@ -150,12 +155,13 @@ Mongoose and server-side template engines are excluded from the project.
 
 ## Project Structure
 
-| Location   | Purpose                                                 |
-| ---------- | ------------------------------------------------------- |
-| `public/`  | HTML pages, CSS modules, browser JavaScript, and images |
-| `src/`     | Express routes, database modules, models, and services  |
-| `scripts/` | Database setup, NVD sample check, and data import       |
-| `docs/`    | Detailed project documentation                          |
+| Location                     | Purpose                                                              |
+| ---------------------------- | -------------------------------------------------------------------- |
+| `public/`                    | HTML pages, CSS modules, browser JavaScript, and images              |
+| `src/`                       | Express routes, database modules, models, and services               |
+| `scripts/`                   | Database setup, NVD sample check, and data import                    |
+| `docs/`                      | Detailed project documentation                                       |
+| `public/images/screenshots/` | Thumbnail, application screenshots, mockups, and deployment evidence |
 
 See the [complete folder/file mapping](docs/architecture.md#folder-and-file-mapping).
 
@@ -164,7 +170,8 @@ See the [complete folder/file mapping](docs/architecture.md#folder-and-file-mapp
 Personas, user stories, mockups, and responsibility split are documented in
 the [design overview](docs/design.md).
 
-All Mockups: [insert link]
+- [Full design document](https://docs.google.com/document/d/1_EBsK1iSNJMkEcqX7na_RYYyHbUdZPt71yt7oZE1Pjw/edit)
+- [Exported mockups](docs/mockup.md)
 
 ## Installation and Local Development
 
@@ -178,7 +185,7 @@ cd vulnscope
 npm ci
 cp .env.example .env
 
-# Prepare MongoDB and import CVEs and products.
+# Prepare vulnerability indexes and import both datasets.
 node scripts/setup-database.js
 node scripts/import-vulnerabilities.js
 node scripts/import-products.js
@@ -204,7 +211,9 @@ Database records are imported separately and are not bundled with the repository
 
 ## Using the Application
 
-Search from Home, or open Vulnerabilities and choose Public CVEs or My local
+On Home, choose Vulnerabilities or Products, enter a query, and select Search.
+A blank query opens the selected public catalog. Alternatively, open
+Vulnerabilities and choose Public CVEs or My local
 records. Apply search/severity filters; local records also support review status.
 Open a record for details, or use Add Vulnerability to create a local record.
 
@@ -213,7 +222,9 @@ Search by vendor, product, or version and filter by product type; local
 records also support review status. Use Add Product to create a local record.
 
 Guest records belong to the browser workspace that created them.
-Clearing its cookie removes access. Public CVEs remain read-only.
+Clearing its cookie removes access without deleting database records.
+Public CVEs and products remain read-only. Account login and cross-device
+workspace access are outside this build.
 
 See the [user guide](docs/user-guide.md).
 
@@ -238,8 +249,11 @@ See [import behavior](docs/setup.md#nvd-import).
 
 ## Code Quality
 
-**Latest local checkpoint — October 16, 2026:** ESLint, Prettier formatting
-verification, and Git whitespace checks passed.
+**Final review — October 18, 2026:** ESLint and Prettier verification passed
+on the reviewed application snapshot. The production dependency audit
+(`npm audit --omit=dev`) reported zero known vulnerabilities. The final
+documentation changes also passed formatting, whitespace, and relative-link
+checks.
 
 ### Run ESLint
 
@@ -273,6 +287,11 @@ MongoDB Atlas for public CVE browsing, search, severity filters, pagination,
 details, guest-record CRUD, persistence, and separate-browser isolation.
 The deployed vulnerability dataset contained 1,500 imported records.
 
+The October 18 review confirmed both public dataset counts, current source
+organization, and code-quality results. Earlier HTML and manual workflow
+results are dated evidence; they do not establish a complete regression of
+every subsequent change or of Sania's Products workflow.
+
 See [validation results, corrections, and remaining checks](docs/validation.md)
 for the detailed record and testing instructions.
 
@@ -291,22 +310,18 @@ Implemented considerations include:
 - Status announcements for loading and errors.
 - Responsive layout rules.
 
-**Checked on October 65:** Hosted layouts at 360, 768, and 1440 CSS pixels,
+**Checked on October 15:** Hosted layouts at 360, 768, and 1440 CSS pixels,
 200% zoom, visible focus, skip navigation, mobile-menu behavior, and keyboard
 operation of the completed workflows.
 
-**Pending:** Screen-reader announcements, measured color contrast, and
-revalidation after changes. These manual checks do not establish full
-accessibility compliance.
+The October 15 follow-up also passed VoiceOver result and error-announcement
+checks. Eight sampled text/background color combinations exceeded 4.5:1.
+These checks do not establish full accessibility compliance; the latest
+homepage search and Products views need their own final manual confirmation.
 
 ## Peer Code Review
 
-**Pending — the Project 2 code-review requirement has not been completed.**
-
-- Reviewed repository: [link]
-- Review or pull-request: [link]
-- Summary of findings and contributions.
-- Validation performed.
+**Pending assignment after Canvas submission.** 
 
 ## Screenshot
 
@@ -318,9 +333,10 @@ See [development screenshots](docs/dev.md) and [Figma design mockups](docs/mocku
 
 ## Presentation and Demo Video
 
-- **Google Slides Presentation (John):** [John's Presentation](https://docs.google.com/presentation/d/1VAJmpa_GvycCUX-Re0htSbg_81e-8JJs4MOuBCO9C20/edit?usp=drive_link)
+- **Google Slides Presentation (John):** [John's presentation](https://docs.google.com/presentation/d/13cx7LqqmMWwijsvRJpnUI7jwwlo0HvpCHUYRvUAL6HQ/edit)
 - **Google Slides Presentation (Sania):** [Sania's presentation](https://docs.google.com/presentation/d/1bH6_mhe3n3b-y8X_ObTOzPIioFuBz1YehroUM92Tutg/edit?usp=sharing)
-- **Demo Video** [Demo Video](add link)
+- **Published video demo (Bluesky):** [Watch the VulnScope demo](https://bsky.app/profile/jpaintsil.bsky.social/post/3my54rlsyjc2o) — published October 18, 2026.
+
 
 ## Generative AI Disclosure
 
@@ -328,11 +344,12 @@ See [development screenshots](docs/dev.md) and [Figma design mockups](docs/mocku
 
 - **Tool:** ChatGPT / Codex / Claude.
 - **Provider:** OpenAI / Anthropic.
-- **Model/version details:** Claude Opus 5.5.
+- **Model/version details:** Not verified in this repository; no specific
+  version is asserted here.
 
 ### How Generative AI Was Used
 
-- John Paintsil - ChatGPT was used as an iterative development assistant by supporting tasks such as reviewing project requirements, organizing information architecture, and refining design documentation to enhance overall project quality and accessibility.
+- John Paintsil — ChatGPT was used as an iterative development assistant by supporting tasks such as reviewing project requirements, planning and organizing information architecture, and refining design documentation to enhance overall project quality and accessibility.
 
 - Sania Anwar - I used Claude to organize the README and design documentation on github. I also used it to help me with the database connection issues.
 

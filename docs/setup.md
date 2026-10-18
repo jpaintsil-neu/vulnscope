@@ -33,20 +33,19 @@ The database name defaults to `vulnscope` when not supplied.
 ## Prepare the Database
 
 ```bash
-# Create collection indexes.
+# Create vulnerability collection indexes.
 node scripts/setup-database.js
 
 # Check a known CVE conversion.
 node scripts/check-nvd.js
 
-# Import the development datasets.
+# Import the vulnerability dataset.
 node scripts/import-vulnerabilities.js
-node scripts/import-products.js
 
 # Check a sample product conversion.
 node scripts/check-nvd-products.js
 
-# Import the product dataset.
+# Import products and create product collection indexes.
 node scripts/import-products.js
 ```
 
