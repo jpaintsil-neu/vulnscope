@@ -307,6 +307,16 @@ git diff --check
 For source validation, upload the relevant HTML file to the
 [W3C Nu HTML Checker](https://validator.w3.org/nu/).
 
+Validated pages:
+
+- [`index.html`](/public/images/screenshots/w3-validator/index.html.png)
+- [`vulnerabilities.html`](/public/images/screenshots/w3-validator/vulnerabilities.html.png)
+- [`vulnerability-form.html`](/public/images/screenshots/w3-validator/vulnerability-form.html.png)
+- [`vulnerability.html`](/public/images/screenshots/w3-validator/vulnerability.htm.png)
+- [`resources.html`](/public/images/screenshots/w3-validator/resources.html.png)
+- [`about.html`](/public/images/screenshots/w3-validator/about.html.png)
+- [`faqs.html`](/public/images/screenshots/w3-validator/faqs.html.png)
+
 For a rendered snapshot, disable browser extensions, reload the application,
 and wait for the intended view to finish loading. Run this in Chrome's
 DevTools Console:
