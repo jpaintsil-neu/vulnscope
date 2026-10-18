@@ -2,13 +2,14 @@
 
 ## Search from Home
 
-Enter a CVE ID or vulnerability keyword and click Search or press Enter.
-The Vulnerabilities page opens with the query applied to public CVEs.
-A blank query opens the unfiltered public list.
+Choose Vulnerabilities or Products in the category selector, enter a query,
+and click Search or press Enter. The same search field opens the selected
+workspace with the query applied to its public catalog. A blank query opens
+that catalog without a search filter.
 
-Keywords can match product/vendor names mentioned in CVE content.
-To search the product catalog, use the product search on Home; it opens
-Products with the query applied.
+Vulnerability search accepts a CVE ID or keywords, including product/vendor
+names mentioned in CVE content. Product search matches vendor, product, or
+version. Without JavaScript, the homepage form defaults to Vulnerabilities.
 
 ## Browse and Filter
 

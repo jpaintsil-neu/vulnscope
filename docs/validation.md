@@ -1,6 +1,41 @@
 # Validation Status
 
-**Last updated:** October 15, 2026
+**Last updated:** October 18, 2026
+
+## Final Repository Review — October 18
+
+Reviewed application snapshot:
+[`ccfe03b1859c9f86fe92d0220352191b5a18a03b`](https://github.com/jpaintsil-neu/vulnscope/commit/ccfe03b1859c9f86fe92d0220352191b5a18a03b).
+This documentation update leaves application code unchanged.
+
+- ESLint and Prettier verification passed on that snapshot.
+- `npm audit --omit=dev` reported zero known production dependency vulnerabilities.
+- Live public APIs returned 1,500 vulnerabilities (75 pages) and 6,344 products
+  (318 pages), with a page size of 20.
+- Read-only HTTP checks passed for Home, Vulnerabilities, Products, About,
+  Resources, FAQs, and the homepage search module. The live homepage contains
+  one search field and its category selector.
+- Vulnerability page two returned 20 records; the final product page returned
+  four. Unmatched searches returned empty results, and page zero returned HTTP
+  400 for both APIs.
+- All 62 relative Markdown links across the README and `docs/` resolved to
+  existing files/anchors. A targeted scan of tracked text found no credential
+  patterns or committed real `.env` files; this is not a complete security audit.
+- Source review confirmed separate collection/routes/modules for both feature
+  areas, native MongoDB-driver use, and browser-based guest ownership checks.
+- The README now links the current presentation and combined 1080p video and
+  describes the single homepage search with category selection.
+
+The sections below retain dated manual-test evidence. Earlier statements
+that screen-reader or sampled contrast checks are pending are superseded by
+the October 15 Local Usability Follow-up. Earlier integration/import pending
+statements do not describe the verified public dataset counts above.
+
+This review does not repeat write operations against the live database or
+establish a complete Products regression. Final manual confirmation of the
+latest homepage search, public deliverable permissions, submission receipts,
+runtime acceptance, and the official freeze deadline remains with the team.
+Peer code review follows the Canvas assignment after submission.
 
 ## Scope and Responsibilities
 
