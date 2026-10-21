@@ -10,6 +10,9 @@ try {
 
   console.log("Fetching up to 1,500 recent CVEs...");
 
+  //This makes a single request for 1,500 results, but a 90-day window
+  //can have more than that and NVD doesn’t guarantee newest-first. 
+  //Could we page through with startIndex or call it a sample in the README?
   const data = await fetchNvdCves({
     resultsPerPage: 1500,
     pubStartDate: startDate.toISOString(),
