@@ -165,7 +165,7 @@ function showTableMessage(message) {
 }
 
 /**
- * Renders the selected record collection.
+ * Renders the selected record collection
  */
 function renderRecords(records) {
   const isLocal = activeFilters.scope === "mine";
