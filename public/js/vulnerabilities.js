@@ -179,6 +179,9 @@ function renderRecords(records) {
     return;
   }
 
+  //This page/search/severity validation is basically the same as in GET /local above. 
+  //Since products.js already has a parseListQuery helper for this it’d be nice to pull it 
+  //into a shared function here too so we only have to fix things in one place.
   const rows = records.map((record) => {
     const row = document.createElement("tr");
     const severity =
