@@ -46,6 +46,7 @@ export function normalizeNvdCpe(cpe) {
 
   // all entries
   if (
+    parts.length !== 13 ||
     parts[0] !== "cpe" ||
     parts[1] !== "2.3" ||
     !productType ||

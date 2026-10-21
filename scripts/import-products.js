@@ -45,6 +45,8 @@ try {
         resultsPerPage: RESULTS_PER_KEYWORD,
       });
     } catch (error) {
+      // Review: Could we retry failed requests before skipping a vendor?
+      // A short network error could leave products out of the import.
       // skip keywords that NVD rejects and continues importing
       console.warn(`Skipped "${keyword}": ${error.message}`);
       continue;
