@@ -88,6 +88,8 @@ function buildFilter(base, { q = "", productType = "" }) {
   }
 
   if (q) {
+    // Review: Could we check this search with a larger product list?
+    // Searching three fields for part of a word may become slow.
     const escapedQuery = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const match = { $regex: escapedQuery, $options: "i" };
 
