@@ -10,6 +10,9 @@ const PORT = process.env.PORT || 3000;
 // Resolve /public for ES modules.
 const publicDirectory = fileURLToPath(new URL("../public", import.meta.url));
 
+//Since this is live on Render, it might be worth adding rate limiting (express-rate-limit), 
+//and a body size limit here. Right now someone could spam the POST routes and fill up the database.
+
 // Parse JSON request bodies.
 app.use(express.json());
 
