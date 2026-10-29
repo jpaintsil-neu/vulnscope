@@ -255,6 +255,12 @@ on the reviewed application snapshot. The production dependency audit
 documentation changes also passed formatting, whitespace, and relative-link
 checks.
 
+[GitHub Actions](.github/workflows/quality-checks.yml) runs ESLint and
+Prettier checks on pull requests targeting `main` and pushes to `main`.
+The active `Protect main` ruleset requires pull requests, passing
+`Quality checks`, and an up-to-date branch before merging. It also blocks
+force pushes and deletion of `main`.
+
 ### Run ESLint
 
 ```bash
@@ -321,7 +327,17 @@ homepage search and Products views need their own final manual confirmation.
 
 ## Peer Code Review
 
-**Pending assignment after Canvas submission.**
+John Paintsil submitted a peer review of
+[OpenSlots](https://github.com/OpenSlots-Dev/openslots), developed by
+Ankita Mandalam and Agilan Balaraman.
+
+- **Submitted:** October 28, 2026.
+- **Pull request:** [#12 — Handle malformed anonymous cookies](https://github.com/OpenSlots-Dev/openslots/pull/12).
+- **Contribution:** A small middleware improvement with a brief inline
+  comment and a recommendation for automated cookie-validation tests.
+- **Status:** Open; awaiting maintainer review as of October 28.
+
+See the [review details and validation](docs/validation.md#peer-code-review).
 
 ## Screenshot
 
