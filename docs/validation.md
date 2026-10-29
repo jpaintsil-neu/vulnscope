@@ -1,6 +1,43 @@
 # Validation Status
 
-**Last updated:** October 18, 2026
+**Last updated:** October 28, 2026
+
+## Peer Code Review
+
+- **Reviewer:** John Paintsil.
+- **Reviewed project:** [OpenSlots](https://github.com/OpenSlots-Dev/openslots).
+- **Project authors:** Ankita Mandalam and Agilan Balaraman.
+- **Submitted:** October 28, 2026.
+- **Pull request:** [OpenSlots #12](https://github.com/OpenSlots-Dev/openslots/pull/12).
+- **File changed:** `middleware/anonymousId.js`.
+- **Status:** Open; awaiting maintainer review as of October 28.
+
+### Finding and Proposed Improvement
+
+The anonymous-browser middleware decodes the ownership cookie using
+`decodeURIComponent()`. Malformed URL encoding, such as
+`openslotsId=%GG`, throws a `URIError` and interrupts the request.
+
+The proposed change catches decoding errors and returns `null`.
+The existing middleware then generates a fresh anonymous ID and cookie.
+A brief inline comment explains this fallback.
+
+The pull request also recommends automated regression tests for valid,
+missing, and malformed cookies.
+
+### Validation Scope
+
+Pre-submission checks in an isolated local OpenSlots checkout passed:
+
+- ESLint and Prettier verification.
+- `git diff --check`.
+- Twelve focused cookie scenarios.
+- Ownership and public-response checks.
+- A local Express regression that returned HTTP 500 before the fix
+  and HTTP 200 with a replacement cookie afterward.
+
+These results cover the proposed OpenSlots change. They do not constitute
+a full OpenSlots database/browser regression or a new VulnScope regression.
 
 ## Final Repository Review — October 18
 
@@ -35,7 +72,8 @@ This review does not repeat write operations against the live database or
 establish a complete Products regression. Final manual confirmation of the
 latest homepage search, public deliverable permissions, submission receipts,
 runtime acceptance, and the official freeze deadline remains with the team.
-Peer code review follows the Canvas assignment after submission.
+John's assigned peer review was submitted on October 28.
+See [Peer Code Review](#peer-code-review) for the pull request and scope.
 
 ## Scope and Responsibilities
 

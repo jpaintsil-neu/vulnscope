@@ -65,6 +65,7 @@ There is no frontend bundling step or server-side template engine.
 | `src/services/`              | `product-validation.js`                                                                                       | Product field validation                                                         |
 | `src/services/`              | `nvd-products.js`                                                                                             | NVD CPE retrieval and conversion                                                 |
 | `scripts/`                   | `check-nvd-products.js`, `import-products.js`                                                                 | Product sample check and import                                                  |
+| `.github/workflows/`         | `quality-checks.yml`                                                                                          | Automated ESLint and Prettier checks for pull requests and pushes to `main`      |     |
 
 ## Collections and Record Origin
 
