@@ -366,5 +366,7 @@ clearFiltersButton.addEventListener("click", () => {
 });
 
 // initial collections
+// Review: Could we refresh this list when the user returns with Back?
+// The browser may show old names or review statuses after an edit.
 updateScopeView();
 loadPage(1);
